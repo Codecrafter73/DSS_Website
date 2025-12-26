@@ -233,47 +233,7 @@ const BrandStory = () => {
           <TimelineSection />
         </div>
       </section>
-
-      {/* --- SECTION: MISSION & VISION --- */}
-      <section data-animate className="relative px-6 py-16">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8">
-            <div className="relative group h-full">
-              <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-blue-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
-              <div className="relative h-full p-8 bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl hover:border-white/20 transition-all duration-300">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-3 bg-green-500/20 text-green-400 rounded-2xl border border-green-500/20">
-                    <Target className="w-8 h-8" />
-                  </div>
-                  <h2 className="text-3xl font-bold">Our Mission</h2>
-                </div>
-                <p className="text-gray-400 leading-relaxed text-lg">
-                  To empower brands with visually compelling, durable, and
-                  regulation-compliant signage that captures attention and
-                  builds strong market presence.
-                </p>
-              </div>
-            </div>
-            <div className="relative group h-full">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
-              <div className="relative h-full p-8 bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl hover:border-white/20 transition-all duration-300">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-3 bg-blue-500/20 text-blue-400 rounded-2xl border border-blue-500/20">
-                    <Lightbulb className="w-8 h-8" />
-                  </div>
-                  <h2 className="text-3xl font-bold">Our Vision</h2>
-                </div>
-                <p className="text-gray-400 leading-relaxed text-lg">
-                  To be the leading digital signage solutions provider in North
-                  India, envisioning a future where every brand communicates
-                  effectively through cutting-edge displays.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
+     
       {/* --- SECTION: GROWTH STATS --- */}
       <section
         data-animate

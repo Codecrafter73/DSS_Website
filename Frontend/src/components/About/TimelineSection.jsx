@@ -4,49 +4,67 @@ import { gsap } from "gsap";
 
 const timelineData = [
   {
-    year: "2005",
-    title: "The Beginning",
-    subtitle: "An establishment of Signage and Graphic",
+    year: "2001",
+    title: "Foundation Laid",
+    subtitle: "Company Established",
     description:
-      "We established the world's largest sign franchise specializing in all different types of signs. Grounding the number of projects we have grown to 10 locations around the world.",
+      "The journey began with a vision to transform signage and graphics in the region.",
     icon: Star,
     color: "from-green-400 to-emerald-600",
   },
   {
-    year: "2010",
-    title: "Rapid Expansion",
-    subtitle: "Expanding Horizons across North India",
+    year: "2005",
+    title: "First Major Project",
+    subtitle: "Breakthrough in Local Market",
     description:
-      "Crossed the milestone of 100+ satisfied clients. We introduced digital printing technologies that revolutionized how local businesses advertised in Lucknow.",
+      "Secured our first large-scale signage contract, setting new standards for quality.",
     icon: Target,
     color: "from-teal-400 to-cyan-500",
   },
   {
-    year: "2015",
-    title: "Tech Innovation",
-    subtitle: "Introduction of LED & Digital Boards",
+    year: "2010",
+    title: "Expansion Phase",
+    subtitle: "Branching Out",
     description:
-      "Pioneered the use of programmable LED displays in the region. This year marked our transition from traditional signage to smart, digital solutions.",
-    icon: Zap,
+      "Opened new branches and expanded our client base across North India.",
+    icon: Users,
     color: "from-blue-400 to-indigo-600",
   },
   {
-    year: "2020",
-    title: "Market Leadership",
-    subtitle: "Dominated Corporate & Retail Sectors",
+    year: "2015",
+    title: "Digital Leap",
+    subtitle: "Embracing Technology",
     description:
-      "Despite global challenges, we secured contracts with top retail chains. Our team grew to 50+ specialized professionals dedicated to quality.",
-    icon: Users,
+      "Introduced LED and digital signage, leading innovation in the industry.",
+    icon: Zap,
     color: "from-purple-400 to-violet-600",
   },
   {
-    year: "2023",
-    title: "Future Ready",
-    subtitle: "AI Integrated Signage Solutions",
+    year: "2020",
+    title: "Resilience & Growth",
+    subtitle: "Navigating Challenges",
     description:
-      "Launching smart signage with audience analytics. We are now not just a signage company, but a complete visual experience provider.",
-    icon: Trophy,
+      "Overcame global challenges and continued to grow, serving 500+ clients.",
+    icon: Users,
     color: "from-pink-400 to-rose-600",
+  },
+  {
+    year: "2023",
+    title: "AI Integration",
+    subtitle: "Smart Signage Solutions",
+    description:
+      "Launched AI-powered signage with analytics, redefining customer engagement.",
+    icon: Trophy,
+    color: "from-yellow-400 to-orange-600",
+  },
+  {
+    year: "2025",
+    title: "Vision 2025",
+    subtitle: "Leading the Future",
+    description:
+      "Celebrating 24 years of excellence, innovation, and leadership in the signage industry.",
+    icon: Star,
+    color: "from-green-400 to-blue-600",
   },
 ];
 
@@ -165,10 +183,6 @@ const TimelineSection = () => {
               {timelineData[activeIndex].description}
             </p>
           </div>
-
-          <button className="mt-4 flex items-center gap-2 text-sm font-semibold text-white bg-white/10 px-6 py-3 rounded-full hover:bg-white/20 transition-all border border-white/5">
-            Read Success Story <ChevronRight className="w-4 h-4" />
-          </button>
         </div>
 
         {/* Right Side: Visual/Image Placeholder */}

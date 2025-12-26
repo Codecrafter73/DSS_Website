@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import CountUp from "../components/CountUp";
 import { Link } from "react-router-dom";
 import {
   Home,
@@ -117,10 +118,15 @@ export default function ClientPage() {
             {/* Stats */}
             <div className="hero-animate grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
               {[
-                { icon: Users, label: "Happy Clients", val: "200+" },
-                { icon: Handshake, label: "Partnerships", val: "50+" },
-                { icon: Globe, label: "Cities Covered", val: "15+" },
-                { icon: Award, label: "Excellence", val: "100%" },
+                { icon: Users, label: "Happy Clients", val: 200, suffix: "+" },
+                {
+                  icon: Handshake,
+                  label: "Partnerships",
+                  val: 50,
+                  suffix: "+",
+                },
+                { icon: Globe, label: "Cities Covered", val: 15, suffix: "+" },
+                { icon: Award, label: "Excellence", val: 100, suffix: "%" },
               ].map((stat, i) => (
                 <div
                   key={i}
@@ -128,7 +134,8 @@ export default function ClientPage() {
                 >
                   <stat.icon className="w-6 h-6 text-green-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-white">
-                    {stat.val}
+                    <CountUp to={stat.val} duration={2} />
+                    {stat.suffix}
                   </div>
                   <div className="text-xs text-gray-400 uppercase tracking-wider">
                     {stat.label}

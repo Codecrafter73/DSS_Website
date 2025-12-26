@@ -230,7 +230,7 @@ const VisionMission = () => {
                 </p>
               </div>
 
-              <div className="space-y-4">
+              {/* <div className="space-y-4">
                 {[
                   "Tailored solutions for unique brand identities",
                   "Seamless execution from concept to maintenance",
@@ -244,7 +244,7 @@ const VisionMission = () => {
                     </span>
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
 
             {/* Right: Grid Cards */}
@@ -318,7 +318,7 @@ const VisionMission = () => {
                 </p>
               </div>
 
-              <div className="space-y-4">
+              {/* <div className="space-y-4">
                 {[
                   "Market leadership across North India",
                   "Pioneering next-gen display technologies",
@@ -332,7 +332,7 @@ const VisionMission = () => {
                     </span>
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

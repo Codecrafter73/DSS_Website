@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import CountUp from "../components/CountUp";
 import {
   Star,
   Quote,
@@ -122,7 +123,9 @@ const TestimonialsPage = () => {
                 <Users className="w-6 h-6" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-white">500+</div>
+                <div className="text-2xl font-bold text-white">
+                  <CountUp to={500} duration={2} />+
+                </div>
                 <div className="text-sm text-gray-400">Happy Clients</div>
               </div>
             </div>
@@ -131,7 +134,9 @@ const TestimonialsPage = () => {
                 <ThumbsUp className="w-6 h-6" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-white">98%</div>
+                <div className="text-2xl font-bold text-white">
+                  <CountUp to={98} duration={2} />%
+                </div>
                 <div className="text-sm text-gray-400">Retention Rate</div>
               </div>
             </div>
@@ -140,7 +145,10 @@ const TestimonialsPage = () => {
                 <Star className="w-6 h-6 fill-current" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-white">4.9/5</div>
+                <div className="text-2xl font-bold text-white">
+                  <CountUp to={4.9} duration={2} />
+                  /5
+                </div>
                 <div className="text-sm text-gray-400">Average Rating</div>
               </div>
             </div>

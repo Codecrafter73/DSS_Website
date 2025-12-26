@@ -239,23 +239,23 @@ const Footer = () => {
                 {[
                   {
                     Icon: Facebook,
-                    href: "https://www.facebook.com/share/1FKWdffPnn/",
+                    href: "https://www.facebook.com/digitalsignagesolutionsup/",
                     color: "hover:text-blue-400",
                   },
                   { Icon: Twitter, href: "#", color: "hover:text-sky-400" },
                   {
                     Icon: Instagram,
-                    href: "https://www.instagram.com/digitalsignagesolutiions?igsh=b3ozbjBxcDBnbTQ5",
+                    href: "https://www.instagram.com/digitalsignagesolutiions/",
                     color: "hover:text-pink-400",
                   },
                   {
                     Icon: Linkedin,
-                    href: "https://www.linkedin.com/company/106092404/admin/dashboard/",
+                    href: "https://www.linkedin.com/company/digitalsignagesolutionsup",
                     color: "hover:text-blue-600",
                   },
                   {
                     Icon: Youtube,
-                    href: "https://youtube.com/@DSSUP",
+                    href: "https://www.youtube.com/@DigitalSignageSolutions",
                     color: "hover:text-red-500",
                   },
                 ].map(({ Icon, href, color }, index) => (
