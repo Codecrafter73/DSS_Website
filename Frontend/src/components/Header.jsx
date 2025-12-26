@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "../assets/DSS_logo.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -20,14 +20,26 @@ export default function Header() {
       ],
     },
     {
-      name: "Our Services",
+      name: "Our Product",
       dropdown: [
         { name: "Outdoor Signage", path: "/services/outdoor-signage" },
         { name: "Indoor Signage", path: "/services/indoor-signage" },
         { name: "High Rise Signage", path: "/services/high-rise-signage" },
       ],
     },
-    // { name: "Products", path: "/products" },
+    {
+      name: "Our Services",
+      dropdown: [
+        { name: "Fabrication", path: "/services/fabrication" },
+        { name: "Installation", path: "/services/installation" },
+        { name: "Civil Work", path: "/services/civil-work" },
+        { name: "ACP Work", path: "/services/acp-work" },
+        {
+          name: "Installation Missing",
+          path: "/services/installation-missing",
+        },
+      ],
+    },
     { name: "Our Project", path: "/projects" },
     { name: "Clients", path: "/client" },
     { name: "Testimonial", path: "/testimonial" },
@@ -36,111 +48,344 @@ export default function Header() {
     { name: "Contact Us", path: "/contact" },
   ];
 
-  const handleLogoClick = () => navigate("/");
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [mobileOpen]);
+
+  const handleLogoClick = () => {
+    navigate("/");
+    setMobileOpen(false);
+  };
+
+  const closeMobileMenu = () => {
+    setMobileOpen(false);
+    setActiveDropdown(null);
+  };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-black/70 backdrop-blur-xl border-b border-white/10 shadow-lg overflow-visible">
-      <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
-        {/* Logo */}
-        <img
-          src={logo}
-          alt="Logo"
-          className="h-18 cursor-pointer bg-white"
-          onClick={handleLogoClick}
-        />
+    <>
+      <style>{`
+        /* Mobile menu animation */
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
 
-        {/* Desktop NAV */}
-        <nav className="hidden lg:flex items-center gap-8 text-white">
-          {navItems.map((item, index) => (
-            <div key={index} className="relative group">
-              <div className="flex items-center gap-1 cursor-pointer hover:text-green-400 transition py-2">
-                {item.path ? (
-                  <Link to={item.path}>{item.name}</Link>
-                ) : (
-                  <span>{item.name}</span>
-                )}
+        .mobile-menu-enter {
+          animation: slideDown 0.3s ease-out;
+        }
 
-                {item.dropdown && <ChevronDown size={16} />}
-              </div>
+        /* Custom scrollbar for mobile menu */
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
 
-              {item.dropdown && (
-                <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <div className="bg-white shadow-xl rounded-lg py-3 w-52 border border-gray-200">
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 3px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 3px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Smooth transitions */
+        .header-transition {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Dropdown animations */
+        .dropdown-enter {
+          animation: slideDown 0.2s ease-out;
+        }
+
+        /* Responsive font sizes */
+        @media (max-width: 374px) {
+          .responsive-logo {
+            height: 2.5rem !important;
+          }
+          
+          .responsive-header {
+            height: 3.5rem !important;
+          }
+        }
+
+        @media (min-width: 375px) and (max-width: 639px) {
+          .responsive-logo {
+            height: 3rem;
+          }
+          
+          .responsive-header {
+            height: 4rem;
+          }
+        }
+
+        @media (min-width: 640px) and (max-width: 1023px) {
+          .responsive-logo {
+            height: 3.5rem;
+          }
+          
+          .responsive-header {
+            height: 5rem;
+          }
+        }
+
+        @media (min-width: 1024px) and (max-width: 1279px) {
+          .nav-item-text {
+            font-size: 0.8rem;
+          }
+          
+          .nav-gap {
+            gap: 0.75rem;
+          }
+        }
+
+        @media (min-width: 1280px) and (max-width: 1535px) {
+          .nav-item-text {
+            font-size: 0.875rem;
+          }
+          
+          .nav-gap {
+            gap: 1rem;
+          }
+        }
+
+        @media (min-width: 1536px) {
+          .nav-item-text {
+            font-size: 1rem;
+          }
+          
+          .nav-gap {
+            gap: 1.5rem;
+          }
+        }
+
+        /* Accessibility - Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+          * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
+        }
+
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+          .header-border {
+            border-bottom: 2px solid white;
+          }
+          
+          .nav-hover:hover {
+            text-decoration: underline;
+          }
+        }
+
+        /* Focus visible for accessibility */
+        .focus-visible:focus-visible {
+          outline: 2px solid #4ade80;
+          outline-offset: 2px;
+          border-radius: 4px;
+        }
+      `}</style>
+
+      <header className="fixed top-0 left-0 w-full z-50 bg-black/70 backdrop-blur-xl border-b border-white/10 shadow-lg header-border">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between responsive-header h-16 sm:h-20">
+            {/* Logo */}
+            <div className="flex-shrink-0">
+              <img
+                src={logo}
+                alt="DSS Logo"
+                className="responsive-logo h-12 sm:h-14 md:h-16 cursor-pointer bg-white px-2 py-1 rounded focus-visible"
+                onClick={handleLogoClick}
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    handleLogoClick();
+                  }
+                }}
+              />
+            </div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center nav-gap gap-4 xl:gap-6 text-white font-medium">
+              {navItems.map((item, index) => (
+                <div key={index} className="relative group">
+                  <div className="flex items-center gap-1 cursor-pointer hover:text-green-400 header-transition py-2 whitespace-nowrap nav-item-text text-sm nav-hover focus-visible">
+                    {item.path ? (
+                      <Link
+                        to={item.path}
+                        className="inline-block"
+                        tabIndex={0}
+                      >
+                        {item.name}
+                      </Link>
+                    ) : (
+                      <span tabIndex={0}>{item.name}</span>
+                    )}
+
+                    {item.dropdown && (
+                      <ChevronDown
+                        size={14}
+                        className="header-transition group-hover:rotate-180"
+                      />
+                    )}
+                  </div>
+
+                  {/* Desktop Dropdown */}
+                  {item.dropdown && (
+                    <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible header-transition pointer-events-none group-hover:pointer-events-auto">
+                      <div className="bg-black/90 backdrop-blur-md shadow-2xl rounded-lg py-2 w-52 border border-white/20 dropdown-enter">
+                        {item.dropdown.map((sub, i) => (
+                          <Link
+                            key={i}
+                            to={sub.path}
+                            className="block px-4 py-2.5 text-white hover:bg-white/15 hover:text-green-400 header-transition text-sm focus-visible"
+                            tabIndex={0}
+                          >
+                            {sub.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </nav>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              className="lg:hidden text-white p-2 hover:bg-white/10 rounded-lg header-transition focus-visible"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
+            >
+              {mobileOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        <div
+          className={`lg:hidden bg-black/95 backdrop-blur-lg text-white border-t border-gray-700 header-transition ${
+            mobileOpen
+              ? "max-h-[calc(100vh-4rem)] opacity-100"
+              : "max-h-0 opacity-0 overflow-hidden"
+          }`}
+        >
+          <div className="overflow-y-auto max-h-[calc(100vh-4rem)] px-4 py-4 space-y-1 custom-scrollbar mobile-menu-enter">
+            {navItems.map((item, index) => (
+              <div
+                key={index}
+                className="border-b border-white/10 last:border-b-0"
+              >
+                <div
+                  className="flex justify-between items-center py-3 cursor-pointer hover:bg-white/5 px-2 rounded header-transition focus-visible"
+                  onClick={() => {
+                    if (item.dropdown) {
+                      setActiveDropdown(
+                        activeDropdown === index ? null : index
+                      );
+                    } else if (item.path) {
+                      navigate(item.path);
+                      closeMobileMenu();
+                    }
+                  }}
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      if (item.dropdown) {
+                        setActiveDropdown(
+                          activeDropdown === index ? null : index
+                        );
+                      } else if (item.path) {
+                        navigate(item.path);
+                        closeMobileMenu();
+                      }
+                    }
+                  }}
+                >
+                  {item.path && !item.dropdown ? (
+                    <Link
+                      to={item.path}
+                      onClick={closeMobileMenu}
+                      className="text-base sm:text-lg font-medium flex-1"
+                      tabIndex={-1}
+                    >
+                      {item.name}
+                    </Link>
+                  ) : (
+                    <span className="text-base sm:text-lg font-medium flex-1">
+                      {item.name}
+                    </span>
+                  )}
+
+                  {item.dropdown && (
+                    <ChevronDown
+                      size={20}
+                      className={`header-transition ${
+                        activeDropdown === index ? "rotate-180" : ""
+                      }`}
+                    />
+                  )}
+                </div>
+
+                {/* Mobile Dropdown */}
+                {item.dropdown && (
+                  <div
+                    className={`ml-4 space-y-1 header-transition overflow-hidden ${
+                      activeDropdown === index
+                        ? "max-h-96 opacity-100 mb-2"
+                        : "max-h-0 opacity-0"
+                    }`}
+                  >
                     {item.dropdown.map((sub, i) => (
                       <Link
                         key={i}
                         to={sub.path}
-                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-black transition"
+                        onClick={closeMobileMenu}
+                        className="block py-2 px-3 text-sm sm:text-base text-gray-300 hover:text-green-400 hover:bg-white/5 rounded header-transition focus-visible"
+                        tabIndex={activeDropdown === index ? 0 : -1}
                       >
                         {sub.name}
                       </Link>
                     ))}
                   </div>
-                </div>
-              )}
-            </div>
-          ))}
-        </nav>
-
-        {/* Mobile Toggle */}
-        <button
-          className="lg:hidden text-white"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
-          {mobileOpen ? <X size={34} /> : <Menu size={34} />}
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="lg:hidden bg-black text-white border-t border-gray-700 py-4 px-4 space-y-3 animate-slideDown max-h-[100vh] overflow-y-auto">
-          {navItems.map((item, index) => (
-            <div key={index}>
-              <div
-                className="flex justify-between items-center py-2 border-b border-white/10"
-                onClick={() =>
-                  setActiveDropdown(activeDropdown === index ? null : index)
-                }
-              >
-                {item.path ? (
-                  <Link
-                    to={item.path}
-                    onClick={() => setMobileOpen(false)}
-                    className="text-lg"
-                  >
-                    {item.name}
-                  </Link>
-                ) : (
-                  <span className="text-lg">{item.name}</span>
-                )}
-
-                {item.dropdown && (
-                  <ChevronDown
-                    className={`${
-                      activeDropdown === index ? "rotate-180" : ""
-                    } transition`}
-                  />
                 )}
               </div>
-
-              {item.dropdown && activeDropdown === index && (
-                <div className="ml-4 mt-2 space-y-2">
-                  {item.dropdown.map((sub, i) => (
-                    <Link
-                      key={i}
-                      to={sub.path}
-                      onClick={() => setMobileOpen(false)}
-                      className="block py-1 text-gray-300 hover:text-green-400 transition"
-                    >
-                      {sub.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      )}
-    </header>
+
+        {/* Mobile Menu Overlay */}
+        {mobileOpen && (
+          <div
+            className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm -z-10"
+            onClick={closeMobileMenu}
+            aria-hidden="true"
+          />
+        )}
+      </header>
+    </>
   );
 }

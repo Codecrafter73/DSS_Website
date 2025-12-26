@@ -11,7 +11,8 @@ import { teamApi } from "../api/team.api.js";
 import { inquiryApi } from "../api/inquiry.api.js";
 import { visitorApi } from "../api/visitor.api.js";
 import { subscriberApi } from "../api/subscriber.api.js";
-// import { jobApi } from '../api/job.api.js'; // Removed: file deleted
+import { jobApi } from "../api/job.api.js";
+import { clientApi } from "../api/client.api.js";
 const persistConfig = {
   key: "root",
   storage,
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   [visitorApi.reducerPath]: visitorApi.reducer,
   [subscriberApi.reducerPath]: subscriberApi.reducer,
   [jobApi.reducerPath]: jobApi.reducer,
+  [clientApi.reducerPath]: clientApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -45,7 +47,8 @@ export const store = configureStore({
       inquiryApi.middleware,
       visitorApi.middleware,
       subscriberApi.middleware,
-      jobApi.middleware
+      jobApi.middleware,
+      clientApi.middleware
     ),
   devTools: import.meta.env.VITE_MODE !== "Pro",
 });

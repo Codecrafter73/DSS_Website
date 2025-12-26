@@ -99,21 +99,22 @@ const ContactUsPage = () => {
         "Lucknow-226028",
       ],
       gradient: "from-emerald-500 to-green-600",
-      action: "https://goo.gl/maps/YOUR_MAP_LINK", // Replace with actual link
+      action:
+        "https://www.google.com/maps/search/?api=1&query=Digital+Signage+Solutions+Chinhat+Tiraha+Faizabad+Road+Lucknow+226028",
     },
     {
       icon: Phone,
       title: "Call Us",
-      details: ["+91-6386901011"],
+      details: ["+91-9236477974", "+91-6386901011"],
       gradient: "from-blue-500 to-indigo-600",
-      action: "tel:6386901011",
+      action: "tel:+91-9236477974",
     },
     {
       icon: Mail,
       title: "Email Us",
-      details: ["info@dssup.co.in", "sales@dssup.co.in"],
+      details: ["info@dssup.in",],
       gradient: "from-purple-500 to-violet-600",
-      action: "mailto:info@dssup.co.in",
+      action: "mailto:info@dssup.in",
     },
     {
       icon: Clock,
@@ -124,10 +125,27 @@ const ContactUsPage = () => {
     },
   ];
 
-  // --- Handlers & Validation Logic (Kept mostly same, styled differently) ---
+  // --- Handlers & Validation Logic ---
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    const newValue = type === "checkbox" ? checked : value;
+    let newValue = type === "checkbox" ? checked : value;
+
+    // Phone number validation - only allow numbers
+    if (name === "phone") {
+      // Remove all non-numeric characters
+      newValue = value.replace(/\D/g, "");
+      // Limit to 10 digits
+      if (newValue.length > 10) {
+        newValue = newValue.slice(0, 10);
+      }
+    }
+
+    // Name validation - only allow letters and spaces
+    if (name === "name") {
+      // Remove all characters except letters and spaces
+      newValue = value.replace(/[^a-zA-Z\s]/g, "");
+    }
+
     setFormData((prev) => ({ ...prev, [name]: newValue }));
     setErrors((prev) => ({ ...prev, [name]: validateField(name, newValue) }));
   };
@@ -179,25 +197,33 @@ const ContactUsPage = () => {
     switch (name) {
       case "name":
         if (!value.trim()) error = "Full name is required";
+        else if (value.trim().length < 2)
+          error = "Name must be at least 2 characters";
         break;
       case "email":
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) error = "Invalid email";
+        if (!value.trim()) error = "Email is required";
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
+          error = "Enter a valid email address";
         break;
       case "phone":
-        if (!/^[6-9]\d{9}$/.test(value.replace(/\s/g, "")))
-          error = "Invalid phone number";
+        if (!/^[6-9]\d{9}$/.test(value))
+          error = "Enter valid 10-digit mobile number starting with 6-9";
         break;
       case "companyName":
-        if (!value.trim()) error = "Company name required";
+        if (!value.trim()) error = "Company name is required";
+        else if (value.trim().length < 2)
+          error = "Company name must be at least 2 characters";
         break;
       case "requirement":
-        if (!value) error = "Select a requirement";
+        if (!value) error = "Please select a requirement";
         break;
       case "message":
-        if (value.trim().length < 10) error = "Message too short";
+        if (!value.trim()) error = "Message is required";
+        else if (value.trim().length < 10)
+          error = "Message must be at least 10 characters";
         break;
       case "agreed":
-        if (!value) error = "Agreement required";
+        if (!value) error = "You must agree to the terms & conditions";
         break;
       default:
         break;
@@ -315,9 +341,9 @@ const ContactUsPage = () => {
             </p>
           </div>
 
-          <div className="content-container grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* --- Left Column: Contact Info --- */}
-            <div className="animate-up flex flex-col gap-6">
+          <div className="content-container space-y-8">
+            {/* --- Contact Info Cards (Top) --- */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-up">
               {contactInfo.map((info, idx) => (
                 <div
                   key={idx}
@@ -341,33 +367,18 @@ const ContactUsPage = () => {
                   {info.action && (
                     <a
                       href={info.action}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="absolute inset-0"
                       aria-label={info.title}
                     />
                   )}
                 </div>
               ))}
-
-              {/* Map Container */}
-              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-2 h-64 shadow-inner">
-                <iframe
-                  src="https://maps.google.com/maps?q=Digital%20Signage%20Solutions%20Lucknow&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                  width="100%"
-                  height="100%"
-                  style={{
-                    border: 0,
-                    borderRadius: "12px",
-                  }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Google Map"
-                ></iframe>
-              </div>
             </div>
 
-            {/* --- Right Column: Contact Form --- */}
-            <div className="lg:col-span-2 animate-up">
+            {/* --- Contact Form (Middle - Split into 2 columns) --- */}
+            <div className="animate-up">
               <div className="bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-3xl p-8 lg:p-10 shadow-2xl">
                 <div className="flex items-center gap-3 mb-8">
                   <div className="p-3 bg-green-500/20 text-green-400 rounded-xl">
@@ -378,9 +389,10 @@ const ContactUsPage = () => {
                   </h2>
                 </div>
 
-                <div className="space-y-6">
-                  {/* Row 1 */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  {/* Left Column */}
+                  <div className="space-y-6">
+                    {/* Full Name */}
                     <div>
                       <label className="block text-sm font-medium text-gray-400 mb-2">
                         Full Name *
@@ -392,6 +404,7 @@ const ContactUsPage = () => {
                           name="name"
                           value={formData.name}
                           onChange={handleInputChange}
+                          pattern="[a-zA-Z\s]*"
                           className={`w-full bg-black/20 border rounded-xl pl-10 pr-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-green-500/50 transition-all ${
                             errors.name
                               ? "border-red-500/50"
@@ -407,35 +420,7 @@ const ContactUsPage = () => {
                       )}
                     </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-2">
-                        Company Name *
-                      </label>
-                      <div className="relative">
-                        <Building className="absolute left-4 top-3.5 w-4 h-4 text-gray-500" />
-                        <input
-                          type="text"
-                          name="companyName"
-                          value={formData.companyName}
-                          onChange={handleInputChange}
-                          className={`w-full bg-black/20 border rounded-xl pl-10 pr-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-green-500/50 transition-all ${
-                            errors.companyName
-                              ? "border-red-500/50"
-                              : "border-white/10"
-                          }`}
-                          placeholder="Your Company Ltd."
-                        />
-                      </div>
-                      {errors.companyName && (
-                        <p className="text-red-500 text-xs mt-1">
-                          {errors.companyName}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Row 2 */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Email Address */}
                     <div>
                       <label className="block text-sm font-medium text-gray-400 mb-2">
                         Email Address *
@@ -462,6 +447,128 @@ const ContactUsPage = () => {
                       )}
                     </div>
 
+                    {/* Requirement Dropdown */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-400 mb-2">
+                        Requirement *
+                      </label>
+                      <select
+                        name="requirement"
+                        value={formData.requirement}
+                        onChange={handleInputChange}
+                        className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500/50 transition-all appearance-none cursor-pointer"
+                      >
+                        <option value="" className="bg-gray-900">
+                          Select a service...
+                        </option>
+                        {requirements.map((req, index) => (
+                          <option
+                            key={index}
+                            value={req}
+                            className="bg-gray-900"
+                          >
+                            {req}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.requirement && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.requirement}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* File Upload */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-400 mb-2">
+                        Site Photos (Optional)
+                      </label>
+                      <div className="border-2 border-dashed border-white/10 rounded-xl p-6 text-center hover:border-green-500/30 hover:bg-white/[0.02] transition-all group cursor-pointer relative">
+                        <input
+                          type="file"
+                          multiple
+                          accept=".jpg,.jpeg,.png,.webp,.pdf"
+                          onChange={handleFileChange}
+                          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                        />
+                        <div className="flex flex-col items-center">
+                          <div className="p-3 bg-white/5 rounded-full mb-3 group-hover:bg-green-500/10 transition-colors">
+                            <Upload className="w-6 h-6 text-gray-400 group-hover:text-green-400" />
+                          </div>
+                          <p className="text-sm text-gray-300">
+                            <span className="text-green-400 font-medium">
+                              Click to upload
+                            </span>{" "}
+                            or drag and drop
+                          </p>
+                          <p className="text-xs text-gray-500 mt-1">
+                            Images or PDF up to 5MB
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* File List */}
+                      {formData.sitePhoto.length > 0 && (
+                        <div className="mt-4 space-y-2">
+                          {formData.sitePhoto.map((file, idx) => (
+                            <div
+                              key={idx}
+                              className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2 border border-white/5"
+                            >
+                              <div className="flex items-center gap-2 overflow-hidden">
+                                <Paperclip className="w-4 h-4 text-green-400 flex-shrink-0" />
+                                <span className="text-sm text-gray-300 truncate">
+                                  {file.name}
+                                </span>
+                              </div>
+                              <button
+                                onClick={() => removeFile(idx)}
+                                className="p-1 hover:bg-white/10 rounded-full text-gray-500 hover:text-red-400 transition-colors"
+                              >
+                                <X className="w-4 h-4" />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      {errors.sitePhoto && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.sitePhoto}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Right Column */}
+                  <div className="space-y-6">
+                    {/* Company Name */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-400 mb-2">
+                        Company Name *
+                      </label>
+                      <div className="relative">
+                        <Building className="absolute left-4 top-3.5 w-4 h-4 text-gray-500" />
+                        <input
+                          type="text"
+                          name="companyName"
+                          value={formData.companyName}
+                          onChange={handleInputChange}
+                          className={`w-full bg-black/20 border rounded-xl pl-10 pr-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-green-500/50 transition-all ${
+                            errors.companyName
+                              ? "border-red-500/50"
+                              : "border-white/10"
+                          }`}
+                          placeholder="Your Company Ltd."
+                        />
+                      </div>
+                      {errors.companyName && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.companyName}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Phone Number */}
                     <div>
                       <label className="block text-sm font-medium text-gray-400 mb-2">
                         Phone Number *
@@ -473,12 +580,15 @@ const ContactUsPage = () => {
                           name="phone"
                           value={formData.phone}
                           onChange={handleInputChange}
+                          inputMode="numeric"
+                          pattern="[0-9]*"
+                          maxLength="10"
                           className={`w-full bg-black/20 border rounded-xl pl-10 pr-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-green-500/50 transition-all ${
                             errors.phone
                               ? "border-red-500/50"
                               : "border-white/10"
                           }`}
-                          placeholder="+91 98765 43210"
+                          placeholder="9876543210"
                         />
                       </div>
                       {errors.phone && (
@@ -487,119 +597,35 @@ const ContactUsPage = () => {
                         </p>
                       )}
                     </div>
-                  </div>
 
-                  {/* Requirement Dropdown */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">
-                      Requirement *
-                    </label>
-                    <select
-                      name="requirement"
-                      value={formData.requirement}
-                      onChange={handleInputChange}
-                      className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500/50 transition-all appearance-none cursor-pointer"
-                    >
-                      <option value="" className="bg-gray-900">
-                        Select a service...
-                      </option>
-                      {requirements.map((req, index) => (
-                        <option key={index} value={req} className="bg-gray-900">
-                          {req}
-                        </option>
-                      ))}
-                    </select>
-                    {errors.requirement && (
-                      <p className="text-red-500 text-xs mt-1">
-                        {errors.requirement}
-                      </p>
-                    )}
-
-                    {/* Diagram Prompt: Helpful for users choosing complex requirements */}
-                  </div>
-
-                  {/* File Upload */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">
-                      Site Photos (Optional)
-                    </label>
-                    <div className="border-2 border-dashed border-white/10 rounded-xl p-6 text-center hover:border-green-500/30 hover:bg-white/[0.02] transition-all group cursor-pointer relative">
-                      <input
-                        type="file"
-                        multiple
-                        accept=".jpg,.jpeg,.png,.webp,.pdf"
-                        onChange={handleFileChange}
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                    {/* Message */}
+                    <div className="flex-1">
+                      <label className="block text-sm font-medium text-gray-400 mb-2">
+                        Message *
+                      </label>
+                      <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        rows={9}
+                        className={`w-full bg-black/20 border rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-green-500/50 transition-all resize-none ${
+                          errors.message
+                            ? "border-red-500/50"
+                            : "border-white/10"
+                        }`}
+                        placeholder="Tell us about your project requirements..."
                       />
-                      <div className="flex flex-col items-center">
-                        <div className="p-3 bg-white/5 rounded-full mb-3 group-hover:bg-green-500/10 transition-colors">
-                          <Upload className="w-6 h-6 text-gray-400 group-hover:text-green-400" />
-                        </div>
-                        <p className="text-sm text-gray-300">
-                          <span className="text-green-400 font-medium">
-                            Click to upload
-                          </span>{" "}
-                          or drag and drop
+                      {errors.message && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.message}
                         </p>
-                        <p className="text-xs text-gray-500 mt-1">
-                          Images or PDF up to 5MB
-                        </p>
-                      </div>
+                      )}
                     </div>
-
-                    {/* File List */}
-                    {formData.sitePhoto.length > 0 && (
-                      <div className="mt-4 space-y-2">
-                        {formData.sitePhoto.map((file, idx) => (
-                          <div
-                            key={idx}
-                            className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2 border border-white/5"
-                          >
-                            <div className="flex items-center gap-2 overflow-hidden">
-                              <Paperclip className="w-4 h-4 text-green-400 flex-shrink-0" />
-                              <span className="text-sm text-gray-300 truncate">
-                                {file.name}
-                              </span>
-                            </div>
-                            <button
-                              onClick={() => removeFile(idx)}
-                              className="p-1 hover:bg-white/10 rounded-full text-gray-500 hover:text-red-400 transition-colors"
-                            >
-                              <X className="w-4 h-4" />
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    {errors.sitePhoto && (
-                      <p className="text-red-500 text-xs mt-1">
-                        {errors.sitePhoto}
-                      </p>
-                    )}
                   </div>
+                </div>
 
-                  {/* Message */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">
-                      Message *
-                    </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      rows={4}
-                      className={`w-full bg-black/20 border rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-green-500/50 transition-all resize-none ${
-                        errors.message ? "border-red-500/50" : "border-white/10"
-                      }`}
-                      placeholder="Tell us about your project requirements..."
-                    />
-                    {errors.message && (
-                      <p className="text-red-500 text-xs mt-1">
-                        {errors.message}
-                      </p>
-                    )}
-                  </div>
-
+                {/* Agreement & Submit (Full Width) */}
+                <div className="mt-8 space-y-4">
                   {/* Agreement */}
                   <div className="flex items-start gap-3">
                     <input
@@ -659,6 +685,23 @@ const ContactUsPage = () => {
                   )}
                 </div>
               </div>
+            </div>
+
+            {/* --- Map Container (Bottom) --- */}
+            <div className="animate-up bg-white/[0.03] border border-white/10 rounded-2xl p-2 h-96 shadow-inner">
+              <iframe
+                src="https://maps.google.com/maps?q=Digital%20Signage%20Solutions%20Lucknow&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style={{
+                  border: 0,
+                  borderRadius: "12px",
+                }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Google Map"
+              ></iframe>
             </div>
           </div>
         </div>

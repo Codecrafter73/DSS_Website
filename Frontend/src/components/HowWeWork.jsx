@@ -1,196 +1,11 @@
-// import React, { useEffect, useRef } from "react";
-// import {
-//   MessageSquare,
-//   Map,
-//   PenTool,
-//   Factory,
-//   Truck,
-//   Headphones,
-//   ArrowRight,
-// } from "lucide-react";
-// import { gsap } from "gsap";
-// import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-// // Register GSAP
-// gsap.registerPlugin(ScrollTrigger);
-
-// const HowWeWork = () => {
-//   const sectionRef = useRef(null);
-
-//   // --- Animation Logic ---
-//   useEffect(() => {
-//     const ctx = gsap.context(() => {
-//       // Animate Header
-//       gsap.fromTo(
-//         ".process-header",
-//         { opacity: 0, y: 30 },
-//         {
-//           opacity: 1,
-//           y: 0,
-//           duration: 0.8,
-//           scrollTrigger: {
-//             trigger: ".process-header",
-//             start: "top 85%",
-//           },
-//         }
-//       );
-
-//       // Animate Steps Staggered
-//       gsap.fromTo(
-//         ".process-card",
-//         { opacity: 0, y: 50 },
-//         {
-//           opacity: 1,
-//           y: 0,
-//           duration: 0.6,
-//           stagger: 0.15,
-//           ease: "power2.out",
-//           scrollTrigger: {
-//             trigger: ".process-grid",
-//             start: "top 80%",
-//           },
-//         }
-//       );
-//     }, sectionRef);
-
-//     return () => ctx.revert();
-//   }, []);
-
-//   const steps = [
-//     {
-//       id: "01",
-//       title: "Consultation & Strategy",
-//       desc: "We start by understanding your brand goals, target audience, and location requirements.",
-//       icon: MessageSquare,
-//       color: "text-blue-400",
-//       border: "hover:border-blue-500/50",
-//     },
-//     {
-//       id: "02",
-//       title: "Site Survey & Recce",
-//       desc: "Our technical team visits the site to measure dimensions and analyze visibility angles.",
-//       icon: Map,
-//       color: "text-green-400",
-//       border: "hover:border-green-500/50",
-//     },
-//     {
-//       id: "03",
-//       title: "Design & Prototyping",
-//       desc: "We create 3D renders and digital mockups so you can visualize the final outcome.",
-//       icon: PenTool,
-//       color: "text-purple-400",
-//       border: "hover:border-purple-500/50",
-//     },
-//     {
-//       id: "04",
-//       title: "Manufacturing",
-//       desc: "Precision fabrication using high-grade materials and advanced CNC/Laser technology.",
-//       icon: Factory,
-//       color: "text-orange-400",
-//       border: "hover:border-orange-500/50",
-//     },
-//     {
-//       id: "05",
-//       title: "Installation",
-//       desc: "Safe and professional installation by our certified team, ensuring structural integrity.",
-//       icon: Truck,
-//       color: "text-red-400",
-//       border: "hover:border-red-500/50",
-//     },
-//     {
-//       id: "06",
-//       title: "Support & AMC",
-//       desc: "We don't just leave. We provide ongoing maintenance and technical support.",
-//       icon: Headphones,
-//       color: "text-teal-400",
-//       border: "hover:border-teal-500/50",
-//     },
-//   ];
-
-//   return (
-//     <section
-//       ref={sectionRef}
-//       className="relative py-20 bg-gray-950 overflow-hidden"
-//     >
-//       {/* Background Decoration */}
-//       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-//         <div className="absolute top-1/4 left-0 w-96 h-96 bg-green-500/10 rounded-full blur-[100px]" />
-//         <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px]" />
-//       </div>
-
-//       <div className="max-w-7xl mx-auto px-6 relative z-10">
-//         {/* Header */}
-//         <div className="process-header text-center mb-16">
-//           <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
-//             Our Work{" "}
-//             <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
-//               Process
-//             </span>
-//           </h2>
-//           <div className="w-24 h-1 bg-gradient-to-r from-green-500 to-blue-500 mx-auto rounded-full mb-6" />
-//           <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-//             From concept to execution, we follow a rigorous workflow to ensure
-//             perfection in every pixel and panel.
-//           </p>
-//         </div>
-
-//         {/* Process Grid */}
-//         <div className="process-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-//           {steps.map((step, index) => (
-//             <div
-//               key={index}
-//               className={`process-card group relative p-8 bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-3xl transition-all duration-300 hover:-translate-y-2 ${step.border}`}
-//             >
-//               {/* Connector Line (Desktop Only - visual cue) */}
-//               {index !== steps.length - 1 && (
-//                 <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-[1px] bg-gradient-to-r from-white/10 to-transparent z-0 transform -translate-y-1/2"></div>
-//               )}
-
-//               {/* Number Background */}
-//               <div className="absolute top-4 right-6 text-6xl font-black text-white/[0.03] group-hover:text-white/[0.05] transition-colors select-none">
-//                 {step.id}
-//               </div>
-
-//               {/* Icon */}
-//               <div
-//                 className={`relative w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
-//               >
-//                 <step.icon className={`w-7 h-7 ${step.color}`} />
-//               </div>
-
-//               {/* Content */}
-//               <h3 className="text-xl font-bold text-white mb-3 group-hover:text-green-400 transition-colors">
-//                 {step.title}
-//               </h3>
-//               <p className="text-gray-400 text-sm leading-relaxed">
-//                 {step.desc}
-//               </p>
-
-//               {/* Hover Indicator */}
-//               <div className="mt-6 flex items-center gap-2 text-xs font-bold text-gray-500 uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
-//                 <span>Next Step</span>
-//                 <ArrowRight className="w-3 h-3" />
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default HowWeWork;
-
-
-
-
 import {
   FileText,
   PencilRuler,
   Building2,
   BadgeCheck,
   Truck,
-  Wrench
+  Wrench,
+  MessageCircle,
 } from "lucide-react";
 import { useMemo } from "react";
 import bg from "../assets/banner2.jpg";
@@ -206,7 +21,8 @@ const steps = [
     id: 2,
     title: "Site Survey",
     icon: Building2,
-    description: "Analyzing installation site for structure, access, and visibility.",
+    description:
+      "Analyzing installation site for structure, access, and visibility.",
   },
   {
     id: 3,
@@ -216,7 +32,7 @@ const steps = [
   },
   {
     id: 4,
-    title: "Fabrication",
+    title: "Manufacturing",
     icon: Wrench,
     description: "Manufacturing signage using selected materials and methods.",
   },
@@ -230,7 +46,15 @@ const steps = [
     id: 6,
     title: "Installation",
     icon: Truck,
-    description: "Safely delivering and mounting signage on-site with precision.",
+    description:
+      "Safely delivering and mounting signage on-site with precision.",
+  },
+  {
+    id: 7,
+    title: "Client Feedback",
+    icon: MessageCircle,
+    description:
+      "Gathering client feedback to validate quality, address concerns, and ensure complete satisfaction.",
   },
 ];
 
@@ -247,10 +71,12 @@ const Step = ({ id, title, Icon, description, index }) => (
       </div>
     </div>
     <h3 className="font-semibold lg:mt-3 text-white text-lg">{title}</h3>
-    <p className="md:block hidden text-gray-300 text-sm mt-1 max-w-xs mx-auto px-2">{description}</p>
+    <p className="md:block hidden text-gray-300 text-sm mt-1 max-w-xs mx-auto px-2">
+      {description}
+    </p>
 
-    {((index !== steps.length - 1) && (index !== 2)) && (
-       <svg
+    {index !== steps.length - 1 && index !== 3 && (
+      <svg
         className="absolute lg:block hidden right-0 top-5 translate-y-1/2 translate-x-24"
         xmlns="http://www.w3.org/2000/svg"
         width="160"
@@ -266,7 +92,6 @@ const Step = ({ id, title, Icon, description, index }) => (
           fill="#7a7878"
         />
       </svg>
-
     )}
   </div>
 );
@@ -291,25 +116,49 @@ export default function HowWeWork() {
       {/* Header */}
       <div className="container mx-auto mb-10">
         <h2 className="text-3xl md:text-5xl font-bold text-white mt-2">
-          Our Signage <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">Process</span>
+          Our Signage{" "}
+          <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+            Process
+          </span>
         </h2>
         <div className="w-24 h-1 bg-gradient-to-r from-green-500 to-blue-500 mx-auto mt-4"></div>
       </div>
 
       {/* Steps */}
       <div className="overflow-visible">
-      <div className="mb-4  grid grid-cols-2 md:grid-cols-3 lg:gap-16 gap-6 max-w-7xl mx-auto relative overflow-visible px-4">
-        {memoizedSteps.map(({ id, title, icon, description }, index) => (
-          <Step
-            key={id}
-            id={id}
-            title={title}
-            Icon={icon}
-            index={index}
-            description={description}
-          />
-        ))}
-      </div>
+        <div className="mb-4 max-w-7xl mx-auto relative overflow-visible px-4">
+          {/* First Row - 4 items */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+            {memoizedSteps
+              .slice(0, 4)
+              .map(({ id, title, icon, description }, index) => (
+                <Step
+                  key={id}
+                  id={id}
+                  title={title}
+                  Icon={icon}
+                  index={index}
+                  description={description}
+                />
+              ))}
+          </div>
+
+          {/* Second Row - 3 items centered */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {memoizedSteps
+              .slice(4, 7)
+              .map(({ id, title, icon, description }, index) => (
+                <Step
+                  key={id}
+                  id={id}
+                  title={title}
+                  Icon={icon}
+                  index={index + 4}
+                  description={description}
+                />
+              ))}
+          </div>
+        </div>
       </div>
     </div>
   );

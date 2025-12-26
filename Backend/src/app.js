@@ -71,6 +71,9 @@ app.use("/api/v1/job", JobRoutes);
 import DashboardRoutes from "./routes/dashboard.routes.js";
 app.use("/api/v1/dashboard", DashboardRoutes);
 
+import clientRoutes from "./routes/client.routes.js";
+app.use("/api/v1/client", clientRoutes);
+
 app.use((req, res, next) => {
   next(new ApiError(404, "Route not found"));
 });

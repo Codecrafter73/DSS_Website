@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {
-  Facebook,
-  Twitter,
-  Instagram,
   Linkedin,
   Home,
   ChevronRight,
-  Users,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
@@ -173,13 +169,8 @@ const TeamPage = () => {
 
         {/* Title */}
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <div className="hero-content inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/20 text-sm font-medium text-green-400 mb-6 cursor-default">
-            <Users className="w-4 h-4" />
-            <span>The Minds Behind The Magic</span>
-          </div>
-
           <h1 className="hero-content text-4xl md:text-6xl font-black mb-6 leading-tight">
-            Meet Our <br className="hidden md:block" />
+            Meet Our{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-400 to-purple-500 animate-gradient-x">
               Creative Team
             </span>
@@ -209,12 +200,8 @@ const TeamPage = () => {
                   {/* Hover Overlay with Socials */}
                   <div className="absolute inset-0 bg-green-900/80 opacity-0 group-hover:opacity-90 transition-opacity duration-300 z-20 flex flex-col items-center justify-center gap-4 backdrop-blur-sm">
                     <div className="flex gap-4 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-300">
-                      {/* Social Links */}
                       <button className="p-3 bg-white text-blue-600 rounded-full hover:bg-blue-600 hover:text-white hover:scale-110 transition-all duration-300">
                         <Linkedin className="w-5 h-5" />
-                      </button>
-                      <button className="p-3 bg-white text-blue-400 rounded-full hover:bg-blue-400 hover:text-white hover:scale-110 transition-all duration-300">
-                        <Twitter className="w-5 h-5" />
                       </button>
                     </div>
                     <p className="text-white font-medium transform translate-y-10 group-hover:translate-y-0 transition-transform duration-300 delay-75">
@@ -225,7 +212,7 @@ const TeamPage = () => {
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                 </div>
 

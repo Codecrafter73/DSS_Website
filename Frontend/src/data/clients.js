@@ -35,6 +35,7 @@ export const clients = [
   { name: "Smile N Glow", logo: c16 },
   { name: "Uday", logo: c17 },
   { name: "Webley", logo: c18 },
+  { name: "Webley", logo: c18 },
 ];
 
 export default clients;

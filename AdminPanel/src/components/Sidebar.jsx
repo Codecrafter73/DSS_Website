@@ -61,6 +61,12 @@ import { toast } from "react-toastify";
       icon: "Dock",
       path:"/job-application"
     },
+    {
+      key: "client",
+      title: "Client",
+      icon: "Users",
+      path:"/clienttable"
+    },
    
     
   ]

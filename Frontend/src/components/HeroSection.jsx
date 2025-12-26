@@ -10,20 +10,11 @@ const   HeroSection = () => {
     {
       id: 1,
       image: bread,
-      // image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1926&q=80",
       title: "Transform Your Brand with",
       highlight: "3S Digital Signage Solutions",
-      subtitle: "Leading digital signage company in Lucknow providing cutting-edge LED walls, outdoor displays, and interactive digital solutions since 2006.",
+      subtitle: "Leading digital signage company in Lucknow providing cutting-edge LED walls, outdoor displays, and interactive digital solutions since 2001.",
       buttonText: "View Our Work"
     },
-    // {
-    //   id: 2,
-    //   image: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
-    //   title: "Revolutionize Your Business with",
-    //   highlight: "Interactive LED Displays",
-    //   subtitle: "Experience the future of advertising with our premium LED walls and interactive displays that captivate audiences and drive engagement.",
-    //   buttonText: "Explore Solutions"
-    // },
     {
       id: 3,
       image: bread,
@@ -32,16 +23,6 @@ const   HeroSection = () => {
       subtitle: "From corporate offices to retail spaces, our intelligent digital signage solutions create immersive experiences that leave lasting impressions.",
       buttonText: "View Our Work"
     },
-    // {
-    //   id: 4,
-      
-    //   image: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
-    //   // image: "https://images.unsplash.com/photo-1486312338219-ce68e2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80",
-    //   title: "Partner with Experts in",
-    //   highlight: "Digital Innovation",
-    //   subtitle: "Join hundreds of satisfied clients who trust our expertise in delivering cutting-edge digital signage solutions that drive results.",
-    //   buttonText: "Contact Us"
-    // }
   ];
 
   // Auto-slide functionality
@@ -83,17 +64,11 @@ const   HeroSection = () => {
             <img
               src={slide.image}
               alt={`Slide ${index + 1}`}
-              className="w-full h-full object-cotain"
+              className="w-full h-full object-contain"
             />
-            {/* <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30"></div> */}
           </div>
         ))}
       </div>
-
-      {/* Animated Overlay Effects */}
-      {/* <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-blue-600/10 to-teal-500/20"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.1),transparent_50%)] animate-pulse"></div> */}
 
       {/* Navigation Arrows */}
       <button
@@ -210,148 +185,3 @@ const   HeroSection = () => {
 };
 
 export default HeroSection;
-
-// import React from 'react';
-// import { Phone, ExternalLink, ShoppingCart, Headphones } from 'lucide-react';
-
-// const HeroSection = () => {
-//   const brandLogos = [
-//     { name: 'Brand 1', color: 'text-pink-500' },
-//     { name: 'Brand 2', color: 'text-green-500' },
-//     { name: 'Brand 3', color: 'text-blue-500' },
-//     { name: 'Brand 4', color: 'text-green-500' },
-//     { name: 'Brand 5', color: 'text-purple-500' },
-//     { name: 'Brand 6', color: 'text-red-500' }
-//   ];
-
-//   return (
-//     <div className="relative min-h-screen bg-black text-white overflow-hidden">
-//       {/* Background Pattern */}
-//       <div className="absolute inset-0 opacity-10">
-//         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-transparent via-gray-900 to-transparent"></div>
-//         <div className="absolute top-20 left-20 w-96 h-96 border border-gray-700 rounded-full opacity-20"></div>
-//         <div className="absolute bottom-20 right-20 w-80 h-80 border border-gray-700 rounded-full opacity-20"></div>
-//         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] border border-gray-700 rounded-full opacity-10"></div>
-//       </div>
-
-//       {/* Navigation */}
-//       <nav className="relative z-10 flex items-center justify-between px-6 py-4">
-//         <div className="flex items-center">
-//           <div className="text-2xl font-bold">
-//             <span className="text-green-400">V</span>
-//             <span className="text-white">emlo</span>
-//           </div>
-//         </div>
-        
-//         <div className="hidden md:flex items-center space-x-8">
-//           <a href="#" className="text-green-400 hover:text-green-300 transition-colors">Home</a>
-//           <a href="#" className="text-white hover:text-green-400 transition-colors">Pages</a>
-//           <a href="#" className="text-white hover:text-green-400 transition-colors">Services</a>
-//           <a href="#" className="text-white hover:text-green-400 transition-colors">Blog</a>
-//           <a href="#" className="text-white hover:text-green-400 transition-colors">Shop</a>
-//           <a href="#" className="text-white hover:text-green-400 transition-colors">Contact Us</a>
-//         </div>
-        
-//         <button className="border border-gray-500 text-white px-6 py-2 rounded-full hover:bg-green-400 hover:text-black hover:border-green-400 transition-all duration-300">
-//           Lets Talk
-//         </button>
-//       </nav>
-
-//       {/* Main Content */}
-//       <div className="relative z-10 px-6 py-20">
-//         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          
-//           {/* Left Content */}
-//           <div className="space-y-8">
-//             <div>
-//               <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-8">
-//                 Brilliant digital signage
-//                 <br />
-//                 <span className="text-green-400">services.</span>
-//               </h1>
-              
-//               <button className="bg-transparent border border-gray-500 text-white px-8 py-3 rounded-full hover:bg-green-400 hover:text-black hover:border-green-400 transition-all duration-300">
-//                 Contact us
-//               </button>
-//             </div>
-
-//             {/* Brand Partners Section */}
-//             <div className="pt-16">
-//               <div className="flex items-center mb-6">
-//                 <span className="text-white font-medium mr-4">Brands partners:</span>
-//                 <div className="flex space-x-3">
-//                   {brandLogos.map((brand, index) => (
-//                     <div key={index} className={`w-8 h-8 rounded-full bg-current ${brand.color} opacity-80`}></div>
-//                   ))}
-//                 </div>
-//               </div>
-              
-//               <p className="text-gray-300 text-sm leading-relaxed max-w-md">
-//                 Our brand partnership is a mutual agreement between two or more businesses 
-//                 or organizations. Through these partnerships companies help one another to increase 
-//                 and add extra value to products/services.
-//               </p>
-//             </div>
-//           </div>
-
-//           {/* Right Content - Image */}
-//           <div className="relative">
-//             <div className="relative">
-//               {/* Main Image Container */}
-//               <div className="relative w-full h-96 lg:h-[500px] rounded-2xl overflow-hidden">
-//                 {/* Sample Mall/Shopping Center Image */}
-//                 <div className="absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-900"></div>
-                
-//                 {/* Mall Interior Mockup */}
-//                 <div className="absolute inset-0 flex items-center justify-center">
-//                   <div className="w-full h-full bg-cover bg-center opacity-80" 
-//                        style={{
-//                          backgroundImage: "linear-gradient(45deg, #667eea 0%, #764ba2 100%)"
-//                        }}>
-//                     {/* Shopping Mall Interior Simulation */}
-//                     <div className="relative w-full h-full">
-//                       {/* Upper level */}
-//                       <div className="absolute top-8 left-8 right-8 h-16 bg-gray-200 rounded opacity-30"></div>
-//                       <div className="absolute top-8 left-8 w-20 h-16 bg-blue-400 rounded opacity-60"></div>
-                      
-//                       {/* Lower level */}
-//                       <div className="absolute bottom-20 left-8 right-8 h-20 bg-gray-300 rounded opacity-40"></div>
-                      
-//                       {/* Storefronts */}
-//                       <div className="absolute bottom-20 left-12 w-24 h-20 bg-blue-400 rounded opacity-50"></div>
-//                       <div className="absolute bottom-20 left-40 w-24 h-20 bg-green-400 rounded opacity-50"></div>
-//                       <div className="absolute bottom-20 right-12 w-24 h-20 bg-purple-400 rounded opacity-50"></div>
-                      
-//                       {/* Central area */}
-//                       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-16 bg-white rounded-lg opacity-90 flex items-center justify-center">
-//                         <div className="text-center">
-//                           <div className="text-gray-800 font-bold text-lg">Welcome to</div>
-//                           <div className="text-gray-600 text-sm">cabot circus</div>
-//                         </div>
-//                       </div>
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Floating Action Buttons */}
-//       <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-20 space-y-4">
-//         <button className="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center hover:bg-green-400 transition-colors shadow-lg">
-//           <Headphones size={20} />
-//         </button>
-//         <button className="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center hover:bg-green-400 transition-colors shadow-lg">
-//           <ExternalLink size={20} />
-//         </button>
-//         <button className="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center hover:bg-green-400 transition-colors shadow-lg">
-//           <ShoppingCart size={20} />
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default HeroSection;

@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import PageHeader from "../../components/PageHeader";
 import Table from "../../components/Table";
-import {
-  useDeleteJobMutation,
-  useGetAllJobsQuery,
-// } from "../../api/job.api"; // Removed: file deleted
+import { useDeleteJobMutation, useGetAllJobsQuery } from "../../api/job.api.js"; // Removed: file deleted
 import { Trash, FileText } from "lucide-react";
 import Loader from "../../components/Loader";
 import { toast } from "react-toastify";
@@ -74,26 +71,27 @@ function JobDashboard() {
     email: { label: "Email" },
     phone: { label: "Phone" },
     jobProfile: { label: "Job Profile" },
-   resume: {
-  label: "Resume",
-  render: (val) => {
-    if (!val) return "No File";
+    resume: {
+      label: "Resume",
+      render: (val) => {
+        if (!val) return "No File";
 
-    const fileUrl = `${import.meta.env.VITE_BACKEND}/${val.url}` || val.public_url;
-    return fileUrl ? (
-      <a
-        href={fileUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center gap-1 text-blue-600 hover:underline"
-      >
-        <FileText size={16} /> View
-      </a>
-    ) : (
-      "No File"
-    );
-  },
-},
+        const fileUrl =
+          `${import.meta.env.VITE_BACKEND}/${val.url}` || val.public_url;
+        return fileUrl ? (
+          <a
+            href={fileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-blue-600 hover:underline"
+          >
+            <FileText size={16} /> View
+          </a>
+        ) : (
+          "No File"
+        );
+      },
+    },
     createdAt: {
       label: "Applied At",
       render: (val) => new Date(val).toLocaleString(),

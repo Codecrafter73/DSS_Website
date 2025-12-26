@@ -71,7 +71,7 @@ const VisionMission = () => {
   const missionPoints = [
     {
       icon: Target,
-      title: "Customer-Centric",
+      title: "Customer-Centric-Approach",
       desc: "Solutions aligned with unique brand identities.",
       gradient: "from-orange-500 to-red-500",
     },
@@ -198,13 +198,10 @@ const VisionMission = () => {
         </div>
 
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <div className="hero-content inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/20 text-sm font-medium text-green-400 mb-6 cursor-default">
-            <Sparkles className="w-4 h-4" />
-            <span>Our North Star</span>
-          </div>
+          
 
           <h1 className="hero-content text-4xl md:text-6xl font-black mb-6 leading-tight">
-            Our Purpose & <br className="hidden md:block" />
+            Our Purpose &{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-400 to-purple-500 animate-gradient-x">
               Future Path
             </span>

@@ -182,9 +182,9 @@ const DirectorMessage = () => {
 
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h1 className="hero-content text-4xl md:text-6xl font-black mb-6 leading-tight">
-            Visionary <br className="hidden md:block" />
+            Our Visionary{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-400 to-purple-500 animate-gradient-x">
-              Leadership
+              Leaders
             </span>
           </h1>
         </div>
@@ -270,119 +270,11 @@ const DirectorMessage = () => {
         </div>
       </section>
 
-      {/* ================= CORE SERVICES (The "Oor Better" Part) ================= */}
-      <section data-animate className="relative px-6 py-10 mb-20">
-        <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-            <div>
-              <h2 className="text-3xl md:text-5xl font-bold mb-4">
-                Our Expertise <span className="text-green-400">Areas</span>
-              </h2>
-              <p className="text-gray-400 max-w-xl text-lg">
-                We specialize in three key verticals to ensure your brand
-                dominates every space.
-              </p>
-            </div>
-            <Link
-              to="/services"
-              className="hidden md:flex items-center gap-2 text-white hover:text-green-400 transition-colors pb-2 group"
-            >
-              View All Services{" "}
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
+      
+     
 
-          {/* 3-Column Service Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 h-auto md:h-[500px]">
-            {services.map((service, index) => (
-              <div
-                key={service.id}
-                onMouseEnter={() => setHoveredService(service.id)}
-                onMouseLeave={() => setHoveredService(null)}
-                className={`group relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 border border-white/10 ${service.border}`}
-              >
-                {/* Background Image with Zoom Effect */}
-                <div className="absolute inset-0">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  {/* Dark Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
-                </div>
-
-                {/* Content */}
-                <div className="absolute inset-0 p-8 flex flex-col justify-end relative z-10">
-                  {/* Icon floating top right */}
-                  <div
-                    className={`absolute top-6 right-6 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white transition-all duration-300 group-hover:scale-110 ${service.bg} ${service.color}`}
-                  >
-                    <service.icon className="w-6 h-6" />
-                  </div>
-
-                  {/* Text Details */}
-                  <div className="transform transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                    <p
-                      className={`text-sm font-bold tracking-wider uppercase mb-2 ${service.color}`}
-                    >
-                      0{index + 1} — {service.subtitle}
-                    </p>
-                    <h3 className="text-3xl font-bold text-white mb-4 group-hover:text-white transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-300 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 line-clamp-3">
-                      {service.desc}
-                    </p>
-
-                    {/* Arrow Button appearing on hover */}
-                    <div className="mt-6 flex items-center gap-2 text-sm font-medium text-white opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 delay-200">
-                      Explore Solution <ArrowUpRight className="w-4 h-4" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ================= VALUES SECTION ================= */}
-      <section
-        data-animate
-        className="relative px-6 py-20 bg-white/[0.02] border-y border-white/5"
-      >
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Our Core Values
-            </h2>
-            <div className="w-16 h-1 bg-green-500 mx-auto rounded-full"></div>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((item, i) => (
-              <div
-                key={i}
-                className="group relative p-8 bg-gray-900 border border-white/10 rounded-2xl hover:border-white/20 transition-all duration-300"
-              >
-                <div
-                  className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
-                >
-                  <item.icon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-lg font-bold text-white mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+    
+     
 
       {/* Custom Styles */}
       <style>{`

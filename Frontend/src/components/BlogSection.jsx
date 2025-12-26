@@ -99,7 +99,7 @@ const HeroSection = () => {
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-lg rounded-full border border-white/20 mb-8">
             <Star className="w-4 h-4 text-yellow-400" />
             <span className="text-sm text-gray-300">
-              18+ Years of Excellence Since 2006
+              5+ Years of Excellence Since 2001
             </span>
           </div>
 
@@ -113,7 +113,7 @@ const HeroSection = () => {
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Leading digital signage solutions in Uttar Pradesh. Cutting-edge LED
+            Leading digital signage solutions in India. Cutting-edge LED
             displays, interactive solutions, and complete branding services.
           </p>
 
@@ -205,7 +205,7 @@ const AboutSection = () => {
           <div className="space-y-6">
             <div className="p-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl">
               <p className="text-gray-300 leading-relaxed">
-                Established in <strong className="text-green-400">2006</strong>{" "}
+                Established in <strong className="text-green-400">2001</strong>{" "}
                 in Lucknow,
                 <strong className="text-white">
                   {" "}
@@ -1485,9 +1485,9 @@ const DarkHomepage = () => {
 
             <button
               className="group px-8 py-4 bg-white/10 backdrop-blur-lg border-2 border-white text-white rounded-full font-semibold hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2"
-              onClick={() => (window.location.href = "tel:+916386901011")}
+              onClick={() => (window.location.href = "tel:+919236477974")}
             >
-              <span>Call +91-6386901011</span>
+              <span>Call +91-9236477974</span>
               <ExternalLink className="w-5 h-5 group-hover:rotate-45 transition-transform duration-300" />
             </button>
           </div>
@@ -1496,7 +1496,7 @@ const DarkHomepage = () => {
           <div className="mt-12 flex flex-wrap justify-center gap-8 text-white/80">
             <div className="flex items-center gap-2">
               <CheckCircle className="w-5 h-5 text-green-300" />
-              <span className="text-sm">18+ Years Experience</span>
+              <span className="text-sm">5+ Years Experience</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle className="w-5 h-5 text-green-300" />

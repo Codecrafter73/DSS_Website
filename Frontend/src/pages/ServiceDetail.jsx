@@ -101,7 +101,7 @@ const ServiceDetailPage = () => {
     {
       id: 5,
       title: "Expert Team",
-      desc: "18+ years of experience with a workforce of skilled engineers and designers.",
+      desc: "5+ years of experience with a workforce of skilled engineers and designers.",
       icon: Users,
       gradient: "from-teal-500 to-cyan-500",
     },

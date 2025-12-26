@@ -57,53 +57,6 @@ const TestimonialsPage = () => {
     );
   }, []);
 
-  const testimonials = [
-    {
-      id: 1,
-      name: "Sarah Johnson",
-      company: "TechCorp Solutions",
-      text: "The signage solutions provided by this team exceeded our expectations. The quality is outstanding and the installation was seamless.",
-      image:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
-      location: "New York, NY",
-      rating: 5,
-      date: "2 weeks ago",
-    },
-    {
-      id: 2,
-      name: "Michael Chen",
-      company: "Urban Bistro",
-      text: "From concept to completion, the entire process was professional. The neon signage has become a landmark in the neighborhood.",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
-      location: "Los Angeles, CA",
-      rating: 5,
-      date: "1 month ago",
-    },
-    {
-      id: 3,
-      name: "Emily Rodriguez",
-      company: "Metro Hospital",
-      text: "The navigation signage system dramatically improved patient flow. Clean, modern, and incredibly functional design.",
-      image:
-        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop",
-      location: "Chicago, IL",
-      rating: 5,
-      date: "3 weeks ago",
-    },
-  ];
-
-  const renderStars = (rating) => {
-    return [...Array(5)].map((_, index) => (
-      <Star
-        key={index}
-        className={`w-4 h-4 ${
-          index < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-600"
-        }`}
-      />
-    ));
-  };
-
   return (
     <div className="relative min-h-screen bg-gray-950 overflow-hidden text-white selection:bg-green-500/30">
       {/* --- Global Background Effects --- */}

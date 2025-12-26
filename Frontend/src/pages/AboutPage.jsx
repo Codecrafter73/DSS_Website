@@ -114,7 +114,7 @@ const AboutPage = () => {
     story: {
       title: "Our Story",
       content:
-        "Founded in 2006 in Lucknow, Digital Signage Solutions UP has been pioneering the digital signage industry for over 18 years. What started as a small venture has grown into the region's most trusted name in digital display solutions, serving over 200 clients across multiple industries with cutting-edge technology and unmatched expertise.",
+        "Founded in 2001 in Lucknow, Digital Signage Solutions UP has been pioneering the digital signage industry for over 18 years. What started as a small venture has grown into the region's most trusted name in digital display solutions, serving over 200 clients across multiple industries with cutting-edge technology and unmatched expertise.",
     },
     mission: {
       title: "Our Mission",
@@ -260,7 +260,7 @@ const AboutPage = () => {
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-medium mb-4">
                   <Sparkles className="w-4 h-4" />
-                  <span>Since 2006</span>
+                  <span>Since 2001</span>
                 </div>
                 <h1 className="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
                   About Our <br />
@@ -473,7 +473,7 @@ const AboutPage = () => {
                       <div className="text-xs text-gray-400 uppercase">
                         Established
                       </div>
-                      <div className="text-white font-bold">2006</div>
+                      <div className="text-white font-bold">2001</div>
                     </div>
                   </div>
                 </div>

@@ -76,7 +76,7 @@ const AboutSection = () => {
             {/* About Content */}
             <div className="mb-4 text-justify ">
               <p   data-aos="fade-up" className="text-gray-600 leading-relaxed  lg:text-lg mb-2">
-                Established in 2006 in the City of Nawabs – Lucknow,{" "}
+                Established in 2001 in the City of Nawabs – Lucknow,{" "}
                 <strong>3S Digital Signage Solutions UP</strong> has emerged as
                 one of the region’s leading providers of customized digital
                 signage and branding solutions. With over{" "}
@@ -120,30 +120,12 @@ const AboutSection = () => {
                 </div>
               ))}
             </div>
-
-            {/* CTA Button */}
-            {/* <div className="flex">
-              <button className="group flex items-center justify-center px-8 py-4 bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold rounded-lg hover:from-green-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105">
-                <span>More About Us</span>
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </div> */}
           </div>
-
-          {/* Right Content - Since Badge */}
-          {/* <div className="relative flex items-center justify-center">
-            <div className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-12 py-8 rounded-full font-bold shadow-lg text-center">
-              <div className="flex items-center justify-center mb-2">
-                <Star className="h-8 w-8 mr-2" />
-                <span className="text-2xl">Since 2006</span>
-              </div>
-              <div className="text-lg opacity-90">18+ Years of Excellence</div>
-            </div>
-          </div> */}
         </div>
 
         {/* Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 lg:gap-6">
+        <div className="flex justify-center">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 lg:gap-6 max-w-6xl w-full">
           {[
             {
               number: counters.projects,
@@ -157,7 +139,6 @@ const AboutSection = () => {
             },
             { number: counters.clients, label: "Happy Clients", suffix: "+" },
             { number: counters.branches, label: "Branches", suffix: "" },
-            { number: counters.cities, label: "Cities Served", suffix: "+" },
             { number: counters.awards, label: "Awards Won", suffix: "+" },
           ].map((stat, index) => (
             <div
@@ -187,6 +168,7 @@ const AboutSection = () => {
               </div>
             </div>
           ))}
+        </div>
         </div>
       </div>
     </section>

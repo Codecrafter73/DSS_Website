@@ -1,63 +1,64 @@
-import React, { useEffect, useState } from 'react';
-import { 
-  Facebook, 
-  Twitter, 
-  Instagram, 
-  Linkedin, 
+import React, { useEffect, useState } from "react";
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
   Youtube,
-  MapPin, 
-  Phone, 
-  Mail, 
+  MapPin,
+  Phone,
+  Mail,
   Clock,
   ArrowRight,
   ExternalLink,
   QrCode,
-  ChevronUp
-} from 'lucide-react';
-import logo from '../assets/DSS_logo.png'
-import cclogo from '../assets/cc-logo.png'
-import { Link } from 'react-router-dom';
-import services from '../data//ServiceData.jsx'
-import { useNewsCreateMutation } from '../api/inquiry.api.js';
-import {toast} from 'react-toastify'
+  ChevronUp,
+} from "lucide-react";
+import logo from "../assets/DSS_logo.png";
+import cclogo from "../assets/cc-logo.png";
+import { Link } from "react-router-dom";
+import services from "../data//ServiceData.jsx";
+import { useNewsCreateMutation } from "../api/inquiry.api.js";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [email, setEmail]= useState("")
-  const [addSubscriber, {isLoading, isError}] = useNewsCreateMutation()
+  const [email, setEmail] = useState("");
+  const [addSubscriber, { isLoading, isError }] = useNewsCreateMutation();
   const branches = [
-    { name: 'Lucknow (Head Office)', address: 'Sector 10, Indira Nagar, Lucknow - 226016' },
-    { name: 'Azamgarh', address: 'Civil Lines, Azamgarh - 276001' },
-    { name: 'Thakurganj', address: 'Main Road, Thakurganj - 224001' },
-    { name: 'Barabanki', address: 'Station Road, Barabanki - 225001' },
-    { name: 'Saraimeer', address: 'Market Area, Saraimeer - 225412' }
+    {
+      name: "Lucknow (Head Office)",
+      address: "Sector 10, Indira Nagar, Lucknow - 226016",
+    },
+    { name: "Azamgarh", address: "Civil Lines, Azamgarh - 276001" },
+    { name: "Thakurganj", address: "Main Road, Thakurganj - 224001" },
+    { name: "Barabanki", address: "Station Road, Barabanki - 225001" },
+    { name: "Saraimeer", address: "Market Area, Saraimeer - 225412" },
   ];
-
 
   const quickLinks = [
-    { name: 'About Us', href: '/about/story' },
-    { name: 'Careers', href: '/career' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Admin Login', href: 'https://dss-web-admin.netlify.app' }
+    { name: "About Us", href: "/about/story" },
+    { name: "Careers", href: "/career" },
+    { name: "Blog", href: "/blog" },
+    { name: "Admin Login", href: "https://dss-web-admin.netlify.app" },
   ];
 
-    useEffect(() => {
-      const handleScroll = () => {
-        setIsScrolled(window.scrollY > 50);
-      };
-  
-      window.addEventListener('scroll', handleScroll);
-      return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
 
-    const handleChange = (e) => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleChange = (e) => {
     setEmail(e.target.value);
   };
 
-
- const handleSubmit = async(e) => {
-  e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -70,95 +71,114 @@ const Footer = () => {
         toast.error("Invalid email format");
         return;
       }
-await addSubscriber({formData:{email}}).unwrap()
+      await addSubscriber({ formData: { email } }).unwrap();
       toast.success("Email submitted successfully");
-      setEmail("")
+      setEmail("");
     } catch (err) {
-      toast.error(`${err?.messsage || err?.data?.message || "Something went wrong" }`);
+      toast.error(
+        `${err?.messsage || err?.data?.message || "Something went wrong"}`
+      );
       console.error(err);
     }
   };
 
   return (
     <footer className="bg-gradient-to-br from-black via-neutral-900 to-neutral-950 text-white">
-     
       {/* Newsletter Signup */}
-        <div className=" py-8 px-4 border-b border-neutral-800">
-          <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-xl font-semibold text-white mb-4">
-              Stay Updated with Latest Digital Signage Trends
-            </h3>
-            <p className="text-gray-300 mb-6">
-              Subscribe to our newsletter for industry insights, product updates, and exclusive offers.
-            </p>
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-              <input 
-                type="email" 
-                value={email}
-                placeholder="Enter your email address"
-                onChange={handleChange}
-                className="flex-1 px-4 py-2 bg-neutral-900 border border-neutral-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
-              />
-              <button  className="px-6 py-2 bg-gradient-to-r from-green-400 to-blue-400 text-white font-medium rounded-lg hover:from-green-500 hover:to-blue-500 transition-all duration-300 transform hover:scale-105">
-                Subscribe
-              </button>
-            </form>
-          </div>
+      <div className=" py-8 px-4 border-b border-neutral-800">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-xl font-semibold text-white mb-4">
+            Stay Updated with Latest Digital Signage Trends
+          </h3>
+          <p className="text-gray-300 mb-6">
+            Subscribe to our newsletter for industry insights, product updates,
+            and exclusive offers.
+          </p>
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto"
+          >
+            <input
+              type="email"
+              value={email}
+              placeholder="Enter your email address"
+              onChange={handleChange}
+              className="flex-1 px-4 py-2 bg-neutral-900 border border-neutral-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
+            />
+            <button className="px-6 py-2 bg-gradient-to-r from-green-400 to-blue-400 text-white font-medium rounded-lg hover:from-green-500 hover:to-blue-500 transition-all duration-300 transform hover:scale-105">
+              Subscribe
+            </button>
+          </form>
         </div>
-     
+      </div>
+
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          
           {/* Company Info */}
           <div className="lg:col-span-1">
-            {/* <div className="flex items-center mb-6">
-            <img src={logo} alt='Logo' className='bg-white h-26' />
-            </div> */}
-            {/* <p className="text-gray-300 leading-relaxed mb-6">
-              Leading digital signage solutions provider in Lucknow since 2006. We transform spaces with cutting-edge LED displays and interactive digital solutions.
-            </p> */}
-            
             {/* Contact Info */}
             <div className="space-y-2">
               <h3 className="text-lg font-semibold mb-3 text-white">
-              Get In Touch
-              <div className="w-12 h-1 bg-gradient-to-r from-green-400 to-blue-400 mt-2"></div>
-            </h3>
-              <a href='https://maps.app.goo.gl/FvbzrGGVEzE9Ueh67' target='_blank' className="flex items-center text-gray-300">
+                Get In Touch
+                <div className="w-12 h-1 bg-gradient-to-r from-green-400 to-blue-400 mt-2"></div>
+              </h3>
+              <a
+                href="https://maps.app.goo.gl/FvbzrGGVEzE9Ueh67"
+                target="_blank"
+                className="flex items-center text-gray-300"
+              >
                 <MapPin className="h-5 w-5 text-green-400 mr-3 flex-shrink-0" />
-                <span className="text-sm">Near Yamaha Showroom, Chinhat Tiraha, Faizabad Road, Lucknow</span>
+                <span className="text-sm">
+                  Near Yamaha Showroom, Chinhat Tiraha, Faizabad Road, Lucknow
+                </span>
               </a>
-              <a href='tel:6386901011' target='_blank' className="flex items-center text-gray-300">
-                <Phone className="h-5 w-5 text-green-400 mr-3 flex-shrink-0" />
-                <span className="text-sm tracking-wide">+91-6386901011</span>
-              </a>
-              <a href='mailto:info@digitalsignagesolutions.in' target='_blank' className="flex items-center text-gray-300">
-                <Mail className="h-5 w-5 text-green-400 mr-3 flex-shrink-0" />
-                <span className="text-sm">info@digitalsignagesolutions.in</span>
-              </a>
-              <div className="flex items-center text-gray-300">
-                <Clock className="h-5 w-5 text-green-400 mr-3 flex-shrink-0" />
-                <span className="text-sm">Mon - Sat: 9:00 AM - 9:00 PM</span>
+              <div className="flex flex-col space-y-1">
+                <a
+                  href="tel:9236477974"
+                  target="_blank"
+                  className="flex items-center text-gray-300"
+                >
+                  <Phone className="h-5 w-5 text-green-400 mr-3 flex-shrink-0" />
+                  <span className="text-sm tracking-wide">+91-9236477974</span>
+                </a>
+
+                <a
+                  href="tel:6386901011"
+                  target="_blank"
+                  className="flex items-center text-gray-300 ml-8"
+                >
+                  <span className="text-sm tracking-wide">+91-6386901011</span>
+                </a>
               </div>
+              <a
+                href="mailto:info@dssup.in"
+                target="_blank"
+                className="flex items-center text-gray-300"
+              >
+                <Mail className="h-5 w-5 text-green-400 mr-3 flex-shrink-0" />
+                <span className="text-sm">info@dssup.in</span>
+              </a>
             </div>
           </div>
 
           {/* Our Services */}
           <div className="lg:col-span-1">
             <h3 className="text-lg font-semibold mb-6 text-white">
-              Our Services
+              Our Products
               <div className="w-12 h-1 bg-gradient-to-r from-green-400 to-blue-400 mt-2"></div>
             </h3>
             <div className="space-y-2">
               {services.slice(0, 8).map((service, index) => (
-                <Link 
+                <Link
                   key={index}
                   to={`/services/${service?.slug}`}
                   className="flex items-center text-gray-300 hover:text-green-400 transition-colors duration-300 group"
                 >
-                  <span className="text-sm group-hover:translate-x-1 transition-transform duration-300">{service.title}</span>
-                 <ExternalLink className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <span className="text-sm group-hover:translate-x-1 transition-transform duration-300">
+                    {service.title}
+                  </span>
+                  <ExternalLink className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               ))}
             </div>
@@ -172,11 +192,17 @@ await addSubscriber({formData:{email}}).unwrap()
             </h3>
             <div className="space-y-2">
               {branches.map((branch, index) => (
-                <div key={index} className="group flex  items-center cursor-pointer">
-                  <h4 title={branch.address} className="text-sm font-medium text-white mb-0.5 group-hover:text-green-400 transition-colors">
+                <div
+                  key={index}
+                  className="group flex  items-center cursor-pointer"
+                >
+                  <h4
+                    title={branch.address}
+                    className="text-sm font-medium text-white mb-0.5 group-hover:text-green-400 transition-colors"
+                  >
                     {branch.name}
                   </h4>
-                    <ExternalLink className="h-3 w-3 ml-1 text-green-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <ExternalLink className="h-3 w-3 ml-1 text-green-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                   {/* <p className="text-xs text-gray-400 leading-relaxed">
                     {branch.address}
                   </p> */}
@@ -193,12 +219,14 @@ await addSubscriber({formData:{email}}).unwrap()
             </h3>
             <div className="grid grid-cols-2 gap-2 mb-4">
               {quickLinks.map((link, index) => (
-                <Link 
+                <Link
                   key={index}
                   to={link.href}
                   className="text-gray-300 hover:text-green-400 transition-colors duration-300 text-sm flex items-center group"
                 >
-                  <span className="group-hover:translate-x-1 transition-transform duration-300">{link.name}</span>
+                  <span className="group-hover:translate-x-1 transition-transform duration-300">
+                    {link.name}
+                  </span>
                   <ExternalLink className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               ))}
@@ -209,15 +237,33 @@ await addSubscriber({formData:{email}}).unwrap()
               <h4 className="text-sm font-medium text-white mb-4">Follow Us</h4>
               <div className="flex space-x-4">
                 {[
-                  { Icon: Facebook, href: '#', color: 'hover:text-blue-400' },
-                  { Icon: Twitter, href: '#', color: 'hover:text-sky-400' },
-                  { Icon: Instagram, href: '#', color: 'hover:text-pink-400' },
-                  { Icon: Linkedin, href: '#', color: 'hover:text-blue-600' },
-                  { Icon: Youtube, href: '#', color: 'hover:text-red-500' }
+                  {
+                    Icon: Facebook,
+                    href: "https://www.facebook.com/share/1FKWdffPnn/",
+                    color: "hover:text-blue-400",
+                  },
+                  { Icon: Twitter, href: "#", color: "hover:text-sky-400" },
+                  {
+                    Icon: Instagram,
+                    href: "https://www.instagram.com/digitalsignagesolutiions?igsh=b3ozbjBxcDBnbTQ5",
+                    color: "hover:text-pink-400",
+                  },
+                  {
+                    Icon: Linkedin,
+                    href: "https://www.linkedin.com/company/106092404/admin/dashboard/",
+                    color: "hover:text-blue-600",
+                  },
+                  {
+                    Icon: Youtube,
+                    href: "https://youtube.com/@DSSUP",
+                    color: "hover:text-red-500",
+                  },
                 ].map(({ Icon, href, color }, index) => (
-                  <a 
+                  <a
                     key={index}
                     href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={`w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-300 ${color} transition-all duration-300 hover:scale-110 hover:shadow-lg`}
                   >
                     <Icon className="h-5 w-5" />
@@ -227,46 +273,55 @@ await addSubscriber({formData:{email}}).unwrap()
             </div>
           </div>
         </div>
-
-       
       </div>
 
       {/* Bottom Bar */}
       <div className="border-t border-neutral-800 bg-neutral-950">
         <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="justify-center text-xs lg:text-sm text-neutral-300 items-center lg:flex gap-2">
-             Copyright © {currentYear} 3S Digital Signage Solutions. All rights reserved. Designed By
-                  <Link 
-                  className='inline-flex'
-                    aria-label="Code Crafter"
-                    to="https://www.codecrafter.co.in/"
-                    target="_blank"
-                  >
-                    <img
-                      src={cclogo}
-                      className="lg:w-24 md:w-20 w-18 mt-2 md:mt-0 transition transform hover:scale-105"
-                      alt="CodeCrafter Logo"
-                    />
-                  </Link>
-                </div>
+            <div className="justify-center text-xs lg:text-sm text-neutral-300 items-center lg:flex gap-2">
+              Copyright © {currentYear} 3S Digital Signage Solutions. All rights
+              reserved. Designed By
+              <Link
+                className="inline-flex"
+                aria-label="Code Crafter"
+                to="https://www.codecrafter.co.in/"
+                target="_blank"
+              >
+                <img
+                  src={cclogo}
+                  className="lg:w-24 md:w-20 w-18 mt-2 md:mt-0 transition transform hover:scale-105"
+                  alt="CodeCrafter Logo"
+                />
+              </Link>
+            </div>
             <div className="flex space-x-6 lg:my-0 my-2 lg:text-sm text-xs">
-              <Link to="/privacy-policy" className="text-gray-400 hover:text-green-400 transition-colors">Privacy Policy</Link>
-              <Link to="/cookie-policy" className="text-gray-400 hover:text-green-400 transition-colors">Cookie Policy</Link>
+              <Link
+                to="/privacy-policy"
+                className="text-gray-400 hover:text-green-400 transition-colors"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                to="/cookie-policy"
+                className="text-gray-400 hover:text-green-400 transition-colors"
+              >
+                Cookie Policy
+              </Link>
             </div>
           </div>
         </div>
       </div>
 
       {/* Scroll to Top Button */}
-{isScrolled &&   <button 
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="fixed bottom-8 right-8 lg:w-12 w-10 h-10 lg:h-12 bg-gradient-to-r from-green-400 to-blue-400 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-50"
-      >
-        <ChevronUp className="h-5 w-5 " />
-      </button> }
-
-    
+      {isScrolled && (
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="fixed bottom-8 right-8 lg:w-12 w-10 h-10 lg:h-12 bg-gradient-to-r from-green-400 to-blue-400 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-50"
+        >
+          <ChevronUp className="h-5 w-5 " />
+        </button>
+      )}
     </footer>
   );
 };

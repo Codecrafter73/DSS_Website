@@ -124,22 +124,17 @@ const BrandStory = () => {
     },
     {
       icon: Users,
-      title: "Customer-Centric",
+      title: "Customer-Centric-Approach",
       desc: "Over 2000 satisfied clients trust us.",
       gradient: "from-green-500 to-teal-500",
     },
     {
       icon: Award,
       title: "Industry Expertise",
-      desc: "18+ years across elections, retail, and corporate.",
+      desc: "5+ years across elections, retail, and corporate.",
       gradient: "from-purple-500 to-pink-500",
     },
-    {
-      icon: Heart,
-      title: "End-to-End Service",
-      desc: "From concept design to installation and maintenance.",
-      gradient: "from-orange-500 to-red-500",
-    },
+   
     {
       icon: Target,
       title: "Turnkey Solutions",
@@ -186,7 +181,6 @@ const BrandStory = () => {
       {/* ================= HERO SECTION START ================= */}
       <div className="relative z-10 pt-32 pb-12 lg:pt-40 lg:pb-20">
         {/* --- CUSTOM TRANSPARENT BREADCRUMB --- */}
-        {/* यह "Black Box" नहीं बनाएगा, यह सीधे बैकग्राउंड के ऊपर दिखेगा */}
         <div className="hero-content max-w-7xl mx-auto px-6 mb-8 flex justify-center">
           <nav className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-sm text-gray-400 hover:border-white/20 transition-all">
             <Link
@@ -206,10 +200,6 @@ const BrandStory = () => {
 
         {/* --- MAIN HERO CONTENT --- */}
         <div className="max-w-7xl mx-auto px-6 text-center relative">
-          <div className="hero-content inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/20 text-sm font-medium text-green-400 mb-6 cursor-default">
-            <Sparkles className="w-4 h-4" />
-            <span>Transforming Horizons Since 2005</span>
-          </div>
 
           <h1 className="hero-content text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-[1.1] tracking-tight">
             Our Brand Story: <br className="hidden md:block" />
@@ -315,51 +305,6 @@ const BrandStory = () => {
                 <div className="text-sm text-gray-400">{stat.label}</div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* --- SECTION: ORIGIN STORY --- */}
-      <section data-animate className="relative px-6 py-24">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <h2 className="text-4xl md:text-5xl font-bold">
-                Where It <span className="text-green-400">All Began</span>
-              </h2>
-              <div className="p-8 bg-gradient-to-br from-white/5 to-transparent border border-white/10 rounded-3xl">
-                <p className="text-gray-300 leading-relaxed text-lg mb-6">
-                  In <strong className="text-white">2006</strong>, in the
-                  historic City of Nawabs – Lucknow, a vision was born. What
-                  started as a small venture with big dreams has transformed
-                  into{" "}
-                  <strong className="text-green-400">
-                    3S Digital Signage Solutions UP
-                  </strong>
-                  .
-                </p>
-                <p className="text-gray-300 leading-relaxed text-lg">
-                  Our founders recognized the growing need for impactful visual
-                  communication. With determination and a commitment to
-                  excellence, we began crafting solutions that would
-                  revolutionize how businesses connect.
-                </p>
-              </div>
-            </div>
-            <div className="relative">
-              <div className="absolute inset-0 bg-green-500/20 blur-[100px] rounded-full" />
-              <div className="relative bg-black/40 backdrop-blur-xl border border-white/20 rounded-[2rem] p-12 text-center transform hover:scale-[1.02] transition-transform duration-500">
-                <div className="inline-block p-4 rounded-full bg-yellow-500/10 mb-6">
-                  <Star className="w-16 h-16 text-yellow-400 fill-yellow-400/20 animate-pulse" />
-                </div>
-                <div className="text-7xl font-black text-white mb-2 tracking-tighter">
-                  2006
-                </div>
-                <div className="text-xl text-green-400 font-medium tracking-wide uppercase">
-                  Established in Lucknow
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
