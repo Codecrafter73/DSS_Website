@@ -528,10 +528,10 @@ const ServiceCTA = ({ service }) => {
                 <Mail className="w-4 h-4" />
                 <span>info@dssup.com</span>
               </div>
-              <div className="flex items-center gap-2">
+              {/* <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
                 <span>Mon-Sat: 9AM - 6PM</span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
