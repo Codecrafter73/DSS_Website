@@ -112,16 +112,9 @@ const ContactUsPage = () => {
     {
       icon: Mail,
       title: "Email Us",
-      details: ["info@dssup.in",],
+      details: ["info@dssup.in"],
       gradient: "from-purple-500 to-violet-600",
       action: "mailto:info@dssup.in",
-    },
-    {
-      icon: Clock,
-      title: "Business Hours",
-      details: ["Mon - Sat: 9:00 AM - 7:00 PM", "Sunday: 10:00 AM - 5:00 PM"],
-      gradient: "from-orange-500 to-amber-600",
-      action: null,
     },
   ];
 
@@ -330,12 +323,12 @@ const ContactUsPage = () => {
 
           {/* Hero Section */}
           <div className="text-center mb-16">
-            <h1 className="hero-animate text-4xl md:text-6xl font-black mb-6 leading-tight">
+            <h1 className="hero-animate text-4xl md:text-6xl font-black mb-6 leading-[1.05]">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-400 to-purple-500">
                 Get In Touch With Us
               </span>
             </h1>
-            <p className="hero-animate text-gray-400 max-w-2xl mx-auto text-lg">
+            <p className="hero-animate text-gray-400 max-w-2xl mx-auto text-lg leading-[0.15]">
               Have a project in mind? Let's collaborate to create something
               extraordinary.
             </p>
@@ -343,48 +336,50 @@ const ContactUsPage = () => {
 
           <div className="content-container space-y-8">
             {/* --- Contact Info Cards (Top) --- */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-up">
-              {contactInfo.map((info, idx) => (
-                <div
-                  key={idx}
-                  className="group relative bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-all duration-300"
-                >
+            <div className="flex justify-center animate-up">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl w-full">
+                {contactInfo.map((info, idx) => (
                   <div
-                    className={`w-12 h-12 rounded-xl bg-gradient-to-br ${info.gradient} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform`}
+                    key={idx}
+                    className="group relative bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-all duration-300"
                   >
-                    <info.icon className="w-6 h-6 text-white" />
+                    <div
+                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${info.gradient} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform`}
+                    >
+                      <info.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-lg font-bold text-white mb-2">
+                      {info.title}
+                    </h3>
+                    <div className="space-y-1">
+                      {info.details.map((line, i) => (
+                        <p key={i} className="text-gray-400 text-sm">
+                          {line}
+                        </p>
+                      ))}
+                    </div>
+                    {info.action && (
+                      <a
+                        href={info.action}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute inset-0"
+                        aria-label={info.title}
+                      />
+                    )}
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2">
-                    {info.title}
-                  </h3>
-                  <div className="space-y-1">
-                    {info.details.map((line, i) => (
-                      <p key={i} className="text-gray-400 text-sm">
-                        {line}
-                      </p>
-                    ))}
-                  </div>
-                  {info.action && (
-                    <a
-                      href={info.action}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="absolute inset-0"
-                      aria-label={info.title}
-                    />
-                  )}
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
             {/* --- Contact Form (Middle - Split into 2 columns) --- */}
             <div className="animate-up">
               <div className="bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-3xl p-8 lg:p-10 shadow-2xl">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="p-3 bg-green-500/20 text-green-400 rounded-xl">
+                <div className="flex flex-row items-center justify-center gap-3 mb-8">
+                  <div className="p-3 bg-green-500/20 text-green-400 rounded-xl flex-shrink-0 flex items-center justify-center">
                     <MessageSquare className="w-6 h-6" />
                   </div>
-                  <h2 className="text-2xl font-bold text-white">
+                  <h2 className="text-2xl font-bold text-white text-center flex items-center m-0 p-0">
                     Send us a Message
                   </h2>
                 </div>

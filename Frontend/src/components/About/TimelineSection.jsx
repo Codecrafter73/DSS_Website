@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 
 const timelineData = [
   {
-    year: "2001",
+    year: "2021",
     title: "Foundation Laid",
     subtitle: "Company Established",
     description:
@@ -13,7 +13,7 @@ const timelineData = [
     color: "from-green-400 to-emerald-600",
   },
   {
-    year: "2005",
+    year: "2022",
     title: "First Major Project",
     subtitle: "Breakthrough in Local Market",
     description:
@@ -22,7 +22,7 @@ const timelineData = [
     color: "from-teal-400 to-cyan-500",
   },
   {
-    year: "2010",
+    year: "2023",
     title: "Expansion Phase",
     subtitle: "Branching Out",
     description:
@@ -31,7 +31,7 @@ const timelineData = [
     color: "from-blue-400 to-indigo-600",
   },
   {
-    year: "2015",
+    year: "2024",
     title: "Digital Leap",
     subtitle: "Embracing Technology",
     description:
@@ -40,29 +40,20 @@ const timelineData = [
     color: "from-purple-400 to-violet-600",
   },
   {
-    year: "2020",
-    title: "Resilience & Growth",
-    subtitle: "Navigating Challenges",
-    description:
-      "Overcame global challenges and continued to grow, serving 500+ clients.",
-    icon: Users,
-    color: "from-pink-400 to-rose-600",
-  },
-  {
-    year: "2023",
+    year: "2025",
     title: "AI Integration",
     subtitle: "Smart Signage Solutions",
     description:
       "Launched AI-powered signage with analytics, redefining customer engagement.",
     icon: Trophy,
-    color: "from-yellow-400 to-orange-600",
+    color: "from-pink-400 to-rose-600",
   },
   {
-    year: "2025",
-    title: "Vision 2025",
+    year: "2026",
+    title: "Vision 2026",
     subtitle: "Leading the Future",
     description:
-      "Celebrating 24 years of excellence, innovation, and leadership in the signage industry.",
+      "Celebrating 5 years of excellence, innovation, and leadership in the signage industry.",
     icon: Star,
     color: "from-green-400 to-blue-600",
   },

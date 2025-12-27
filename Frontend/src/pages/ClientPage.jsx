@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useGetAllClientsQuery } from "../api/client.api";
 import CountUp from "../components/CountUp";
 import { Link } from "react-router-dom";
 import {
@@ -12,9 +13,6 @@ import {
 } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-// Image Imports
-import { clients } from "../data/clients";
 
 // Register GSAP
 gsap.registerPlugin(ScrollTrigger);
@@ -32,6 +30,8 @@ export default function ClientPage() {
   }, []);
 
   // --- Animations ---
+  const { data, isLoading, isError } = useGetAllClientsQuery();
+  const clients = data?.data?.data || [];
   useEffect(() => {
     // Hero Fade In
     gsap.fromTo(
@@ -146,31 +146,56 @@ export default function ClientPage() {
           </div>
 
           {/* --- Client Grid --- */}
-          <div className="client-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-24">
-            {clients?.map((client, idx) => (
-              <div
-                key={idx}
-                className="client-card group relative p-4 bg-white/[0.03] border border-white/10 rounded-2xl hover:border-green-500/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_30px_-10px_rgba(34,197,94,0.15)]"
-              >
-                {/* Logo Container - White Background for Logo Visibility */}
-                <div className="bg-white rounded-xl overflow-hidden aspect-square flex items-center justify-center p-4 mb-3 transition-transform duration-300 group-hover:scale-105">
-                  <img
-                    src={client.logo}
-                    loading="lazy"
-                    alt={client.name}
-                    className="w-full h-full object-contain filter hover:brightness-110 transition-all"
-                  />
-                </div>
-
-                {/* Client Name */}
-                <div className="text-center">
-                  <h3 className="text-sm font-semibold text-gray-300 group-hover:text-white transition-colors">
-                    {client.name}
-                  </h3>
-                </div>
+          {isLoading ? (
+            <div className="client-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-24">
+              <div className="col-span-full text-center text-gray-400">
+                Loading clients...
               </div>
-            ))}
-          </div>
+            </div>
+          ) : isError ? (
+            <div className="client-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-24">
+              <div className="col-span-full text-center text-red-400">
+                Failed to load clients
+              </div>
+            </div>
+          ) : clients.length === 0 ? (
+            <div className="client-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-24">
+              <div className="col-span-full text-center text-gray-400">
+                No clients found.
+              </div>
+            </div>
+          ) : (
+            <div className="client-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-24">
+              {clients.map((client, idx) => (
+                <div
+                  key={client._id || idx}
+                  className="client-card group relative p-4 bg-white/[0.03] border border-white/10 rounded-2xl hover:border-green-500/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_30px_-10px_rgba(34,197,94,0.15)]"
+                >
+                  {/* Logo Container - White Background for Logo Visibility */}
+                  <div className=" rounded-xl overflow-hidden aspect-square flex items-center justify-center p-4 mb-3 transition-transform duration-300 group-hover:scale-105">
+                    <img
+                      src={
+                        client.image?.public_url ||
+                        client.image?.url ||
+                        client.logo ||
+                        "/no-image.png"
+                      }
+                      loading="lazy"
+                      alt={client.name}
+                      className="w-full h-full object-contain filter hover:brightness-110 transition-all"
+                    />
+                  </div>
+
+                  {/* Client Name */}
+                  <div className="text-center">
+                    <h3 className="text-sm font-semibold text-gray-300 group-hover:text-white transition-colors">
+                      {client.name}
+                    </h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* CTA Section */}
           <div className="bg-gradient-to-r from-green-600 to-blue-600 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">

@@ -53,8 +53,12 @@ function App() {
           <Route path="/admin/client" element={<ClientTable />} />
           <Route path="/clienttable" element={<ClientTable />} />
           <Route path="/clienttable/add" element={<ClientForm />} />
+          <Route path="/clienttable/update/:id" element={<ClientForm />} />
           <Route path="/admin/client/create" element={<ClientForm />} />
           <Route path="/admin/client/:id/edit" element={<ClientForm />} />
+          <Route path="/client" element={<ClientTable />} />
+          <Route path="/client/add" element={<ClientForm />} />
+          <Route path="/client/update/:id" element={<ClientForm />} />
         </Route>
       </Routes>
     </>

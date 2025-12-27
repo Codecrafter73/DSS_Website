@@ -29,21 +29,21 @@ const ServiceSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-gray-100 mb-2">
             Our{" "}
             <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-              Services
+              Products
             </span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-green-500 to-blue-500 mx-auto mb-2"></div>
           <p className="text-lg text-gray-200 max-w-3xl mx-auto leading-relaxed">
-            We provide comprehensive signage solutions for all your business
-            needs.
+            We provide premium signage products for all your business needs.
           </p>
         </div>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
-          {console.log(services) }
+          {console.log(services)}
           {services.map((service, index) => (
-            <Link  to={`/services/${service?.slug}`}
+            <Link
+              to={`/services/${service?.slug}`}
               data-aos="fade-up"
               data-aos-delay={index * 100}
               key={service.id}
@@ -71,10 +71,7 @@ const ServiceSection = () => {
                   </p>
 
                   {/* Read More Button */}
-                  <button
-                   
-                    className="z-50 flex items-center text-white hover:text-green-400 transition-colors duration-300 font-medium"
-                  >
+                  <button className="z-50 flex items-center text-white hover:text-green-400 transition-colors duration-300 font-medium">
                     <span className="mr-2">Read More</span>
                     <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                   </button>
@@ -90,7 +87,7 @@ const ServiceSection = () => {
         {/* Call to Action */}
         {/* <div className="text-center mt-6">
           <button className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold rounded-lg hover:from-green-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
-            <span>View All Services</span>
+            <span>View All Products</span>
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </div> */}

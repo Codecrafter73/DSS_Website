@@ -76,7 +76,7 @@ const AboutSection = () => {
             {/* About Content */}
             <div className="mb-4 text-justify ">
               <p   data-aos="fade-up" className="text-gray-600 leading-relaxed  lg:text-lg mb-2">
-                Established in 2001 in the City of Nawabs – Lucknow,{" "}
+                Established in 2021 in the City of Nawabs – Lucknow,{" "}
                 <strong>3S Digital Signage Solutions UP</strong> has emerged as
                 one of the region’s leading providers of customized digital
                 signage and branding solutions. With over{" "}

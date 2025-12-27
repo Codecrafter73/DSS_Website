@@ -22,9 +22,9 @@ export default function Header() {
     {
       name: "Our Product",
       dropdown: [
-        { name: "Outdoor Signage", path: "/services/outdoor-signage" },
-        { name: "Indoor Signage", path: "/services/indoor-signage" },
-        { name: "High Rise Signage", path: "/services/high-rise-signage" },
+        { name: "Outdoor Signage", path: "/products/outdoor-signage" },
+        { name: "Indoor Signage", path: "/products/indoor-signage" },
+        { name: "High Rise Signage", path: "/products/high-rise-signage" },
       ],
     },
     {
@@ -35,8 +35,8 @@ export default function Header() {
         { name: "Civil Work", path: "/services/civil-work" },
         { name: "ACP Work", path: "/services/acp-work" },
         {
-          name: "Installation Missing",
-          path: "/services/installation-missing",
+          name: "Installation Services",
+          path: "/services/installation-services",
         },
       ],
     },

@@ -21,6 +21,7 @@ import services from "../data//ServiceData.jsx";
 import { useNewsCreateMutation } from "../api/inquiry.api.js";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import servicesData from "../data//ServiceData.jsx";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -165,22 +166,24 @@ const Footer = () => {
           {/* Our Services */}
           <div className="lg:col-span-1">
             <h3 className="text-lg font-semibold mb-6 text-white">
-              Our Products
+              Our Services
               <div className="w-12 h-1 bg-gradient-to-r from-green-400 to-blue-400 mt-2"></div>
             </h3>
             <div className="space-y-2">
-              {services.slice(0, 8).map((service, index) => (
-                <Link
-                  key={index}
-                  to={`/services/${service?.slug}`}
-                  className="flex items-center text-gray-300 hover:text-green-400 transition-colors duration-300 group"
-                >
-                  <span className="text-sm group-hover:translate-x-1 transition-transform duration-300">
-                    {service.title}
-                  </span>
-                  <ExternalLink className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </Link>
-              ))}
+              {Object.values(servicesData)
+                .slice(0, 8)
+                .map((service, index) => (
+                  <Link
+                    key={index}
+                    to={`/services/${service?.slug}`}
+                    className="flex items-center text-gray-300 hover:text-green-400 transition-colors duration-300 group"
+                  >
+                    <span className="text-sm group-hover:translate-x-1 transition-transform duration-300">
+                      {service.title}
+                    </span>
+                    <ExternalLink className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </Link>
+                ))}
             </div>
           </div>
 
@@ -274,7 +277,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-
 
       {/* Bottom Bar */}
       <div className="border-t border-neutral-800 bg-neutral-950">

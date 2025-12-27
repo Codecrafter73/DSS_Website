@@ -1,8 +1,7 @@
-import React from "react";
 import { Users, Award, Shield, Zap } from "lucide-react";
-import pattern from "../assets/pattern/pattern12.jpg";
+
 import { Link } from "react-router-dom";
-import TextMarquee from "./TextMarquee";
+
 const achievements = [
   {
     icon: Award,
@@ -55,17 +54,7 @@ function WhyChooseUs() {
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
               >
-                <div className="z-20 relative border border-gray-800 bg-gray-900 lg:p-6 p-4 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 text-center">
-                  <div
-                    className="absolute inset-0 "
-                    style={{
-                      backgroundImage: `url(${pattern})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      opacity: 0.25,
-                      zIndex: -1,
-                    }}
-                  ></div>
+                <div className="z-20 relative border border-gray-800 lg:p-6 p-4 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 text-center">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mb-4 group-hover:scale-110 transition-transform duration-300">
                     <achievement.icon className="h-8 w-8 text-white" />
                   </div>

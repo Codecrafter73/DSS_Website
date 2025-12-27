@@ -134,7 +134,11 @@ function ClientTable() {
         path="add"
         btnTitle="Add New Client"
       />
-      <Table data={rows} columnConfig={clientColumnConfig} />
+      <Table
+        key={rows && rows.length ? rows.map((r) => r._id).join("-") : "empty"}
+        data={rows}
+        columnConfig={clientColumnConfig}
+      />
     </div>
   );
 }

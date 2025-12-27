@@ -16,17 +16,19 @@ import {
   Users,
   Award,
 } from "lucide-react";
-import serviceData from "../data/ServiceData";
 import HowWeWork from "../components/HowWeWork";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ProductData from "../data/ProductData";
 
 // Register GSAP
 gsap.registerPlugin(ScrollTrigger);
 
-const ServiceDetailPage = () => {
+const ProductDetailPage = () => {
   const { slug } = useParams();
-  const service = serviceData.find((s) => s.slug === slug);
+  console.log({ slug });
+  const service = ProductData.find((s) => s.slug === slug);
+  console.log(service);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [hoveredFeature, setHoveredFeature] = useState(null);
 
@@ -120,10 +122,10 @@ const ServiceDetailPage = () => {
         <div className="text-center p-8 bg-white/5 border border-white/10 rounded-2xl">
           <h2 className="text-2xl font-bold mb-2">Service Not Found</h2>
           <Link
-            to="/services"
+            to="/products"
             className="px-6 py-2 bg-white/10 rounded-full hover:bg-white/20 transition-all"
           >
-            Back to Services
+            Back to Products
           </Link>
         </div>
       </div>
@@ -172,10 +174,10 @@ const ServiceDetailPage = () => {
               </Link>
               <ChevronRight className="w-3 h-3 text-gray-600" />
               <Link
-                to="/services"
+                to="/products"
                 className="hover:text-green-400 transition-colors"
               >
-                Services
+                Products
               </Link>
               <ChevronRight className="w-3 h-3 text-gray-600" />
               <span className="text-white font-medium">{service.title}</span>
@@ -376,4 +378,4 @@ const ServiceDetailPage = () => {
   );
 };
 
-export default ServiceDetailPage;
+export default ProductDetailPage;

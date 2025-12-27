@@ -6,8 +6,9 @@ import Footer from "../components/Footer";
 const Layout = () => {
   return (
     <div className="flex flex-col min-h-screen">
+      {/* SplashCursor removed for admin panel */}
       <div className="">
-      <Header />
+        <Header />
       </div>
 
       {/* Main content below header */}
@@ -22,7 +23,7 @@ const Layout = () => {
           <Outlet />
         </main>
         <div className="fixed bottom-0 z-10">
-          <Footer/>
+          <Footer />
         </div>
       </div>
     </div>

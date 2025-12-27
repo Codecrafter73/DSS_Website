@@ -99,7 +99,7 @@ const HeroSection = () => {
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-lg rounded-full border border-white/20 mb-8">
             <Star className="w-4 h-4 text-yellow-400" />
             <span className="text-sm text-gray-300">
-              5+ Years of Excellence Since 2001
+              5+ Years of Excellence Since 2021
             </span>
           </div>
 
@@ -205,7 +205,7 @@ const AboutSection = () => {
           <div className="space-y-6">
             <div className="p-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl">
               <p className="text-gray-300 leading-relaxed">
-                Established in <strong className="text-green-400">2001</strong>{" "}
+                Established in <strong className="text-green-400">2021</strong>{" "}
                 in Lucknow,
                 <strong className="text-white">
                   {" "}

@@ -50,6 +50,7 @@ function ClientForm() {
   useEffect(() => {
     if (id && clientData?.data) {
       const { name, image } = clientData.data;
+
       reset({
         name: name || "",
         image: null,
@@ -67,6 +68,7 @@ function ClientForm() {
       if (formData.image?.[0]) {
         payload.append("image", formData.image[0]);
       }
+      console.log("This is an payload", payload);
 
       if (id) {
         await updateClient({ id, formData: payload }).unwrap();
@@ -74,6 +76,7 @@ function ClientForm() {
       } else {
         await createClient(payload).unwrap();
         toast.success("Client created successfully!");
+        reset();
       }
 
       navigate("/client");

@@ -1,8 +1,6 @@
 import express from "express";
 import Upload from "../middlewares/multer.middleware.js";
 import { fileValidator } from "../middlewares/fileValidator.middleware.js";
-import { requireBody } from "../middlewares/validateBody.middleware.js";
-import { Client } from "../models/client.model.js";
 
 import {
   createClient,
@@ -23,7 +21,6 @@ router.post(
   "/",
   Upload("client").single("image"),
   fileValidator({ types: ["image"], maxSizeMB: 5 }),
-  requireBody(Client),
   createClient
 );
 

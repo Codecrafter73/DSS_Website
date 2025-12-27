@@ -2,16 +2,12 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import {
   ChevronLeft,
   ChevronRight,
-  X,
-  ZoomIn,
   Home,
-  Grid,
   FolderOpen,
-  Filter,
   Layers,
   Maximize2,
 } from "lucide-react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { useGetAllGalleryQuery } from "../api/gallery.api";
 import Loader from "../utils/Loader";
 import { gsap } from "gsap";
@@ -23,8 +19,7 @@ gsap.registerPlugin(ScrollTrigger);
 const ProjectGallery = () => {
   const [searchParams] = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const navigate = useNavigate();
 
   // Performance Refs
   const blob1Ref = useRef(null);
@@ -114,43 +109,6 @@ const ProjectGallery = () => {
     const category = searchParams.get("category");
     if (category) setSelectedCategory(category);
   }, [searchParams]);
-
-  // --- 5. MODAL LOGIC ---
-  const openModal = (index) => {
-    setCurrentImageIndex(index);
-    setIsModalOpen(true);
-    document.body.style.overflow = "hidden";
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    document.body.style.overflow = "unset";
-  };
-
-  const goToPrevious = (e) => {
-    e?.stopPropagation();
-    setCurrentImageIndex((prev) =>
-      prev === 0 ? filteredProducts.length - 1 : prev - 1
-    );
-  };
-
-  const goToNext = (e) => {
-    e?.stopPropagation();
-    setCurrentImageIndex((prev) =>
-      prev === filteredProducts.length - 1 ? 0 : prev + 1
-    );
-  };
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (!isModalOpen) return;
-      if (e.key === "Escape") closeModal();
-      if (e.key === "ArrowLeft") goToPrevious();
-      if (e.key === "ArrowRight") goToNext();
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isModalOpen]);
 
   if (isLoading) {
     return (
@@ -275,35 +233,62 @@ const ProjectGallery = () => {
                 <div
                   key={product._id}
                   className="gallery-item group relative overflow-hidden rounded-2xl bg-gray-900 border border-white/10 cursor-pointer shadow-lg hover:shadow-green-500/20 transition-all duration-500 hover:-translate-y-2"
-                  onClick={() => openModal(index)}
+                  onClick={() => navigate(`/project/${product._id}`)}
                 >
-                  <div className="aspect-[4/3] overflow-hidden">
+                  {/* Full Image */}
+                  <div className="aspect-[4/3] overflow-hidden relative">
                     <img
                       src={product.image?.public_url}
                       alt={product.category}
                       loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-                  </div>
 
-                  {/* Dark Gradient Overlay (Always there slightly, stronger on hover) */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                    {/* Dark overlay on hover */}
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-500" />
 
-                  {/* Hover Actions */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[2px]">
-                    <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center border border-white/20 transform scale-0 group-hover:scale-100 transition-transform duration-300 delay-75 text-white">
-                      <Maximize2 size={28} />
+                    {/* Label - Always visible at top */}
+                    <div className="absolute top-0 left-0 right-0 p-4">
+                      <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-green-500 to-blue-600 text-white shadow-lg">
+                        {product.category}
+                      </span>
                     </div>
-                  </div>
 
-                  {/* Content (Bottom) */}
-                  <div className="absolute bottom-0 left-0 right-0 p-5 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                    <span className="text-xs font-bold text-green-400 uppercase tracking-widest mb-1 block">
-                      {product.category}
-                    </span>
-                    <h3 className="text-lg font-bold text-white leading-tight group-hover:text-green-100 transition-colors">
-                      {product.title || "Project Title"}
-                    </h3>
+                    {/* Content Box - Slides from left on hover */}
+                    <div
+                      className="
+                        absolute bottom-0 left-0 right-0
+                        bg-gradient-to-t from-black via-black/95 to-transparent
+                        p-6 pb-8
+                        transform transition-all duration-700 ease-out
+                        translate-x-[-100%]
+                        group-hover:translate-x-0
+                      "
+                    >
+                      {/* Title */}
+                      <h3 className="text-xl font-bold text-white mb-3 hover:text-green-400 transition-colors">
+                        {product.title || "Project Title"}
+                      </h3>
+
+                      {/* Category Label */}
+                      <span className="text-xs font-bold text-green-400 uppercase tracking-widest block mb-3">
+                        {product.category}
+                      </span>
+
+                      {/* Icon */}
+                      <div className="flex items-center gap-2">
+                        <Maximize2
+                          size={18}
+                          className="text-gray-400 group-hover:text-green-400 transition-colors"
+                        />
+                        <span className="text-sm text-gray-400 group-hover:text-green-400 transition-colors">
+                          Click to view
+                        </span>
+                      </div>
+
+                      {/* Animated gradient line */}
+                      <div className="mt-4 h-1 w-full bg-gradient-to-r from-green-500 to-blue-600 rounded-full shadow-lg" />
+                    </div>
                   </div>
                 </div>
               ))}
@@ -328,67 +313,6 @@ const ProjectGallery = () => {
               >
                 Reset Filters
               </button>
-            </div>
-          )}
-
-          {/* Modal (Lightbox) */}
-          {isModalOpen && (
-            <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 animate-in fade-in duration-300">
-              {/* Top Bar Controls */}
-              <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-center z-50">
-                <div className="text-white/70 text-sm font-medium">
-                  {currentImageIndex + 1} / {filteredProducts.length}
-                </div>
-                <button
-                  onClick={closeModal}
-                  className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors"
-                >
-                  <X size={24} />
-                </button>
-              </div>
-
-              {/* Navigation Buttons (Desktop) */}
-              <button
-                onClick={goToPrevious}
-                className="absolute left-6 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-white transition-all hover:scale-110 z-50 hidden md:block"
-              >
-                <ChevronLeft size={32} />
-              </button>
-
-              <button
-                onClick={goToNext}
-                className="absolute right-6 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-white transition-all hover:scale-110 z-50 hidden md:block"
-              >
-                <ChevronRight size={32} />
-              </button>
-
-              {/* Main Image */}
-              <div
-                className="relative max-w-6xl w-full h-full flex flex-col items-center justify-center"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="relative max-h-[80vh] w-auto overflow-hidden rounded-lg shadow-2xl border border-white/10">
-                  <img
-                    src={filteredProducts[currentImageIndex]?.image?.public_url}
-                    alt={filteredProducts[currentImageIndex]?.category}
-                    className="max-h-[80vh] w-auto object-contain"
-                  />
-                </div>
-
-                {/* Caption */}
-                <div className="mt-6 text-center max-w-lg">
-                  <h3 className="text-2xl font-bold text-white mb-2">
-                    {filteredProducts[currentImageIndex]?.title ||
-                      "Project Detail"}
-                  </h3>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-green-500/20 border border-green-500/30 rounded-full">
-                    <Layers className="w-3 h-3 text-green-400" />
-                    <span className="text-xs font-bold text-green-400 uppercase">
-                      {filteredProducts[currentImageIndex]?.category}
-                    </span>
-                  </div>
-                </div>
-              </div>
             </div>
           )}
         </div>

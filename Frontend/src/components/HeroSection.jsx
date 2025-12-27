@@ -12,7 +12,7 @@ const   HeroSection = () => {
       image: bread,
       title: "Transform Your Brand with",
       highlight: "3S Digital Signage Solutions",
-      subtitle: "Leading digital signage company in Lucknow providing cutting-edge LED walls, outdoor displays, and interactive digital solutions since 2001.",
+      subtitle: "Leading digital signage company in Lucknow providing cutting-edge LED walls, outdoor displays, and interactive digital solutions since 2021.",
       buttonText: "View Our Work"
     },
     {

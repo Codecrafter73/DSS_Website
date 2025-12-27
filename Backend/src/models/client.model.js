@@ -8,16 +8,15 @@ const clientSchema = new mongoose.Schema(
       trim: true,
       unique: true,
     },
-
     image: {
-      url: { type: String },
-      public_url: { type: String },
-      public_id: { type: String },
+      url: String,
+      public_url: String,
+      public_id: String,
     },
-
     isActive: {
       type: Boolean,
       default: true,
+      index: true,
     },
   },
   { timestamps: true }

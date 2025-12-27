@@ -7,7 +7,70 @@ import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { clients } from "../data/clients";
+import ClientSection from "../components/ClientSection";
+import { useGetAllClientsQuery } from "../api/client.api";
+// ================= CLIENTS SECTION =================
+const ClientsSection = () => {
+  const { data, isLoading, isError } = useGetAllClientsQuery();
+  const clients = data?.data?.data || [];
+
+  return (
+    <section
+      id="clients"
+      data-animate
+      className="relative bg-black py-12 md:py-16 px-4"
+    >
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-6xl font-bold text-white mb-4">
+            Our <span className="text-green-400">Clients</span>
+          </h2>
+          <div className="w-24 md:w-32 h-1 bg-gradient-to-r from-green-500 to-blue-500 mx-auto mb-4" />
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Trusted by leading brands across industries
+          </p>
+        </div>
+
+        {/* Grid */}
+        {isLoading ? (
+          <div className="text-center text-gray-400">Loading clients...</div>
+        ) : isError ? (
+          <div className="text-center text-red-400">Failed to load clients</div>
+        ) : clients.length === 0 ? (
+          <div className="text-center text-gray-400">No clients found</div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            {clients.map((client, idx) => (
+              <div
+                key={client._id || idx}
+                className="group p-4 bg-white/[0.03] border border-white/10 rounded-2xl hover:border-green-500/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_30px_-10px_rgba(34,197,94,0.15)]"
+              >
+                <div className="aspect-square flex items-center justify-center p-4 mb-3 rounded-xl">
+                  <img
+                    src={
+                      client.image?.public_url ||
+                      client.image?.url ||
+                      client.logo ||
+                      "/no-image.png"
+                    }
+                    alt={client.name}
+                    loading="lazy"
+                    className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <h3 className="text-sm font-semibold text-center text-gray-300 group-hover:text-white transition-colors">
+                  {client.name}
+                </h3>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
+// ================= TESTIMONIALS SECTION =================
 import { useGetAllGalleryQuery } from "../api/gallery.api";
 import { useGetAllBlogsQuery } from "../api/blog.api";
 import formatDate from "../utils/FormateDate";
@@ -75,6 +138,7 @@ const HeroSection = () => {
       className="relative min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 overflow-hidden flex items-center"
     >
       {/* Animated Background */}
+
       <div className="absolute inset-0 opacity-30 pointer-events-none">
         <div
           className="absolute w-64 h-64 md:w-96 md:h-96 bg-green-500 rounded-full blur-3xl"
@@ -161,14 +225,16 @@ const AboutSection = () => {
               DSS UP
             </span>
           </h2>
-          <div className="w-24 md:w-32 h-1 bg-gradient-to-r from-green-500 to-blue-500 mx-auto mb-4" />
+          <div className="flex justify-center">
+            <div className="w-24 md:w-32 h-1 bg-gradient-to-r from-green-500 to-blue-500 mb-4" />
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-12 ">
           <div className="space-y-6">
             <div className="p-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl text-center md:text-left">
               <p className="text-gray-300 leading-relaxed text-sm md:text-base">
-                Established in <strong className="text-green-400">2001</strong>,
+                Established in <strong className="text-green-400">2021</strong>,
                 in the City of Nawabs – Lucknow,
                 <strong className="text-white">
                   {" "}
@@ -267,7 +333,7 @@ const ProductSection = () => {
 
   return (
     <section
-      id="services"
+      id="products"
       data-animate
       className="relative bg-gradient-to-b from-black via-gray-900 to-black py-12 md:py-16 px-4 overflow-hidden"
     >
@@ -337,7 +403,7 @@ const ProductSection = () => {
 
                 <button
                   className="group/btn flex items-center gap-2 text-green-400 transition-all duration-300 group-hover:text-white cursor-pointer"
-                  onClick={() => navigate(`/services/${product.slug}`)}
+                  onClick={() => navigate(`/products/${product.slug}`)}
                 >
                   <span className="relative text-sm font-bold">Learn More</span>
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" />
@@ -356,7 +422,7 @@ const ProductSection = () => {
   );
 };
 
-// ================= SERVICES SECTION (NEW) =================
+// ================= SERVICES SECTION  =================
 const ServicesSection = () => {
   const navigate = useNavigate();
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -395,8 +461,8 @@ const ServicesSection = () => {
       features: ["Modern Finish", "Weather Resistant", "Premium Look"],
     },
     {
-      title: "Installation Missing",
-      slug: "installation-missing",
+      title: "Installation Services",
+      slug: "installation-services",
       desc: "Troubleshooting and completing incomplete or problematic signage installations",
       icon: BadgeCheck,
       gradient: "from-pink-500 to-rose-500",
@@ -495,7 +561,7 @@ const ServicesSection = () => {
                   onClick={() => navigate(`/services/${service.slug}`)}
                 >
                   <span className="relative text-sm font-bold">
-                    Explore Service
+                    Explore Product
                   </span>
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" />
                 </button>
@@ -522,12 +588,10 @@ const ServicesSection = () => {
 // ================= PROJECTS SECTION =================
 const ProjectSection = () => {
   const navigate = useNavigate();
-  const [hoveredIndex, setHoveredIndex] = useState(null);
   const backendUrl = import.meta.env.VITE_BACKEND;
 
   const { data: galleryData } = useGetAllGalleryQuery();
 
-  // Transform gallery data into projects format
   const projects =
     galleryData?.data?.map((item, index) => {
       const gradients = [
@@ -541,12 +605,11 @@ const ProjectSection = () => {
 
       return {
         title: item.category || "Project",
-        desc: item.category || "Digital signage installation",
-        type: item.category || "SHOWCASE",
+        desc: "Digital signage installation",
         img:
           item.image?.public_url ||
-          `${backendUrl}/${item.image?.url}` ||
-          "https://picsum.photos/seed/default/900/650",
+          (item.image?.url ? `${backendUrl}/${item.image.url}` : "") ||
+          "https://picsum.photos/900/650",
         gradient: gradients[index % gradients.length],
         _id: item._id,
       };
@@ -555,72 +618,89 @@ const ProjectSection = () => {
   return (
     <section
       id="projects"
-      data-animate
-      className="relative bg-gradient-to-b from-black via-gray-900 to-black py-12 md:py-16 px-4"
+      className="relative bg-gradient-to-b from-black via-gray-900 to-black py-16 px-4"
     >
-      <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-6xl font-bold mb-4">
-            <span className="text-white">Our </span>
-            <span className="bg-gradient-to-r from-green-400 via-blue-400 to-purple-500 bg-clip-text text-transparent">
-              Projects
-            </span>
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-6xl font-bold text-white">
+            Our <span className="text-green-400">Projects</span>
           </h2>
-          <div className="w-24 md:w-32 h-1 bg-gradient-to-r from-green-500 to-blue-500 mx-auto mb-6" />
-          <p className="text-base md:text-xl text-gray-400 max-w-2xl mx-auto">
-            Showcase of our premium digital signage installations
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.slice(0, 6).map((project, i) => (
-            <div
-              key={i}
-              className="group relative"
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
+            <div key={project._id || i} className="group relative">
+              {/* Glow */}
               <div
-                className={`absolute inset-0 bg-gradient-to-r ${project.gradient} opacity-0 group-hover:opacity-30 blur-2xl transition-all duration-700 rounded-2xl`}
+                className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${project.gradient} opacity-0 group-hover:opacity-30 blur-2xl transition-all duration-700`}
               />
 
-              <div className="relative h-full bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl overflow-hidden">
-                <div className="relative h-48 md:h-56 overflow-hidden">
+              {/* Card */}
+              <div className="relative bg-white/5 border border-white/10 rounded-2xl overflow-hidden transition-all duration-500 group-hover:-translate-y-2">
+                {/* Full Image */}
+                <div className="relative h-80 overflow-hidden">
                   <img
                     src={project.img}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  <div
-                    className={`absolute top-4 right-4 px-3 py-1 bg-gradient-to-r ${project.gradient} rounded-full text-white text-[10px] md:text-xs font-semibold`}
-                  >
-                    {project.type}
-                  </div>
-                </div>
 
-                <div className="p-5 md:p-6">
-                  <h3
-                    onClick={() => navigate("/projects")}
-                    className="text-lg  md:text-xl font-bold text-white mb-2 cursor-pointer hover:text-green-400 transition-colors"
-                  >
-                    {project.title}
-                  </h3>
+                  {/* Dark overlay on hover */}
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-500" />
+
+                  {/* Label - Always visible at top */}
+                  <div className="absolute top-0 left-0 right-0 p-4">
+                    <span
+                      className={`inline-block px-4 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r ${project.gradient} text-white shadow-lg`}
+                    >
+                      {project.title}
+                    </span>
+                  </div>
+
+                  {/* Content Box - Slides from left on hover */}
                   <div
-                    className={`w-12 h-1 bg-gradient-to-r ${project.gradient} mb-3 group-hover:w-full transition-all duration-500`}
-                  />
+                    className="
+                      absolute bottom-0 left-0 right-0
+                      bg-gradient-to-t from-black via-black/95 to-transparent
+                      p-6 pb-8
+                      transform transition-all duration-700 ease-out
+                      translate-x-[-100%]
+                      group-hover:translate-x-0
+                    "
+                  >
+                    {/* Title */}
+                    <h3
+                      onClick={() => navigate("/projects")}
+                      className="text-2xl font-bold text-white cursor-pointer mb-3 hover:text-green-400 transition-colors"
+                    >
+                      {project.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-sm text-gray-300 mb-4 leading-relaxed">
+                      {project.desc}
+                    </p>
+
+                    {/* Animated gradient line */}
+                    <div
+                      className={`h-1 w-full bg-gradient-to-r ${project.gradient} rounded-full shadow-lg`}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        {/* CTA */}
+        <div className="text-center mt-14">
           <button
-            className="px-8 py-3 bg-white/10 backdrop-blur-lg border border-white/20 rounded-full text-white font-semibold hover:bg-white/20 transition-all flex items-center gap-2 mx-auto text-sm md:text-base cursor-pointer"
             onClick={() => navigate("/projects")}
+            className="px-8 py-3 rounded-full bg-white/10 border border-white/20 text-white font-semibold hover:bg-white/20 transition-all flex items-center gap-2 mx-auto"
           >
-            Explore More Projects <ArrowRight className="w-4 h-4" />
+            Explore More Projects <ArrowRight size={18} />
           </button>
         </div>
       </div>
@@ -628,9 +708,8 @@ const ProjectSection = () => {
   );
 };
 
-// ================= BLOG SECTION (CAROUSEL WITH AUTOPLAY) =================
-const BlogSection = () => {
-  const navigate = useNavigate();
+// ================= BLOG SECTION =================
+const BlogSection = ({ navigate }) => {
   const { data: blogData, isLoading } = useGetAllBlogsQuery();
   const swiperRef = useRef(null);
 
@@ -719,7 +798,12 @@ const BlogSection = () => {
                     </div>
 
                     <img
-                      src={post?.image?.public_url}
+                      src={
+                        post?.image?.public_url ||
+                        post?.image?.url ||
+                        post?.logo ||
+                        "/no-image.png"
+                      }
                       alt={post.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
@@ -780,65 +864,6 @@ const BlogSection = () => {
           height: auto;
         }
       `}</style>
-    </section>
-  );
-};
-
-// ================= CLIENT SECTION (OPTIMIZED MARQUEE) =================
-const ClientSection = () => {
-  return (
-    <section
-      id="clients"
-      data-animate
-      className="relative bg-black py-12 md:py-16 px-4 overflow-hidden"
-    >
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="container mx-auto mb-10 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mt-2">
-            Our{" "}
-            <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-              Clients
-            </span>
-          </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-green-500 to-blue-500 mx-auto mt-4"></div>
-        </div>
-
-        <div className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-
-          <Swiper
-            modules={[Autoplay]}
-            spaceBetween={20}
-            slidesPerView={2}
-            loop={true}
-            speed={3000}
-            autoplay={{ delay: 0, disableOnInteraction: false }}
-            breakpoints={{
-              640: { slidesPerView: 3, spaceBetween: 30 },
-              768: { slidesPerView: 4 },
-              1024: { slidesPerView: 6 },
-            }}
-            className="client-swiper py-4"
-          >
-            {clients.map((client, i) => (
-              <SwiperSlide key={i}>
-                <div className="aspect-square p-4 bg-white/5 border border-white/40 rounded-xl flex items-center justify-center group hover:bg-white/10 transition-all">
-                  {/* Updated Image Class for Hover Color Effect */}
-                  <img
-                    src={client.logo}
-                    alt={client.name}
-                    className="w-full h-full object-contain  transition-all duration-300"
-                    loading="lazy"
-                  />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </div>
-      <style>{` .client-swiper .swiper-wrapper { transition-timing-function: linear !important; } `}</style>
     </section>
   );
 };
@@ -975,6 +1000,7 @@ const CustomCursor = () => {
 // ================= MAIN COMPONENT =================
 const Home = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkMobile = () => {
@@ -1025,9 +1051,9 @@ const Home = () => {
       <ProjectSection />
       <HowWeWork />
       <WhyChooseUs />
-      <BlogSection />
-      <ClientSection />
+      <ClientsSection />
       <TestimonialSection />
+      <BlogSection navigate={navigate} />
     </div>
   );
 };
