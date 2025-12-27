@@ -143,15 +143,10 @@ const TeamPage = () => {
                     {/* Gradient Overlay for Text Readability */}
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-80 z-10" />
 
-                    {/* Hover Overlay with Socials */}
-                    <div className="absolute inset-0 bg-green-900/80 opacity-0 group-hover:opacity-90 transition-opacity duration-300 z-20 flex flex-col items-center justify-center gap-4 backdrop-blur-sm">
-                      <div className="flex gap-4 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-300">
-                        <button className="p-3 bg-white text-blue-600 rounded-full hover:bg-blue-600 hover:text-white hover:scale-110 transition-all duration-300">
-                          <Linkedin className="w-5 h-5" />
-                        </button>
-                      </div>
-                      <p className="text-white font-medium transform translate-y-10 group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                        View Profile
+                    {/* Hover Overlay with Designation Only */}
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex items-center justify-center backdrop-blur-sm">
+                      <p className="text-white text-lg font-semibold text-center px-4 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-300">
+                        {member.designation}
                       </p>
                     </div>
 
@@ -174,9 +169,9 @@ const TeamPage = () => {
                       <h3 className="text-xl font-bold text-white mb-1 tracking-wide">
                         {member.name}
                       </h3>
-                      <p className="text-gray-400 text-sm font-medium uppercase tracking-wider group-hover:text-green-400 transition-colors">
-                        {member.role}
-                      </p>
+                      {/* <p className="text-gray-400 text-sm font-medium uppercase tracking-wider group-hover:text-green-400 transition-colors">
+                        {member.designation}
+                      </p> */}
                     </div>
                   </div>
                 </div>

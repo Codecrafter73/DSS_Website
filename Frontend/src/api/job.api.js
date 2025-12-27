@@ -4,36 +4,43 @@ import { axiosBaseQuery } from "./axiosBaseQuery";
 export const jobApi = createApi({
   baseQuery: axiosBaseQuery(),
   reducerPath: "jobApi",
-  tagTypes: ["job"],
+  tagTypes: ["Job"],
   endpoints: (builder) => ({
-    createJob: builder.mutation({
-      query: (formData) => ({
+    // Create Job
+    jobCreate: builder.mutation({
+      query: ({ formData }) => ({
         url: `/job`,
         method: "POST",
-        body: formData,
+        data: formData,
       }),
-      invalidatesTags: ["job"],
+      invalidatesTags: ["Job"],
     }),
+
+    // Get All Jobs
     getAllJobs: builder.query({
       query: () => ({
         url: `/job`,
         method: "GET",
       }),
-      providesTags: ["job"],
+      providesTags: ["Job"],
     }),
+
+    // Delete Job
     deleteJob: builder.mutation({
       query: ({ id }) => ({
         url: `/job/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["job"],
+      invalidatesTags: ["Job"],
     }),
-
   }),
 });
 
 export const {
-  useCreateJobMutation,
+  useJobCreateMutation,
   useGetAllJobsQuery,
   useDeleteJobMutation,
 } = jobApi;
+
+// Alias for compatibility with CareerPage.jsx usage
+export const useCreateJobMutation = useJobCreateMutation;
