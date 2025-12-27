@@ -522,7 +522,7 @@ const ServiceCTA = ({ service }) => {
             <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-gray-400">
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4" />
-                <span>+91 XXXXX XXXXX</span>
+                <span>+91-9236477974</span> 
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
