@@ -151,7 +151,7 @@ const servicesData = {
         title: "Shopping Mall Fascia",
         description: "50ft steel structure with LED mounting system",
         image:
-          "https://images.unsplash.com/photo-1582554833764-e5df77e4daba?w=800",
+          "https://images.unsplash.com/photo-1464983953574-0892a716854b?w=800",
         specs: ["Steel Frame", "Weather Proof", "LED Ready"],
       },
       {
@@ -851,7 +851,7 @@ const servicesData = {
         title: "Shopping Mall Pylon Repair",
         description: "Fixed leaning structure and restored LED functionality",
         image:
-          "https://images.unsplash.com/photo-1582554833764-e5df77e4daba?w=800",
+          "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800",
         specs: ["Structural Fix", "LED Repair", "Safety Certified"],
       },
       {

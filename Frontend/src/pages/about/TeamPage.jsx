@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {
-  Linkedin,
-  Home,
-  ChevronRight,
-} from "lucide-react";
+import { Linkedin, Home, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGetAllTeamQuery } from "../../api/team.api";
 
 // Register GSAP Plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -50,73 +47,9 @@ const TeamPage = () => {
     );
   }, []);
 
-  // --- Hardcoded Team Data ---
-  const teamMembers = [
-    {
-      id: 1,
-      name: "Ravi Sharma",
-      role: "Creative Director",
-      image:
-        "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop",
-      social: { linkedin: "#", twitter: "#" },
-    },
-    {
-      id: 2,
-      name: "Priya Verma",
-      role: "Graphic Designer",
-      image:
-        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop",
-      social: { linkedin: "#", instagram: "#" },
-    },
-    {
-      id: 3,
-      name: "Amit Patel",
-      role: "Production Manager",
-      image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop",
-      social: { linkedin: "#", facebook: "#" },
-    },
-    {
-      id: 4,
-      name: "Sneha Kapoor",
-      role: "Client Relationship Manager",
-      image:
-        "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop",
-      social: { linkedin: "#", twitter: "#" },
-    },
-    {
-      id: 5,
-      name: "Arjun Mehta",
-      role: "Signage Installation Head",
-      image:
-        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1887&auto=format&fit=crop",
-      social: { linkedin: "#", facebook: "#" },
-    },
-    {
-      id: 6,
-      name: "Kavita Iyer",
-      role: "Digital Signage Consultant",
-      image:
-        "https://images.unsplash.com/photo-1598550874175-4d7112ee7f43?q=80&w=2070&auto=format&fit=crop",
-      social: { linkedin: "#", instagram: "#" },
-    },
-    {
-      id: 7,
-      name: "Rahul Singh",
-      role: "LED Display Technician",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1887&auto=format&fit=crop",
-      social: { linkedin: "#", twitter: "#" },
-    },
-    {
-      id: 8,
-      name: "Neha Deshmukh",
-      role: "Marketing & Branding",
-      image:
-        "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=2070&auto=format&fit=crop",
-      social: { linkedin: "#", instagram: "#" },
-    },
-  ];
+  // --- Fetch team from backend ---
+  const { data, isLoading, isError } = useGetAllTeamQuery();
+  const teamMembers = data?.data || [];
 
   return (
     <div className="relative min-h-screen bg-gray-950 overflow-hidden text-white selection:bg-green-500/30">
@@ -187,49 +120,68 @@ const TeamPage = () => {
       <section className="relative px-6 pb-32 z-20 min-h-[50vh]">
         <div className="max-w-7xl mx-auto">
           <div className="team-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {teamMembers.map((member) => (
-              <div
-                key={member.id}
-                className="team-card group relative bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-green-500/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_30px_-10px_rgba(34,197,94,0.2)]"
-              >
-                {/* Image Container */}
-                <div className="relative aspect-[3/4] overflow-hidden">
-                  {/* Gradient Overlay for Text Readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-80 z-10" />
-
-                  {/* Hover Overlay with Socials */}
-                  <div className="absolute inset-0 bg-green-900/80 opacity-0 group-hover:opacity-90 transition-opacity duration-300 z-20 flex flex-col items-center justify-center gap-4 backdrop-blur-sm">
-                    <div className="flex gap-4 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-300">
-                      <button className="p-3 bg-white text-blue-600 rounded-full hover:bg-blue-600 hover:text-white hover:scale-110 transition-all duration-300">
-                        <Linkedin className="w-5 h-5" />
-                      </button>
-                    </div>
-                    <p className="text-white font-medium transform translate-y-10 group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                      View Profile
-                    </p>
-                  </div>
-
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                </div>
-
-                {/* Content - Positioned Absolute Bottom */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-30 transform transition-transform duration-300 group-hover:-translate-y-2">
-                  <div className="flex flex-col items-center text-center">
-                    <div className="h-1 w-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mb-3 group-hover:w-20 transition-all duration-300" />
-                    <h3 className="text-xl font-bold text-white mb-1 tracking-wide">
-                      {member.name}
-                    </h3>
-                    <p className="text-gray-400 text-sm font-medium uppercase tracking-wider group-hover:text-green-400 transition-colors">
-                      {member.role}
-                    </p>
-                  </div>
-                </div>
+            {isLoading ? (
+              <div className="col-span-full text-center text-gray-400">
+                Loading team...
               </div>
-            ))}
+            ) : isError ? (
+              <div className="col-span-full text-center text-red-400">
+                Failed to load team
+              </div>
+            ) : teamMembers.length === 0 ? (
+              <div className="col-span-full text-center text-gray-400">
+                No team members found.
+              </div>
+            ) : (
+              teamMembers.map((member) => (
+                <div
+                  key={member._id || member.id}
+                  className="team-card group relative bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-green-500/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_30px_-10px_rgba(34,197,94,0.2)]"
+                >
+                  {/* Image Container */}
+                  <div className="relative aspect-[3/4] overflow-hidden">
+                    {/* Gradient Overlay for Text Readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-80 z-10" />
+
+                    {/* Hover Overlay with Socials */}
+                    <div className="absolute inset-0 bg-green-900/80 opacity-0 group-hover:opacity-90 transition-opacity duration-300 z-20 flex flex-col items-center justify-center gap-4 backdrop-blur-sm">
+                      <div className="flex gap-4 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-300">
+                        <button className="p-3 bg-white text-blue-600 rounded-full hover:bg-blue-600 hover:text-white hover:scale-110 transition-all duration-300">
+                          <Linkedin className="w-5 h-5" />
+                        </button>
+                      </div>
+                      <p className="text-white font-medium transform translate-y-10 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                        View Profile
+                      </p>
+                    </div>
+
+                    <img
+                      src={
+                        member.image?.public_url ||
+                        member.image?.url ||
+                        member.image ||
+                        "/no-image.png"
+                      }
+                      alt={member.name}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                  </div>
+
+                  {/* Content - Positioned Absolute Bottom */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-30 transform transition-transform duration-300 group-hover:-translate-y-2">
+                    <div className="flex flex-col items-center text-center">
+                      <div className="h-1 w-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mb-3 group-hover:w-20 transition-all duration-300" />
+                      <h3 className="text-xl font-bold text-white mb-1 tracking-wide">
+                        {member.name}
+                      </h3>
+                      <p className="text-gray-400 text-sm font-medium uppercase tracking-wider group-hover:text-green-400 transition-colors">
+                        {member.role}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </section>

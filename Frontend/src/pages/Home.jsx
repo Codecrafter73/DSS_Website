@@ -41,29 +41,56 @@ const ClientsSection = () => {
           <div className="text-center text-gray-400">No clients found</div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            {clients.map((client, idx) => (
-              <div
-                key={client._id || idx}
-                className="group p-4 bg-white/[0.03] border border-white/10 rounded-2xl hover:border-green-500/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_30px_-10px_rgba(34,197,94,0.15)]"
-              >
-                <div className="aspect-square flex items-center justify-center p-4 mb-3 rounded-xl">
-                  <img
-                    src={
-                      client.image?.public_url ||
-                      client.image?.url ||
-                      client.logo ||
-                      "/no-image.png"
-                    }
-                    alt={client.name}
-                    loading="lazy"
-                    className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
+            {clients.map((client, idx) => {
+              // Use a gradient for each card (cycle through some colors)
+              const gradients = [
+                "from-blue-500 to-cyan-500",
+                "from-green-500 to-teal-500",
+                "from-purple-500 to-pink-500",
+                "from-orange-500 to-red-500",
+                "from-indigo-500 to-blue-500",
+                "from-pink-500 to-rose-500",
+              ];
+              const gradient = gradients[idx % gradients.length];
+              return (
+                <div key={client._id || idx} className="group relative">
+                  {/* Glow */}
+                  <div
+                    className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${gradient} opacity-0 group-hover:opacity-30 blur-2xl transition-all duration-700`}
                   />
+
+                  {/* Card */}
+                  <div className="relative bg-white/5 border border-white/10 rounded-2xl overflow-hidden transition-all duration-500 group-hover:-translate-y-2">
+                    {/* Full Image */}
+                    <div className="relative h-48 overflow-hidden">
+                      <img
+                        src={
+                          client.image?.public_url ||
+                          client.image?.url ||
+                          client.logo ||
+                          "/no-image.png"
+                        }
+                        alt={client.name}
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+
+                      {/* Dark overlay on hover */}
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-500" />
+
+                      {/* Label - Always visible at top */}
+                      <div className="absolute top-0 left-0 right-0 p-4">
+                        <span
+                          className={`inline-block px-4 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r ${gradient} text-white shadow-lg`}
+                        >
+                          {client.name}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-sm font-semibold text-center text-gray-300 group-hover:text-white transition-colors">
-                  {client.name}
-                </h3>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
