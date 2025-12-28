@@ -51,10 +51,10 @@ const steps = [
   },
   {
     id: 7,
-    title: "Client Feedback",
+    title: "Client Satisfaction",
     icon: MessageCircle,
     description:
-      "Gathering client feedback to validate quality, address concerns, and ensure complete satisfaction.",
+      "Gathering client satisfaction to validate quality, address concerns, and ensure complete satisfaction.",
   },
 ];
 

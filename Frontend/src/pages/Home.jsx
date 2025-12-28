@@ -996,19 +996,6 @@ const CustomCursor = () => {
     <>
       <style>{` * { cursor: none !important; } `}</style>
       <div
-        className={`fixed pointer-events-none z-[9999] rounded-full border-2 ${
-          isHovering ? "border-green-400 bg-green-400/10" : "border-white/50"
-        } ${isClicking ? "scale-75" : "scale-100"}`}
-        style={{
-          left: cursorPos.x,
-          top: cursorPos.y,
-          width: isHovering ? "50px" : "40px",
-          height: isHovering ? "50px" : "40px",
-          transform: "translate(-50%, -50%)",
-          transition: "width 0.2s, height 0.2s, transform 0.1s",
-        }}
-      />
-      <div
         className={`fixed pointer-events-none z-[9999] rounded-full ${
           isHovering ? "bg-green-400 scale-150" : "bg-white"
         }`}
