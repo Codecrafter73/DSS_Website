@@ -300,6 +300,174 @@ const ProductData = [
       "Long-term investment in skyline presence",
     ],
   },
+  {
+    id: 3,
+    slug: "fabrication",
+    title: "Fabrication",
+    description:
+      "Precision-driven custom fabrication solutions for signage structures using high-quality materials and advanced engineering.",
+    icon: <Navigation className="w-8 h-8" />,
+    image: dimensional,
+    color: "from-orange-500 to-red-600",
+
+    shortDescription:
+      "Custom fabrication solutions delivering strength, accuracy, and long-term durability.",
+    overview:
+      "Our fabrication services focus on delivering structurally sound, aesthetically refined, and durable signage components tailored to your project requirements. Using advanced machinery, skilled craftsmanship, and premium-grade materials, we manufacture signage structures that meet safety standards and design expectations. From metal frames and channel letters to customized mounts and support systems, our fabrication process ensures precision, consistency, and longevity across all installations.",
+    services: [
+      {
+        title: "Metal Fabrication",
+        description:
+          "High-strength metal structures engineered for signage and branding applications",
+        features: [
+          "MS & SS fabrication",
+          "Laser cutting",
+          "Welding precision",
+          "Powder coating",
+        ],
+      },
+      {
+        title: "Channel Letter Fabrication",
+        description:
+          "Custom-built channel letters for illuminated and non-illuminated signage",
+        features: [
+          "3D lettering",
+          "LED compatibility",
+          "Weather resistance",
+          "Clean finishing",
+        ],
+      },
+      {
+        title: "Structural Frames",
+        description:
+          "Robust support frames designed for long-term outdoor and indoor use",
+        features: [
+          "Load-tested designs",
+          "Anti-rust coating",
+          "Custom dimensions",
+          "Safety compliance",
+        ],
+      },
+    ],
+    process: [
+      {
+        step: 1,
+        title: "Design & Measurements",
+        description:
+          "Accurate measurements and technical drawings based on site requirements",
+      },
+      {
+        step: 2,
+        title: "Material Selection",
+        description:
+          "Selection of suitable metals and finishes for durability and aesthetics",
+      },
+      {
+        step: 3,
+        title: "Fabrication",
+        description:
+          "Precision cutting, welding, and assembly by skilled technicians",
+      },
+      {
+        step: 4,
+        title: "Quality Inspection",
+        description:
+          "Thorough checks to ensure strength, finish, and compliance standards",
+      },
+    ],
+    benefits: [
+      "High structural strength and durability",
+      "Precision-engineered components",
+      "Custom-built solutions",
+      "Weather and corrosion resistance",
+      "Consistent quality finish",
+      "Long service life",
+    ],
+  },
+  {
+    id: 4,
+    slug: "acp-work",
+    title: "ACP Work",
+    description:
+      "Modern Aluminium Composite Panel (ACP) cladding solutions for premium exterior and interior finishes.",
+    icon: <Calendar className="w-8 h-8" />,
+    image: led,
+    color: "from-indigo-500 to-blue-600",
+
+    shortDescription:
+      "Stylish, durable ACP cladding solutions for commercial and architectural applications.",
+    overview:
+      "Our ACP work solutions deliver a perfect blend of aesthetics, durability, and functionality for building facades and interiors. We specialize in designing and installing ACP panels that enhance architectural appeal while offering excellent weather resistance and low maintenance. Ideal for commercial buildings, showrooms, and corporate offices, our ACP installations ensure clean lines, modern finishes, and long-lasting performance.",
+    services: [
+      {
+        title: "Exterior ACP Cladding",
+        description:
+          "Weather-resistant ACP installations for building exteriors",
+        features: [
+          "UV-resistant panels",
+          "Waterproof sealing",
+          "Clean joint finishing",
+          "Structural safety",
+        ],
+      },
+      {
+        title: "Interior ACP Panels",
+        description:
+          "Elegant interior wall cladding for modern commercial spaces",
+        features: [
+          "Smooth finish",
+          "Color consistency",
+          "Easy maintenance",
+          "Fire-retardant options",
+        ],
+      },
+      {
+        title: "Facade Design",
+        description:
+          "Custom ACP facade designs aligned with architectural concepts",
+        features: [
+          "3D facade planning",
+          "Custom colors",
+          "Brand integration",
+          "Modern aesthetics",
+        ],
+      },
+    ],
+    process: [
+      {
+        step: 1,
+        title: "Site Inspection",
+        description:
+          "Assessment of surface conditions and structural requirements",
+      },
+      {
+        step: 2,
+        title: "Design Planning",
+        description:
+          "Panel layout planning aligned with architectural design",
+      },
+      {
+        step: 3,
+        title: "ACP Installation",
+        description:
+          "Precise panel fixing with professional alignment and finishing",
+      },
+      {
+        step: 4,
+        title: "Final Inspection",
+        description:
+          "Quality check to ensure finish consistency and durability",
+      },
+    ],
+    benefits: [
+      "Modern and premium appearance",
+      "High durability and weather resistance",
+      "Low maintenance requirements",
+      "Wide range of color options",
+      "Improved building aesthetics",
+      "Professional execution",
+    ],
+  },
 ];
 
 export default ProductData;

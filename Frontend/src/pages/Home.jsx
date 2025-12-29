@@ -335,7 +335,7 @@ const ProductSection = () => {
     {
       title: "Outdoor Signage",
       slug: "outdoor-signage",
-      desc: "Modern display solutions using advanced LED screens and interactive technology",
+      desc: "High-impact outdoor digital and LED signage solutions for maximum visibility.",
       icon: Monitor,
       gradient: "from-blue-500 to-cyan-500",
       animation: "slide-up",
@@ -343,7 +343,7 @@ const ProductSection = () => {
     {
       title: "Indoor Signage",
       slug: "indoor-signage",
-      desc: "High-brightness indoor & outdoor LED systems for maximum visual impact",
+      desc: "Premium indoor signage systems for retail, corporate, and commercial spaces.",
       icon: Zap,
       gradient: "from-green-500 to-teal-500",
       animation: "rotate-scale",
@@ -351,10 +351,26 @@ const ProductSection = () => {
     {
       title: "High Rise Signage",
       slug: "high-rise-signage",
-      desc: "In-shop branding, retail displays, events & complete visual identity solutions",
-      icon: Palette,
+      desc: "Large-scale high-rise signage engineered for durability and long-distance visibility.",
+      icon: Building2,
       gradient: "from-purple-500 to-pink-500",
       animation: "flip",
+    },
+    {
+      title: "Fabrication",
+      slug: "fabrication",
+      desc: "Custom signage fabrication with precision engineering and premium materials.",
+      icon: Hammer,
+      gradient: "from-orange-500 to-red-500",
+      animation: "slide-up",
+    },
+    {
+      title: "ACP Work",
+      slug: "acp-work",
+      desc: "Modern ACP cladding solutions for sleek, durable, and professional finishes.",
+      icon: Settings,
+      gradient: "from-indigo-500 to-blue-500",
+      animation: "rotate-scale",
     },
   ];
 
@@ -453,47 +469,46 @@ const ProductSection = () => {
 const ServicesSection = () => {
   const navigate = useNavigate();
   const [hoveredIndex, setHoveredIndex] = useState(null);
-
   const services = [
     {
-      title: "Fabrication",
-      slug: "fabrication",
-      desc: "Expert metal and material fabrication for custom signage structures with precision engineering",
-      icon: Hammer,
-      gradient: "from-orange-500 to-red-500",
-      features: ["Metal Work", "Custom Designs", "Quality Materials"],
+      title: "Recce Work",
+      slug: "recce-work",
+      desc: "Site survey and analysis for optimal signage placement and planning.",
+      icon: Truck,
+      gradient: "from-blue-500 to-cyan-500",
+      features: ["Site Survey", "Measurement", "Feasibility Study"],
     },
     {
-      title: "Installation",
-      slug: "installation",
-      desc: "Professional installation services ensuring secure and perfect mounting of all signage types",
+      title: "Design Work",
+      slug: "design-work",
+      desc: "Creative and technical design services for impactful signage solutions.",
+      icon: PencilRuler,
+      gradient: "from-green-500 to-teal-500",
+      features: ["Concept Design", "3D Visualization", "Brand Integration"],
+    },
+    {
+      title: "Installation Work",
+      slug: "installation-work",
+      desc: "Professional installation ensuring secure and perfect signage setup.",
       icon: Wrench,
       gradient: "from-cyan-500 to-blue-500",
       features: ["Expert Team", "Safe Setup", "Quick Turnaround"],
     },
     {
-      title: "Civil Work",
-      slug: "civil-work",
-      desc: "Complete civil construction and structural work for signage foundations and support systems",
-      icon: Building2,
-      gradient: "from-emerald-500 to-green-500",
-      features: ["Foundation Work", "Structural Support", "Compliance"],
-    },
-    {
       title: "ACP Work",
       slug: "acp-work",
-      desc: "Aluminum Composite Panel cladding and finishing for modern, durable signage solutions",
+      desc: "Aluminum Composite Panel cladding for modern, durable signage.",
       icon: Settings,
       gradient: "from-violet-500 to-purple-500",
       features: ["Modern Finish", "Weather Resistant", "Premium Look"],
     },
     {
-      title: "Installation Services",
-      slug: "installation-services",
-      desc: "Troubleshooting and completing incomplete or problematic signage installations",
-      icon: BadgeCheck,
+      title: "Consultancy",
+      slug: "consultancy",
+      desc: "Expert advice and consultancy for all your signage and branding needs.",
+      icon: MessageCircle,
       gradient: "from-pink-500 to-rose-500",
-      features: ["Problem Solving", "Quick Fixes", "Quality Assurance"],
+      features: ["Brand Strategy", "Technical Guidance", "Project Planning"],
     },
   ];
 

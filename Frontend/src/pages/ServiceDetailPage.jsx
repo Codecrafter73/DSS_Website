@@ -71,8 +71,8 @@ const ServiceHero = ({ service }) => {
 
           {/* Title */}
           <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-6">
-            <span className="text-white">{service.title}</span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-400 to-purple-500 animate-gradient-x mt-2">
+            <span className="text-white">{service.title} </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-400 to-purple-500 animate-gradient-x">
               Services
             </span>
           </h1>

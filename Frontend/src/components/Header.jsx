@@ -22,22 +22,29 @@ export default function Header() {
     {
       name: "Our Product",
       dropdown: [
-        { name: "Outdoor Signage", path: "/products/outdoor-signage" },
-        { name: "Indoor Signage", path: "/products/indoor-signage" },
-        { name: "High Rise Signage", path: "/products/high-rise-signage" },
+        {
+          name: "Signages",
+          dropdown: [
+            { name: "Outdoor Signage", path: "/products/outdoor-signage" },
+            { name: "Indoor Signage", path: "/products/indoor-signage" },
+            { name: "High Rise Signage", path: "/products/high-rise-signage" },
+          ],
+        },
+        { name: "Fabrication", path: "/products/fabrication" },
+        { name: "ACP Work", path: "/products/acp-work" },
       ],
     },
     {
       name: "Our Services",
       dropdown: [
-        { name: "Fabrication", path: "/services/fabrication" },
-        { name: "Installation", path: "/services/installation" },
-        { name: "Civil Work", path: "/services/civil-work" },
-        { name: "ACP Work", path: "/services/acp-work" },
+        { name: "Recce Work", path: "/services/recce-work" },
+        { name: "Design Work", path: "/services/design-work" },
+        { name: "Installation Work", path: "/services/installation-work" },
         {
-          name: "Installation Services",
-          path: "/services/installation-services",
+          name: "Annual Maintenance Contract (AMC)",
+          path: "/services/annual-maintenance-contract",
         },
+        { name: "Consultancy", path: "/services/consultancy" },
       ],
     },
     { name: "Our Project", path: "/projects" },
@@ -256,14 +263,43 @@ export default function Header() {
                     <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible header-transition pointer-events-none group-hover:pointer-events-auto">
                       <div className="bg-black/90 backdrop-blur-md shadow-2xl rounded-lg py-2 w-52 border border-white/20 dropdown-enter">
                         {item.dropdown.map((sub, i) => (
-                          <Link
-                            key={i}
-                            to={sub.path}
-                            className="block px-4 py-2.5 text-white hover:bg-white/15 hover:text-green-400 header-transition text-sm focus-visible"
-                            tabIndex={0}
-                          >
-                            {sub.name}
-                          </Link>
+                          <div key={i} className="relative group/sub">
+                            {sub.path ? (
+                              <Link
+                                to={sub.path}
+                                className="flex items-center justify-between px-4 py-2.5 text-white hover:bg-white/15 hover:text-green-400 header-transition text-sm focus-visible"
+                                tabIndex={0}
+                              >
+                                {sub.name}
+                              </Link>
+                            ) : (
+                              <span className="flex items-center justify-between px-4 py-2.5 text-white cursor-default text-sm">
+                                {sub.name}
+                                {sub.dropdown && (
+                                  <ChevronDown
+                                    size={14}
+                                    className="ml-2 transition-transform duration-300 group-hover/sub:rotate-180"
+                                  />
+                                )}
+                              </span>
+                            )}
+
+                            {sub.dropdown && (
+                              <div className="absolute left-full top-0 ml-1 opacity-0 invisible scale-95 group-hover/sub:opacity-100 group-hover/sub:visible group-hover/sub:scale-100 header-transition origin-left">
+                                <div className="bg-black/90 backdrop-blur-md shadow-2xl rounded-lg py-2 w-56 border border-white/20">
+                                  {sub.dropdown.map((child, j) => (
+                                    <Link
+                                      key={j}
+                                      to={child.path}
+                                      className="block px-4 py-2.5 text-white hover:bg-white/15 hover:text-green-400 header-transition text-sm focus-visible"
+                                    >
+                                      {child.name}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
                         ))}
                       </div>
                     </div>
@@ -279,7 +315,20 @@ export default function Header() {
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
             >
-              {mobileOpen ? <X size={28} /> : <Menu size={28} />}
+              <div className="relative w-7 h-7">
+                <Menu
+                  size={28}
+                  className={`absolute inset-0 transition-all duration-300 ${
+                    mobileOpen ? "opacity-0 rotate-90 scale-75" : "opacity-100 rotate-0 scale-100"
+                  }`}
+                />
+                <X
+                  size={28}
+                  className={`absolute inset-0 transition-all duration-300 ${
+                    mobileOpen ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-75"
+                  }`}
+                />
+              </div>
             </button>
           </div>
         </div>

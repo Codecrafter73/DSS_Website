@@ -22,10 +22,14 @@ import ServicePage from "./pages/ServiceDetailPage";
 import ServiceDetailPage from "./pages/ServiceDetailPage";
 import GlobalCursors from "./components/GlobalCursors";
 import ProjectDetail from "./pages/ProjectDetail";
+import ScrollProgressBar from "./components/ScrollProgressBar";
+import TextToSpeechPlayer from "./components/TextToSpeechPlayer";
 
 function AppRoutes() {
   return (
     <>
+      <ScrollProgressBar />
+      <TextToSpeechPlayer text="Welcome to our website" autoPlay={false} />
       <GlobalCursors />
       <Header />
       <ScrollToTop />

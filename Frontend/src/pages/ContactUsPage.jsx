@@ -337,7 +337,7 @@ const ContactUsPage = () => {
           <div className="content-container space-y-8">
             {/* --- Contact Info Cards (Top) --- */}
             <div className="flex justify-center animate-up">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl w-full">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
                 {contactInfo.map((info, idx) => (
                   <div
                     key={idx}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import TextToSpeechPlayer from "../components/TextToSpeechPlayer";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import {
   Calendar,
@@ -39,169 +40,10 @@ const BlogDetail = () => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Text-to-Speech States
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [speechProgress, setSpeechProgress] = useState(0);
-  const [currentUtterance, setCurrentUtterance] = useState(null);
-  const [showAudioPlayer, setShowAudioPlayer] = useState(true);
-  const [speechSpeed, setSpeechSpeed] = useState(1);
 
   // Fetch all blogs
   const { data: blogData, isLoading, isError } = useGetAllBlogsQuery();
 
-  // --- Text-to-Speech Functions ---
-  const extractTextFromHTML = (html) => {
-    const temp = document.createElement("div");
-    temp.innerHTML = html;
-    return temp.textContent || temp.innerText || "";
-  };
-
-  const startSpeech = (text) => {
-    if ("speechSynthesis" in window) {
-      // Cancel any ongoing speech
-      window.speechSynthesis.cancel();
-
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = speechSpeed;
-      utterance.pitch = 1;
-      utterance.volume = isMuted ? 0 : 1;
-
-      // Get available voices and set a good one
-      const voices = window.speechSynthesis.getVoices();
-      const englishVoice =
-        voices.find(
-          (voice) =>
-            voice.lang.startsWith("en") && voice.name.includes("Google")
-        ) ||
-        voices.find((voice) => voice.lang.startsWith("en")) ||
-        voices[0];
-
-      if (englishVoice) {
-        utterance.voice = englishVoice;
-      }
-
-      utterance.onstart = () => {
-        setIsPlaying(true);
-        setIsPaused(false);
-      };
-
-      utterance.onend = () => {
-        setIsPlaying(false);
-        setIsPaused(false);
-        setSpeechProgress(100);
-      };
-
-      utterance.onerror = (event) => {
-        console.error("Speech error:", event);
-        setIsPlaying(false);
-        setIsPaused(false);
-      };
-
-      utterance.onpause = () => {
-        setIsPaused(true);
-      };
-
-      utterance.onresume = () => {
-        setIsPaused(false);
-      };
-
-      // Simulate progress (rough estimation)
-      const words = text.split(" ").length;
-      const estimatedDuration = (words / 150) * 60 * 1000; // ~150 words per minute
-      let elapsed = 0;
-      const progressInterval = setInterval(() => {
-        elapsed += 100;
-        const progress = Math.min((elapsed / estimatedDuration) * 100, 99);
-        setSpeechProgress(progress);
-
-        if (!window.speechSynthesis.speaking || elapsed >= estimatedDuration) {
-          clearInterval(progressInterval);
-        }
-      }, 100);
-
-      setCurrentUtterance(utterance);
-      window.speechSynthesis.speak(utterance);
-    } else {
-      alert("Text-to-speech is not supported in your browser.");
-    }
-  };
-
-  const togglePlayPause = () => {
-    if (isPlaying && !isPaused) {
-      window.speechSynthesis.pause();
-      setIsPaused(true);
-    } else if (isPaused) {
-      window.speechSynthesis.resume();
-      setIsPaused(false);
-    } else {
-      const blog = blogData?.data?.find((item) => item.slug === slug);
-      if (blog) {
-        const textContent = `${blog.title}. ${extractTextFromHTML(
-          blog.description
-        )}`;
-        startSpeech(textContent);
-      }
-    }
-  };
-
-  const stopSpeech = () => {
-    window.speechSynthesis.cancel();
-    setIsPlaying(false);
-    setIsPaused(false);
-    setSpeechProgress(0);
-  };
-
-  const toggleMute = () => {
-    setIsMuted(!isMuted);
-    if (currentUtterance) {
-      currentUtterance.volume = !isMuted ? 0 : 1;
-    }
-  };
-
-  const changeSpeed = () => {
-    const speeds = [0.75, 1, 1.25, 1.5, 2];
-    const currentIndex = speeds.indexOf(speechSpeed);
-    const nextSpeed = speeds[(currentIndex + 1) % speeds.length];
-    setSpeechSpeed(nextSpeed);
-
-    // If currently playing, restart with new speed
-    if (isPlaying) {
-      const blog = blogData?.data?.find((item) => item.slug === slug);
-      if (blog) {
-        stopSpeech();
-        setTimeout(() => {
-          const textContent = `${blog.title}. ${extractTextFromHTML(
-            blog.description
-          )}`;
-          startSpeech(textContent);
-        }, 100);
-      }
-    }
-  };
-
-  // Auto-play on page load (after 2 seconds)
-  useEffect(() => {
-    const blog = blogData?.data?.find((item) => item.slug === slug);
-    if (blog && showAudioPlayer) {
-      const timer = setTimeout(() => {
-        const textContent = `${blog.title}. ${extractTextFromHTML(
-          blog.description
-        )}`;
-        startSpeech(textContent);
-      }, 2000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [blogData, slug]);
-
-  // Cleanup speech on unmount
-  useEffect(() => {
-    return () => {
-      window.speechSynthesis.cancel();
-    };
-  }, []);
 
   // --- Scroll Progress ---
   useEffect(() => {
@@ -279,6 +121,15 @@ const BlogDetail = () => {
   }
 
   const blog = blogData?.data?.find((item) => item.slug === slug);
+  const extractTextFromHTML = (html) => {
+    const temp = document.createElement("div");
+    temp.innerHTML = html;
+    return temp.textContent || temp.innerText || "";
+  };
+
+  const speechText = blog
+    ? `${blog.title}. ${extractTextFromHTML(blog.description)}`
+    : "";
   const relatedBlogs = blogData?.data?.filter(
     (item) => item.slug !== blog?.slug
   );
@@ -301,6 +152,7 @@ const BlogDetail = () => {
 
   return (
     <div className="relative min-h-screen bg-gray-950 overflow-hidden text-white selection:bg-green-500/30">
+      <TextToSpeechPlayer text={speechText} autoPlay={false} />
       {/* Reading Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-1 bg-white/5 z-50">
         <div
@@ -309,132 +161,6 @@ const BlogDetail = () => {
         />
       </div>
 
-      {/* Floating Audio Player */}
-      {showAudioPlayer && (
-        <div className="fixed bottom-8 left-8 z-50 animate-in slide-in-from-bottom-4 fade-in duration-500">
-          <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 border border-white/20 rounded-2xl shadow-2xl backdrop-blur-xl overflow-hidden group hover:border-green-500/50 transition-all duration-300">
-            {/* Glow Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-            <div className="relative p-6 w-80">
-              {/* Header */}
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-blue-500 flex items-center justify-center shadow-lg">
-                    <Volume2 className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-white">
-                      Audio Reader
-                    </h4>
-                    <p className="text-xs text-gray-400">
-                      Listen to this article
-                    </p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => {
-                    stopSpeech();
-                    setShowAudioPlayer(false);
-                  }}
-                  className="p-2 hover:bg-white/10 rounded-lg transition-all"
-                >
-                  <CloseIcon size={16} className="text-gray-400" />
-                </button>
-              </div>
-
-              {/* Progress Bar */}
-              <div className="mb-4">
-                <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-r from-green-500 to-blue-500 transition-all duration-300 rounded-full"
-                    style={{ width: `${speechProgress}%` }}
-                  />
-                </div>
-                <div className="flex justify-between mt-2 text-xs text-gray-400">
-                  <span>{Math.round(speechProgress)}%</span>
-                  <span>{speechSpeed}x</span>
-                </div>
-              </div>
-
-              {/* Controls */}
-              <div className="flex items-center justify-center gap-3">
-                {/* Skip Back */}
-                <button
-                  onClick={stopSpeech}
-                  className="p-3 hover:bg-white/10 rounded-full transition-all"
-                  title="Stop"
-                >
-                  <SkipBack size={18} className="text-gray-300" />
-                </button>
-
-                {/* Play/Pause */}
-                <button
-                  onClick={togglePlayPause}
-                  className="w-14 h-14 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-105"
-                >
-                  {isPlaying && !isPaused ? (
-                    <Pause size={24} className="text-white fill-white" />
-                  ) : (
-                    <Play size={24} className="text-white fill-white ml-1" />
-                  )}
-                </button>
-
-                {/* Speed Control */}
-                <button
-                  onClick={changeSpeed}
-                  className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-xs font-bold text-white transition-all"
-                  title="Change Speed"
-                >
-                  {speechSpeed}x
-                </button>
-
-                {/* Mute */}
-                <button
-                  onClick={toggleMute}
-                  className="p-3 hover:bg-white/10 rounded-full transition-all"
-                  title="Mute/Unmute"
-                >
-                  {isMuted ? (
-                    <VolumeX size={18} className="text-gray-300" />
-                  ) : (
-                    <Volume2 size={18} className="text-gray-300" />
-                  )}
-                </button>
-              </div>
-
-              {/* Status */}
-              <div className="mt-4 text-center">
-                <p className="text-xs text-gray-400">
-                  {isPlaying && !isPaused ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                      Now Playing
-                    </span>
-                  ) : isPaused ? (
-                    "Paused"
-                  ) : (
-                    "Ready to play"
-                  )}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Show Audio Player Button (if hidden) */}
-      {!showAudioPlayer && (
-        <button
-          onClick={() => setShowAudioPlayer(true)}
-          className="fixed bottom-8 left-8 z-50 p-4 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 rounded-full shadow-2xl hover:scale-110 transition-all group"
-        >
-          <Volume2 size={24} className="text-white" />
-          <span className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-xs font-bold animate-pulse">
-            !
-          </span>
-        </button>
-      )}
 
       {/* Enhanced Background Effects */}
       <div className="fixed inset-0 pointer-events-none z-0">
