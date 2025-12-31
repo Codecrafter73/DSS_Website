@@ -14,7 +14,7 @@ const TextToSpeechPlayer = ({ text, autoPlay = true }) => {
   const [isMuted, setIsMuted] = useState(false);
   const [progress, setProgress] = useState(0);
   const [speed, setSpeed] = useState(1);
-  const [showPlayer, setShowPlayer] = useState(true);
+  const [showPlayer, setShowPlayer] = useState(false);
   const [utterance, setUtterance] = useState(null);
   const [language, setLanguage] = useState("en-IN");
   const lastTextRef = useRef("");

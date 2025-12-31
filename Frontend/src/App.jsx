@@ -24,6 +24,7 @@ import GlobalCursors from "./components/GlobalCursors";
 import ProjectDetail from "./pages/ProjectDetail";
 import ScrollProgressBar from "./components/ScrollProgressBar";
 import TextToSpeechPlayer from "./components/TextToSpeechPlayer";
+import Chatbot from "./components/Chatbot";
 
 function AppRoutes() {
   return (
@@ -31,6 +32,7 @@ function AppRoutes() {
       <ScrollProgressBar />
       <TextToSpeechPlayer text="Welcome to our website" autoPlay={false} />
       <GlobalCursors />
+      <Chatbot />
       <Header />
       <ScrollToTop />
       <Routes>

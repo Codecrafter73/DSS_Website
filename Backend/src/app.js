@@ -74,6 +74,9 @@ app.use("/api/v1/dashboard", DashboardRoutes);
 import clientRoutes from "./routes/client.routes.js";
 app.use("/api/v1/client", clientRoutes);
 
+import groqRoutes from "./routes/groq.routes.js";
+app.use("/api/v1/groq", groqRoutes);
+
 app.use((req, res, next) => {
   next(new ApiError(404, "Route not found"));
 });
