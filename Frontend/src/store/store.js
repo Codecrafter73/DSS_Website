@@ -13,6 +13,7 @@ import { inquiryApi } from "../api/inquiry.api.js";
 import { subscriberApi } from "../api/subscriber.api.js";
 import { clientApi } from "../api/client.api.js";
 import { jobApi } from "../api/job.api.js";
+import { groqApi } from "../api/groqApi.js";
 const persistConfig = {
   key: "root",
   storage,
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   [subscriberApi.reducerPath]: subscriberApi.reducer,
   [clientApi.reducerPath]: clientApi.reducer,
   [jobApi.reducerPath]: jobApi.reducer,
+  [groqApi.reducerPath]: groqApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -48,7 +50,8 @@ export const store = configureStore({
       // jobApi.middleware, // Removed: jobApi not defined
       subscriberApi.middleware,
       clientApi.middleware,
-      jobApi.middleware
+      jobApi.middleware,
+      groqApi.middleware
     ),
   devTools: import.meta.env.VITE_MODE !== "Pro",
 });

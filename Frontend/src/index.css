@@ -85,3 +85,17 @@ body{
       white-space: nowrap;
     }
   }
+
+/* Custom Cursor */
+.custom-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999 !important; /* Higher than chatbot z-50 */
+  mix-blend-mode: difference;
+}
+
+.custom-cursor-dot {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999 !important; /* Higher than chatbot z-50 */
+}
