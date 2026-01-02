@@ -77,6 +77,9 @@ app.use("/api/v1/client", clientRoutes);
 import groqRoutes from "./routes/groq.routes.js";
 app.use("/api/v1/groq", groqRoutes);
 
+import OfferRoutes from "./routes/offer.routes.js";
+app.use("/api/v1/offers", OfferRoutes);
+
 app.use((req, res, next) => {
   next(new ApiError(404, "Route not found"));
 });

@@ -1,80 +1,84 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import * as Icons from "lucide-react";
-import logo from '../assets/dss_logo.webp'
+import logo from "../assets/dss_logo.webp";
 import { useAuth } from "../store/AuthContext";
 import { toast } from "react-toastify";
 
-  const sidebarItems =  [
-    {
-      key: "dashboard",
-      title: "Dashboard",
-      icon: "LayoutDashboard",
-      path: "/dashboard",
-    },
-    {
-      key: "blog",
-      title: "Blogs",
-      icon: "Newspaper",
-      path:"/blog"
-    },
-    {
-      key: "gallery",
-      title: "Project Gallery",
-      icon: "Images",
-      path:"/gallery"
-    },
-    {
-      key: "product",
-      title: "Product",
-      icon: "ShoppingCart",
-      path:"/product"
-    },
-    {
-      key: "team",
-      title: "Our Team",
-      icon: "UsersRound",
-      path:"/team"
-    },
-    {
-      key: "inquiry",
-      title: "Inquiry",
-      icon: "CircleUser",
-      path:"/inquiry"
-    },
+const sidebarItems = [
+  {
+    key: "dashboard",
+    title: "Dashboard",
+    icon: "LayoutDashboard",
+    path: "/dashboard",
+  },
+  {
+    key: "blog",
+    title: "Blogs",
+    icon: "Newspaper",
+    path: "/blog",
+  },
+  {
+    key: "gallery",
+    title: "Project Gallery",
+    icon: "Images",
+    path: "/gallery",
+  },
+  {
+    key: "product",
+    title: "Product",
+    icon: "ShoppingCart",
+    path: "/product",
+  },
+  {
+    key: "team",
+    title: "Our Team",
+    icon: "UsersRound",
+    path: "/team",
+  },
+  {
+    key: "inquiry",
+    title: "Inquiry",
+    icon: "CircleUser",
+    path: "/inquiry",
+  },
 
-    {
-      key: "visitor",
-      title: "Website Visitor",
-      icon: "Eye",
-      path:"/visitor"
-    },
-    {
-      key: "subscriber",
-      title: "News Latter Subscribers",
-      icon: "Mails",
-      path:"/subscriber"
-    },
-    {
-      key: "job",
-      title: "Job Application",
-      icon: "Dock",
-      path:"/job-application"
-    },
-    {
-      key: "client",
-      title: "Client",
-      icon: "Users",
-      path:"/clienttable"
-    },
-   
-    
-  ]
+  {
+    key: "visitor",
+    title: "Website Visitor",
+    icon: "Eye",
+    path: "/visitor",
+  },
+  {
+    key: "subscriber",
+    title: "News Latter Subscribers",
+    icon: "Mails",
+    path: "/subscriber",
+  },
+  {
+    key: "job",
+    title: "Job Application",
+    icon: "Dock",
+    path: "/job-application",
+  },
+  {
+    key: "client",
+    title: "Client",
+    icon: "Users",
+    path: "/clienttable",
+  },
+  {
+    key: "offers",
+    title: "Offers",
+    icon: "Tag",
+    path: "/offers",
+  },
+];
 
 const Sidebar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const toggleDropdown = (key) => {
     if (isCollapsed) return;
@@ -89,13 +93,19 @@ const Sidebar = () => {
   };
 
   return (
-    <div className={`${isCollapsed ? 'w-16  tracking-wider flex flex-col justify-center items-center' : 'w-64'} bg-black  h-screen ease-in-out shadow-2xl`}>
+    <div
+      className={`${
+        isCollapsed
+          ? "w-16  tracking-wider flex flex-col justify-center items-center"
+          : "w-64"
+      } bg-black  h-screen ease-in-out shadow-2xl`}
+    >
       {/* Header */}
       <div className="p-1 border-b border-gray-200/20  ">
         <div className="flex items-center justify-between h-18">
           {!isCollapsed && (
             <div className="flex items-center">
-                 <img src={logo} alt="logo" className="h-18 w-36 bg-white" />
+              <img src={logo} alt="logo" className="h-18 w-36 bg-white" />
             </div>
           )}
           <button
@@ -121,16 +131,18 @@ const Sidebar = () => {
                     onClick={() => toggleDropdown(item.key)}
                     className={`w-full flex items-center text-gray-300  hover:text-white justify-between p-1.5 rounded-lg transition-all duration-200 group `}
                     //    ${
-                    //   isActive 
-                    //     ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white' 
+                    //   isActive
+                    //     ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
                     //     : 'text-gray-300 hover:bg-gray-800 hover:text-white'
                     // }`}
-                    title={isCollapsed ? item.title : ''}
+                    title={isCollapsed ? item.title : ""}
                   >
                     <div className="flex items-center gap-3">
                       <Icon size={20} className="flex-shrink-0" />
                       {!isCollapsed && (
-                        <span className="text-sm font-medium">{item.title}</span>
+                        <span className="text-sm font-medium">
+                          {item.title}
+                        </span>
                       )}
                     </div>
                     {!isCollapsed && (
@@ -151,9 +163,10 @@ const Sidebar = () => {
                           to={child.path}
                           className={({ isActive }) => `
                             block text-sm p-1 rounded-sm transition-colors duration-200
-                            ${isActive 
-                              ? 'text-white bg-neutral-800' 
-                              : 'text-gray-400 hover:text-white '
+                            ${
+                              isActive
+                                ? "text-white bg-neutral-800"
+                                : "text-gray-400 hover:text-white "
                             }
                           `}
                         >
@@ -168,12 +181,13 @@ const Sidebar = () => {
                   to={item.path}
                   className={({ isActive }) => `
                     flex items-center gap-2 p-1.5 rounded-lg transition-all duration-200 group
-                    ${isActive 
-                      ? 'text-gray-300' 
-                      : 'text-gray-300 hover: hover:text-white'
+                    ${
+                      isActive
+                        ? "text-gray-300"
+                        : "text-gray-300 hover: hover:text-white"
                     }
                   `}
-                  title={isCollapsed ? item.title : ''}
+                  title={isCollapsed ? item.title : ""}
                 >
                   <Icon size={20} className="flex-shrink-0" />
                   {!isCollapsed && (

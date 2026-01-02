@@ -21,6 +21,7 @@ import JobDashboard from "./pages/job/JobDahboard";
 import AnnouncementForm from "./pages/subscribers/AnnouncementForm";
 import ClientTable from "./pages/client/clienttable";
 import ClientForm from "./pages/client/clientForm";
+import OffersDashboard from "./pages/offers/OfferForm";
 function App() {
   return (
     <>
@@ -41,6 +42,7 @@ function App() {
           <Route path="/team" element={<TeamDashboard />} />
           <Route path="/team/add" element={<TeamForm />} />
           <Route path="/team/update/:id" element={<TeamForm />} />
+          <Route path="/offers" element={<OffersDashboard />} />
           <Route path="/inquiry" element={<InquiryDashboard />} />
           <Route path="/visitor" element={<VisitorDashboard />} />
           <Route path="/subscriber" element={<SubscriberDashboard />} />
