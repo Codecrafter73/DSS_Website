@@ -133,6 +133,12 @@ import {
   BookOpen,
   Hammer,
   Settings,
+  Handshake,
+  TrendingUp,
+  Target,
+  DollarSign,
+  Gift,
+  UserPlus,
 } from "lucide-react";
 import Stats from "./stats";
 import ScrollFloat from "../components/ScrollFloat";
@@ -529,11 +535,11 @@ const ServicesSection = () => {
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-6xl font-bold mb-4">
             <span className="text-white">Our </span>
-            <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-500 bg-clip-text text-transparent animate-gradient">
+            <span className="bg-gradient-to-r from-green-400 via-blue-400 to-purple-500 bg-clip-text text-transparent animate-gradient">
               Services
             </span>
           </h2>
-          <div className="w-24 md:w-32 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto mb-6 animate-pulse" />
+          <div className="w-24 md:w-32 h-1 bg-gradient-to-r from-green-500 to-blue-500 mx-auto mb-6 animate-pulse" />
           <p className="text-base md:text-xl text-gray-400 max-w-2xl mx-auto">
             Comprehensive signage services from fabrication to installation
           </p>
@@ -581,8 +587,6 @@ const ServicesSection = () => {
                 <div
                   className={`w-16 h-1 bg-gradient-to-r ${service.gradient} mb-4 transition-all duration-500 group-hover:w-full`}
                 />
-
-                {/* Description */}
                 <p className="text-gray-400 mb-6 leading-relaxed text-sm md:text-base">
                   {service.desc}
                 </p>
@@ -610,17 +614,6 @@ const ServicesSection = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="text-center mt-12">
-          <button
-            className="px-8 py-3 bg-white/10 backdrop-blur-lg border border-white/20 rounded-full text-white font-semibold hover:bg-white/20 transition-all flex items-center gap-2 mx-auto text-sm md:text-base cursor-pointer"
-            onClick={() => navigate("/contact")}
-          >
-            Get Custom Quote
-            <Phone className="w-4 h-4" />
-          </button>
         </div>
       </div>
     </section>
@@ -981,6 +974,490 @@ const TestimonialSection = () => {
   );
 };
 
+// ================= BRAND COLLABORATION SECTION =================
+import CountUp from "../components/CountUp";
+
+const Counter = ({ value, duration = 1200 }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const match = value.match(/[\d.,]+/);
+    const suffix = value.replace(/[\d.,]/g, "");
+    const target = match ? parseFloat(match[0].replace(/,/g, "")) : 0;
+    if (!target) return setCount(value);
+
+    let current = 0;
+    let raf;
+    const step = () => {
+      current += target / (duration / 16);
+      if (current < target) {
+        setCount(Math.floor(current));
+        raf = requestAnimationFrame(step);
+      } else {
+        setCount(target);
+      }
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [value, duration]);
+
+  const suffix = value.replace(/[\d.,]/g, "");
+  return (
+    <>
+      {typeof count === "number" ? count.toLocaleString() : count}
+      {suffix}
+    </>
+  );
+};
+
+const BrandCollaborationSection = () => {
+  const navigate = useNavigate();
+
+  const benefits = [
+    {
+      icon: Target,
+      title: "Targeted Exposure",
+      gradient: "from-blue-500 to-cyan-500",
+    },
+    {
+      icon: TrendingUp,
+      title: "Increased Visibility",
+      gradient: "from-green-500 to-teal-500",
+    },
+    {
+      icon: Globe,
+      title: "Multi-Location Reach",
+      gradient: "from-purple-500 to-pink-500",
+    },
+    {
+      icon: Award,
+      title: "Premium Quality",
+      gradient: "from-orange-500 to-red-500",
+    },
+  ];
+
+  return (
+    <section
+      id="brand-collaboration"
+      data-animate
+      className="relative bg-gradient-to-b from-black via-gray-900 to-black py-12 md:py-16 px-4 overflow-hidden"
+    >
+      {/* Background Effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(34,197,94,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(34,197,94,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+        <div className="absolute top-20 left-0 w-96 h-96 bg-green-500/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-20 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-6xl font-bold mb-4">
+            <span className="text-white">Brand </span>
+            <span className="bg-gradient-to-r from-green-400 via-blue-400 to-purple-500 bg-clip-text text-transparent">
+              Collaboration
+            </span>
+          </h2>
+          <div className="w-24 md:w-32 h-1 bg-gradient-to-r from-green-500 to-blue-500 mx-auto mb-6" />
+          <p className="text-base md:text-xl text-gray-400 max-w-2xl mx-auto">
+            Partner with us to amplify your brand's reach through strategic
+            digital signage solutions
+          </p>
+        </div>
+
+        {/* Content Grid */}
+        <div className="grid lg:grid-cols-2 gap-8 items-center mb-12">
+          {/* Left: Benefits */}
+          <div className="grid grid-cols-2 gap-4">
+            {benefits.map((benefit, i) => (
+              <div key={i} className="group relative">
+                <div
+                  className={`absolute inset-0 bg-gradient-to-r ${benefit.gradient} opacity-0 group-hover:opacity-30 blur-2xl transition-all duration-700 rounded-2xl`}
+                />
+                <div className="relative p-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl hover:border-white/30 transition-all">
+                  <div
+                    className={`w-12 h-12 bg-gradient-to-br ${benefit.gradient} rounded-xl flex items-center justify-center mb-4`}
+                  >
+                    <benefit.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-white font-semibold text-sm md:text-base">
+                    {benefit.title}
+                  </h3>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Right: CTA */}
+          <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+            <Handshake className="w-16 h-16 text-green-400 mb-4" />
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Let's Grow Together
+            </h3>
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              Join hands with India's leading digital signage provider. Feature
+              your brand on our premium network and reach thousands of potential
+              customers daily.
+            </p>
+            <div className="space-y-3 mb-6">
+              {[
+                "Prime Location Placements",
+                "Flexible Campaign Durations",
+                "Performance Analytics",
+              ].map((feature, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
+                  <span className="text-sm text-gray-300">{feature}</span>
+                </div>
+              ))}
+            </div>
+
+            <button
+              onClick={() => navigate("/brand-collaboration")}
+              className="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-blue-600 rounded-full text-white font-semibold hover:shadow-2xl hover:shadow-green-500/50 transition-all flex items-center justify-center gap-2"
+            >
+              Explore Partnership
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { number: 500, suffix: "K+", label: "Daily Impressions" },
+            { number: 50, suffix: "+", label: "Premium Locations" },
+            { number: 95, suffix: "%", label: "Brand Recall Rate" },
+            { number: 100, suffix: "+", label: "Happy Partners" },
+          ].map((stat, i) => (
+            <div
+              key={i}
+              className="text-center p-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl"
+            >
+              <div className="text-3xl md:text-4xl font-bold text-green-400 mb-2">
+                <CountUp
+                  to={stat.number}
+                  duration={2.5}
+                  delay={i * 0.15}
+                  className="inline"
+                />
+                <span>{stat.suffix}</span>
+              </div>
+              <div className="text-sm text-gray-400">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ================= REFERRAL & AFFILIATE SECTION =================
+const ReferralAffiliateSection = () => {
+  const navigate = useNavigate();
+
+  const programs = [
+    {
+      icon: UserPlus,
+      title: "Referral Program",
+      desc: "Refer clients and earn attractive rewards",
+      gradient: "from-blue-500 to-cyan-500",
+      benefits: [
+        "Up to 10% Commission",
+        "Instant Payouts",
+        "Lifetime Earnings",
+      ],
+    },
+    {
+      icon: Handshake,
+      title: "Affiliate Partnership",
+      desc: "Become our partner and grow together",
+      gradient: "from-green-500 to-teal-500",
+      benefits: ["Recurring Revenue", "Marketing Support", "Exclusive Deals"],
+    },
+  ];
+
+  return (
+    <section
+      id="referral-affiliate"
+      data-animate
+      className="relative bg-black py-12 md:py-16 px-4 overflow-hidden"
+    >
+      {/* Background Effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+        <div className="absolute top-20 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px]" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-6xl font-bold mb-4">
+            <span className="text-white">Referral & </span>
+            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-500 bg-clip-text text-transparent">
+              Affiliate Program
+            </span>
+          </h2>
+          <div className="w-24 md:w-32 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6" />
+          <p className="text-base md:text-xl text-gray-400 max-w-2xl mx-auto">
+            Earn while you help businesses grow with our digital signage
+            solutions
+          </p>
+        </div>
+
+        {/* Programs Grid */}
+        <div className="grid md:grid-cols-2 gap-8 mb-12">
+          {programs.map((program, i) => (
+            <div key={i} className="group relative">
+              <div
+                className={`absolute inset-0 bg-gradient-to-r ${program.gradient} opacity-0 group-hover:opacity-30 blur-2xl transition-all duration-700 rounded-2xl`}
+              />
+              <div className="relative p-8 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl hover:border-white/30 transition-all">
+                <div
+                  className={`w-16 h-16 bg-gradient-to-br ${program.gradient} rounded-2xl flex items-center justify-center mb-6`}
+                >
+                  <program.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-3">
+                  {program.title}
+                </h3>
+                <p className="text-gray-400 mb-6">{program.desc}</p>
+                <div className="space-y-3 mb-6">
+                  {program.benefits.map((benefit, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
+                      <span className="text-sm text-gray-300">{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+                <div
+                  className={`h-1 w-full bg-gradient-to-r ${program.gradient} rounded-full`}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+          <Gift className="w-16 h-16 text-purple-400 mx-auto mb-4" />
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+            Start Earning Today!
+          </h3>
+          <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
+            Join our referral and affiliate programs to unlock unlimited earning
+            potential. Easy signup, transparent tracking, and timely payouts
+            guaranteed.
+          </p>
+          <button
+            onClick={() => navigate("/referral-affiliate")}
+            className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full text-white font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transition-all flex items-center gap-2 mx-auto"
+          >
+            Join Now
+            <DollarSign className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ================= FRANCHISE APPLICATION SECTION =================
+const FranchiseApplicationSection = () => {
+  const navigate = useNavigate();
+
+  const franchiseHighlights = [
+    {
+      icon: Building,
+      title: "Established Brand",
+      desc: "Join a trusted name with 5+ years of excellence in digital signage",
+      gradient: "from-blue-500 to-cyan-500",
+    },
+    {
+      icon: TrendingUp,
+      title: "Proven Model",
+      desc: "Profitable business model with demonstrated growth and scalability",
+      gradient: "from-green-500 to-teal-500",
+    },
+    {
+      icon: Users,
+      title: "Dedicated Support",
+      desc: "Comprehensive training and ongoing support from our expert team",
+      gradient: "from-purple-500 to-pink-500",
+    },
+    {
+      icon: Globe,
+      title: "Market Expansion",
+      desc: "Opportunity to expand our presence to new regions and territories",
+      gradient: "from-orange-500 to-red-500",
+    },
+  ];
+
+  const requirements = [
+    "Entrepreneurial mindset with business acumen",
+    "Minimum capital investment as per region",
+    "Strong local network and connections",
+    "Marketing and sales capability",
+    "Commitment to brand standards",
+  ];
+
+  return (
+    <section
+      id="franchise"
+      data-animate
+      className="relative bg-gradient-to-b from-black via-gray-900 to-black py-12 md:py-16 px-4 overflow-hidden"
+    >
+      {/* Background Effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(168,85,247,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+        <div className="absolute top-20 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-20 right-0 w-96 h-96 bg-pink-500/10 rounded-full blur-[120px]" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-6xl font-bold mb-4">
+            <span className="text-white">Franchise </span>
+            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-500 bg-clip-text text-transparent">
+              Opportunities
+            </span>
+          </h2>
+          <div className="w-24 md:w-32 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6" />
+          <p className="text-base md:text-xl text-gray-400 max-w-2xl mx-auto">
+            Build your own successful business with our proven franchise model
+            and industry-leading support
+          </p>
+        </div>
+
+        {/* Highlights Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {franchiseHighlights.map((highlight, i) => (
+            <div key={i} className="group relative">
+              <div
+                className={`absolute inset-0 bg-gradient-to-r ${highlight.gradient} opacity-0 group-hover:opacity-30 blur-2xl transition-all duration-700 rounded-2xl`}
+              />
+              <div className="relative p-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl hover:border-white/30 transition-all group-hover:-translate-y-2">
+                <div
+                  className={`w-12 h-12 bg-gradient-to-br ${highlight.gradient} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
+                >
+                  <highlight.icon className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">
+                  {highlight.title}
+                </h3>
+                <p className="text-sm text-gray-400">{highlight.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid lg:grid-cols-2 gap-8 items-center mb-12">
+          {/* Left: Requirements */}
+          <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+                <CheckCircle className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-white">
+                What We're Looking For
+              </h3>
+            </div>
+            <div className="space-y-4">
+              {requirements.map((req, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-white text-xs font-bold">✓</span>
+                  </div>
+                  <span className="text-gray-300 text-sm md:text-base">
+                    {req}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: CTA */}
+          <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-lg border border-purple-500/20 rounded-2xl p-8 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl group-hover:scale-125 transition-transform duration-700" />
+
+            <div className="relative z-10">
+              <Building2 className="w-16 h-16 text-purple-400 mb-6" />
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                Grow Your Enterprise
+              </h3>
+              <p className="text-gray-300 mb-6 leading-relaxed">
+                Partner with 3S Digital Signage Solutions and tap into the
+                booming digital signage market. Comprehensive training,
+                marketing support, and continuous guidance to ensure your
+                success.
+              </p>
+
+              <div className="space-y-3 mb-8">
+                {[
+                  "Complete training & onboarding",
+                  "Marketing & brand support",
+                  "Ongoing technical assistance",
+                  "Territory-exclusive rights",
+                ].map((benefit, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <Award className="w-4 h-4 text-purple-400 flex-shrink-0" />
+                    <span className="text-sm text-gray-300">{benefit}</span>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                onClick={() => navigate("/franchise-application")}
+                className="w-full px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full text-white font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transition-all flex items-center justify-center gap-2"
+              >
+                Apply for Franchise
+                <ArrowRight className="w-5 h-5" />
+              </button>
+
+              <p className="text-xs text-gray-400 text-center mt-4">
+                Limited franchise opportunities available. Apply now!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { number: 50, suffix: "+", label: "Active Franchises", prefix: "" },
+            { number: 2000, suffix: "+", label: "Total Clients", prefix: "" },
+            {
+              number: 18,
+              suffix: "Yrs",
+              label: "Industry Experience",
+              prefix: "",
+            },
+            { number: 95, suffix: "%", label: "Success Rate", prefix: "" },
+          ].map((stat, i) => (
+            <div
+              key={i}
+              className="text-center p-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl"
+            >
+              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
+                <CountUp
+                  to={stat.number}
+                  duration={2.5}
+                  delay={i * 0.15}
+                  className="inline"
+                />
+                <span>{stat.suffix}</span>
+              </div>
+              <div className="text-sm text-gray-400">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // ================= CUSTOM CURSOR (DESKTOP ONLY) =================
 const CustomCursor = () => {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
@@ -1082,6 +1559,9 @@ const Home = () => {
       <WhyChooseUs />
       <ClientsSection />
       <TestimonialSection />
+      <BrandCollaborationSection />
+      <ReferralAffiliateSection />
+      <FranchiseApplicationSection />
       <BlogSection navigate={navigate} />
     </div>
   );

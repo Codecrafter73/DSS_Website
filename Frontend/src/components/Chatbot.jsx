@@ -187,7 +187,7 @@ export default function Chatbot() {
       )}
 
       {/* Custom CSS for animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes slide-up {
           from {
             opacity: 0;
@@ -198,7 +198,6 @@ export default function Chatbot() {
             transform: translateY(0);
           }
         }
-
         @keyframes fade-in {
           from {
             opacity: 0;
@@ -207,7 +206,6 @@ export default function Chatbot() {
             opacity: 1;
           }
         }
-
         @keyframes bounce-subtle {
           0%,
           100% {
@@ -217,23 +215,18 @@ export default function Chatbot() {
             transform: translateY(-5px);
           }
         }
-
         .animate-slide-up {
           animation: slide-up 0.3s ease-out;
         }
-
         .animate-fade-in {
           animation: fade-in 0.4s ease-out;
         }
-
         .animate-bounce-subtle {
           animation: bounce-subtle 2s ease-in-out infinite;
         }
-
         .animation-delay-200 {
           animation-delay: 0.2s;
         }
-
         .animation-delay-400 {
           animation-delay: 0.4s;
         }

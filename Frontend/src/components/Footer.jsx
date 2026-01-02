@@ -39,10 +39,15 @@ const Footer = () => {
   ];
 
   const quickLinks = [
-    { name: "About Us", href: "/about/story" },
-    { name: "Careers", href: "/career" },
-    { name: "Blog", href: "/blog" },
-    { name: "Admin Login", href: "https://dss-web-admin.netlify.app" },
+    { name: "About Us", href: "/about/story", external: false },
+    { name: "Careers", href: "/career", external: false },
+    { name: "Blog", href: "/blog", external: false },
+    { name: "CRM", href: "https://dss-crm.onrender.com", external: true },
+    {
+      name: "Admin Login",
+      href: "https://dss-web-admin.netlify.app",
+      external: true,
+    },
   ];
 
   useEffect(() => {
@@ -221,18 +226,33 @@ const Footer = () => {
               <div className="w-12 h-1 bg-gradient-to-r from-green-400 to-blue-400 mt-1"></div>
             </h3>
             <div className="grid grid-cols-2 gap-2 mb-4">
-              {quickLinks.map((link, index) => (
-                <Link
-                  key={index}
-                  to={link.href}
-                  className="text-gray-300 hover:text-green-400 transition-colors duration-300 text-sm flex items-center group"
-                >
-                  <span className="group-hover:translate-x-1 transition-transform duration-300">
-                    {link.name}
-                  </span>
-                  <ExternalLink className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </Link>
-              ))}
+              {quickLinks.map((link, index) =>
+                link.external ? (
+                  <a
+                    key={index}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-300 hover:text-green-400 transition-colors duration-300 text-sm flex items-center group"
+                  >
+                    <span className="group-hover:translate-x-1 transition-transform duration-300">
+                      {link.name}
+                    </span>
+                    <ExternalLink className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </a>
+                ) : (
+                  <Link
+                    key={index}
+                    to={link.href}
+                    className="text-gray-300 hover:text-green-400 transition-colors duration-300 text-sm flex items-center group"
+                  >
+                    <span className="group-hover:translate-x-1 transition-transform duration-300">
+                      {link.name}
+                    </span>
+                    <ExternalLink className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </Link>
+                )
+              )}
             </div>
 
             {/* Social Media */}

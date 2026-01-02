@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "../assets/DSS_logo.png";
 import { Link, useNavigate } from "react-router-dom";
+import EnquiryModal from "./EnquiryModal"; // Import your modal component
 
 export default function Header() {
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [isEnquiryModalOpen, setEnquiryModalOpen] = useState(false);
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -75,6 +77,10 @@ export default function Header() {
   const closeMobileMenu = () => {
     setMobileOpen(false);
     setActiveDropdown(null);
+  };
+
+  const handleEnquiryButtonClick = () => {
+    setEnquiryModalOpen(true);
   };
 
   return (
@@ -306,6 +312,15 @@ export default function Header() {
                   )}
                 </div>
               ))}
+
+              {/* Enquiry Button */}
+              <button
+                onClick={handleEnquiryButtonClick}
+                className="px-4 py-2 bg-gradient-to-r from-green-400 to-blue-400 text-white font-medium rounded-lg hover:from-green-500 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 shadow-lg whitespace-nowrap text-sm focus-visible"
+                tabIndex={0}
+              >
+                Enquiry Now
+              </button>
             </nav>
 
             {/* Mobile Menu Toggle */}
@@ -319,13 +334,17 @@ export default function Header() {
                 <Menu
                   size={28}
                   className={`absolute inset-0 transition-all duration-300 ${
-                    mobileOpen ? "opacity-0 rotate-90 scale-75" : "opacity-100 rotate-0 scale-100"
+                    mobileOpen
+                      ? "opacity-0 rotate-90 scale-75"
+                      : "opacity-100 rotate-0 scale-100"
                   }`}
                 />
                 <X
                   size={28}
                   className={`absolute inset-0 transition-all duration-300 ${
-                    mobileOpen ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-75"
+                    mobileOpen
+                      ? "opacity-100 rotate-0 scale-100"
+                      : "opacity-0 -rotate-90 scale-75"
                   }`}
                 />
               </div>
@@ -434,6 +453,12 @@ export default function Header() {
             aria-hidden="true"
           />
         )}
+
+        {/* Enquiry Modal */}
+        <EnquiryModal
+          isOpen={isEnquiryModalOpen}
+          onClose={() => setEnquiryModalOpen(false)}
+        />
       </header>
     </>
   );
