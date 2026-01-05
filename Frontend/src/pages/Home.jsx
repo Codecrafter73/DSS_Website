@@ -452,11 +452,13 @@ const ProductSection = () => {
         </div>
 
         {/* Services Grid - 1 Col Mobile, 3 Col Desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="flex flex-wrap justify-center gap-6 md:gap-8">
           {products.map((product, i) => (
             <div
               key={i}
-              className={`group relative ${
+              className={`group relative     w-full
+        md:w-[calc(50%-1rem)]
+        lg:w-[calc(33.333%-1.333rem)] ${
                 product.animation === "slide-up"
                   ? "animate-slide-up"
                   : product.animation === "rotate-scale"
@@ -592,11 +594,13 @@ const ServicesSection = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="flex flex-wrap justify-center gap-6 md:gap-8">
           {services.map((service, i) => (
             <div
               key={i}
-              className="group relative"
+              className="group relative     w-full
+        md:w-[calc(50%-1rem)]
+        lg:w-[calc(33.333%-1.333rem)]"
               style={{ animationDelay: `${i * 100}ms` }}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}

@@ -72,7 +72,7 @@ const Footer = () => {
     { name: "CRM", href: "https://dss-crm.onrender.com", external: true },
     {
       name: "Admin Login",
-      href: "https://dss-web-admin.netlify.app",
+      href: "https://dssup.in/admin",
       external: true,
     },
   ];
