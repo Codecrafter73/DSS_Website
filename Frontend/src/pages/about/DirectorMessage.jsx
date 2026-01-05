@@ -17,7 +17,7 @@ import {
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ShahnawazSir from "../../assets/ShahnawazSir.jpg";
+import ShahnawazSir from "../../assets/ShahnawazSir.png";
 
 // Register GSAP Plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -212,7 +212,7 @@ const DirectorMessage = () => {
                       <img
                         src={ShahnawazSir}
                         alt="Director"
-                        className="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out transform group-hover:scale-105"
+                        className="w-full h-full rounded-full object-cover  group-hover:grayscale-0 transition-all duration-700 ease-out transform group-hover:scale-105"
                       />
                     </div>
                   </div>
