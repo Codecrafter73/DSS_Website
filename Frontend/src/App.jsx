@@ -28,6 +28,7 @@ import Chatbot from "./components/Chatbot";
 import BrandCollaboration from "./pages/BrandCollaboration";
 import ReferralAffiliate from "./pages/ReferralAffiliate";
 import FranchiseApplication from "./pages/FranchiseApplication";
+import BranchPage from "./components/BranchPage";
 
 function AppRoutes() {
   return (
@@ -67,7 +68,11 @@ function AppRoutes() {
         <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="/brand-collaboration" element={<BrandCollaboration />} />
         <Route path="/referral-affiliate" element={<ReferralAffiliate />} />
-        <Route path="/franchise-application" element={<FranchiseApplication />} />
+        <Route
+          path="/franchise-application"
+          element={<FranchiseApplication />}
+        />
+        <Route path="/branches/:slug" element={<BranchPage />} />
       </Routes>
       <Footer />
     </>

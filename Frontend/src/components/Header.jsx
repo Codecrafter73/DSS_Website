@@ -220,7 +220,7 @@ export default function Header() {
         }
       `}</style>
 
-      <header className="fixed top-0 left-0 w-full z-50 bg-black/70 backdrop-blur-xl border-b border-white/10 shadow-lg header-border">
+      <header className="fixed top-0 left-0 w-full z-40 bg-black/70 backdrop-blur-xl border-b border-white/10 shadow-lg header-border">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between responsive-header h-16 sm:h-20">
             {/* Logo */}

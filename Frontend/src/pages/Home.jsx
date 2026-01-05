@@ -13,6 +13,7 @@ import { useGetAllClientsQuery } from "../api/client.api";
 const ClientsSection = () => {
   const { data, isLoading, isError } = useGetAllClientsQuery();
   const clients = data?.data?.data || [];
+  const navigate = useNavigate();
 
   return (
     <section
@@ -40,60 +41,105 @@ const ClientsSection = () => {
         ) : clients.length === 0 ? (
           <div className="text-center text-gray-400">No clients found</div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            {clients.map((client, idx) => {
-              // Use a gradient for each card (cycle through some colors)
-              const gradients = [
-                "from-blue-500 to-cyan-500",
-                "from-green-500 to-teal-500",
-                "from-purple-500 to-pink-500",
-                "from-orange-500 to-red-500",
-                "from-indigo-500 to-blue-500",
-                "from-pink-500 to-rose-500",
-              ];
-              const gradient = gradients[idx % gradients.length];
-              return (
-                <div key={client._id || idx} className="group relative">
-                  {/* Glow */}
-                  <div
-                    className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${gradient} opacity-0 group-hover:opacity-30 blur-2xl transition-all duration-700`}
-                  />
-
-                  {/* Card */}
-                  <div className="relative bg-white/5 border border-white/10 rounded-2xl overflow-hidden transition-all duration-500 group-hover:-translate-y-2">
-                    {/* Full Image */}
-                    <div className="relative h-48 overflow-hidden">
-                      <img
-                        src={
-                          client.image?.public_url ||
-                          client.image?.url ||
-                          client.logo ||
-                          "/no-image.png"
-                        }
-                        alt={client.name}
-                        loading="lazy"
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          <>
+            <div className="relative overflow-hidden">
+              <div className="clients-marquee flex gap-6 w-max">
+                {[...clients, ...clients].map((client, idx) => {
+                  const gradients = [
+                    "from-blue-500 to-cyan-500",
+                    "from-green-500 to-teal-500",
+                    "from-purple-500 to-pink-500",
+                    "from-orange-500 to-red-500",
+                    "from-indigo-500 to-blue-500",
+                    "from-pink-500 to-rose-500",
+                  ];
+                  const gradient = gradients[idx % gradients.length];
+                  return (
+                    <div
+                      key={`${client._id || idx}-${idx}`}
+                      onMouseEnter={(e) =>
+                        e.currentTarget
+                          .closest(".clients-marquee")
+                          ?.classList.add("paused")
+                      }
+                      onMouseLeave={(e) =>
+                        e.currentTarget
+                          .closest(".clients-marquee")
+                          ?.classList.remove("paused")
+                      }
+                      className="relative shrink-0 w-40 sm:w-48 md:w-56 transform transition-all duration-500 hover:scale-105"
+                    >
+                      {/* Glow */}
+                      <div
+                        className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${gradient} opacity-0 hover:opacity-30 blur-2xl transition-all duration-700`}
                       />
 
-                      {/* Dark overlay on hover */}
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-500" />
+                      {/* Card */}
+                      <div className="relative bg-white/5 border border-white/10 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2">
+                        {/* Full Image */}
+                        <div className="relative h-48 overflow-hidden">
+                          <img
+                            src={
+                              client.image?.public_url ||
+                              client.image?.url ||
+                              client.logo ||
+                              "/no-image.png"
+                            }
+                            alt={client.name}
+                            loading="lazy"
+                            className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                          />
 
-                      {/* Label - Always visible at top */}
-                      <div className="absolute top-0 left-0 right-0 p-4">
-                        <span
-                          className={`inline-block px-4 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r ${gradient} text-white shadow-lg`}
-                        >
-                          {client.name}
-                        </span>
+                          {/* Dark overlay on hover */}
+                          <div className="absolute inset-0 bg-black/20 hover:bg-black/40 transition-all duration-500" />
+
+                          {/* Label - Always visible at top */}
+                          {/* <div className="absolute top-0 left-0 right-0 p-4">
+                            <span
+                              className={`inline-block px-4 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r ${gradient} text-white shadow-lg`}
+                            >
+                              {client.name}
+                            </span>
+                          </div> */}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* View All Button */}
+            <div className="text-center mt-10">
+              <button
+                onClick={() => navigate("/client")}
+                className="px-8 py-3 bg-gradient-to-r from-green-500 to-blue-600 rounded-full text-white font-semibold hover:shadow-2xl hover:shadow-green-500/50 transition-all flex items-center gap-2 mx-auto text-sm md:text-base"
+              >
+                View All Clients
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </>
         )}
       </div>
+      <style>{`
+  .clients-marquee {
+    animation: marquee 25s linear infinite;
+  }
+
+  .clients-marquee.paused {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+`}</style>
     </section>
   );
 };
@@ -1254,7 +1300,6 @@ const ReferralAffiliateSection = () => {
             className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full text-white font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transition-all flex items-center gap-2 mx-auto"
           >
             Join Now
-            <DollarSign className="w-5 h-5" />
           </button>
         </div>
       </div>

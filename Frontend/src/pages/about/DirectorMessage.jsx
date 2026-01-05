@@ -12,7 +12,7 @@ import {
   Monitor,
   Sun,
   ArrowUpRight,
-  ArrowRight
+  ArrowRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
@@ -209,7 +209,7 @@ const DirectorMessage = () => {
                     {/* Image Container */}
                     <div className="relative w-full h-full rounded-full border-4 border-white/10 p-2 bg-gray-900 shadow-2xl">
                       <img
-                        src="https://randomuser.me/api/portraits/men/75.jpg"
+                        src="/Shahnawaz sir.jpg"
                         alt="Director"
                         className="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out transform group-hover:scale-105"
                       />
@@ -253,7 +253,7 @@ const DirectorMessage = () => {
                         className="text-4xl text-white mb-2 font-handwriting opacity-90"
                         style={{ fontFamily: "cursive" }}
                       >
-                        Raj Malhotra
+                        Mohd Shahnawaz
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="h-px w-8 bg-green-500"></div>
@@ -269,12 +269,6 @@ const DirectorMessage = () => {
           </div>
         </div>
       </section>
-
-      
-     
-
-    
-     
 
       {/* Custom Styles */}
       <style>{`

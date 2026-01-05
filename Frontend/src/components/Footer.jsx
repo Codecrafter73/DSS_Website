@@ -29,13 +29,40 @@ const Footer = () => {
   const [addSubscriber, { isLoading, isError }] = useNewsCreateMutation();
   const branches = [
     {
-      name: "Lucknow (Head Office)",
-      address: "Sector 10, Indira Nagar, Lucknow - 226016",
+      name: "Lucknow (Chinhat)",
+      address: "Chinhat, Lucknow",
+      slug: "lucknow-chinhat",
     },
-    { name: "Azamgarh", address: "Civil Lines, Azamgarh - 276001" },
-    { name: "Thakurganj", address: "Main Road, Thakurganj - 224001" },
-    { name: "Barabanki", address: "Station Road, Barabanki - 225001" },
-    { name: "Saraimeer", address: "Market Area, Saraimeer - 225412" },
+    {
+      name: "Lucknow (Thakurganj)",
+      address: "Thakurganj, Lucknow",
+      slug: "lucknow-thakurganj",
+    },
+    {
+      name: "Barabanki",
+      address: "Barabanki",
+      slug: "barabanki",
+    },
+    {
+      name: "Azamgarh (Saraimeer)",
+      address: "Saraimeer, Azamgarh",
+      slug: "azamgarh-saraimeer",
+    },
+    {
+      name: "Azamgarh (Narouli)",
+      address: "Narouli, Azamgarh",
+      slug: "azamgarh-narouli",
+    },
+    {
+      name: "Azamgarh (Mukaiganj)",
+      address: "Mukaiganj, Azamgarh",
+      slug: "azamgarh-mukaiganj",
+    },
+    {
+      name: "Sultanpur (Kadipur)",
+      address: "Kadipur, Sultanpur",
+      slug: "sultanpur-kadipur",
+    },
   ];
 
   const quickLinks = [
@@ -200,21 +227,17 @@ const Footer = () => {
             </h3>
             <div className="space-y-2">
               {branches.map((branch, index) => (
-                <div
+                <Link
                   key={index}
-                  className="group flex  items-center cursor-pointer"
+                  to={`/branches/${branch.slug}`}
+                  title={branch.address}
+                  className="group flex items-center cursor-pointer"
                 >
-                  <h4
-                    title={branch.address}
-                    className="text-sm font-medium text-white mb-0.5 group-hover:text-green-400 transition-colors"
-                  >
+                  <h4 className="text-sm font-medium text-white mb-0.5 group-hover:text-green-400 transition-colors">
                     {branch.name}
                   </h4>
                   <ExternalLink className="h-3 w-3 ml-1 text-green-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  {/* <p className="text-xs text-gray-400 leading-relaxed">
-                    {branch.address}
-                  </p> */}
-                </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -265,7 +288,6 @@ const Footer = () => {
                     href: "https://www.facebook.com/digitalsignagesolutionsup/",
                     color: "hover:text-blue-400",
                   },
-                  { Icon: Twitter, href: "#", color: "hover:text-sky-400" },
                   {
                     Icon: Instagram,
                     href: "https://www.instagram.com/digitalsignagesolutiions/",
