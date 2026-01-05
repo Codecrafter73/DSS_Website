@@ -459,12 +459,12 @@ const ProductSection = () => {
               className={`group relative     w-full
         md:w-[calc(50%-1rem)]
         lg:w-[calc(33.333%-1.333rem)] ${
-                product.animation === "slide-up"
-                  ? "animate-slide-up"
-                  : product.animation === "rotate-scale"
-                  ? "animate-rotate-scale"
-                  : "animate-flip"
-              }`}
+          product.animation === "slide-up"
+            ? "animate-slide-up"
+            : product.animation === "rotate-scale"
+            ? "animate-rotate-scale"
+            : "animate-flip"
+        }`}
               style={{ animationDelay: `${i * 100}ms` }}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -955,33 +955,6 @@ const BlogSection = ({ navigate }) => {
 
 // ================= TESTIMONIALS SECTION =================
 const TestimonialSection = () => {
-  const testimonials = [
-    {
-      quote: "Outstanding outdoor signage work!",
-      name: "Rohit Sharma",
-      role: "Retail Owner",
-      img: "https://picsum.photos/seed/t1/100",
-    },
-    {
-      quote: "Boosted our customer engagement.",
-      name: "Priya Verma",
-      role: "Manager",
-      img: "https://picsum.photos/seed/t2/100",
-    },
-    {
-      quote: "Excellent finishing & professional.",
-      name: "Arjun Mehta",
-      role: "Supervisor",
-      img: "https://picsum.photos/seed/t3/100",
-    },
-    {
-      quote: "Increased walk-ins significantly.",
-      name: "Neha Kapoor",
-      role: "Marketing",
-      img: "https://picsum.photos/seed/t4/100",
-    },
-  ];
-
   return (
     <section
       id="testimonials"
@@ -1511,7 +1484,7 @@ const FranchiseApplicationSection = () => {
 const CustomCursor = () => {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  const [isClicking, setIsClicking] = useState(false);
+  const [isClicking, setIsClicking] = useState(false); // Added state variable
 
   useEffect(() => {
     const handleMouseMove = (e) => setCursorPos({ x: e.clientX, y: e.clientY });

@@ -390,7 +390,7 @@ const AboutPage = () => {
               {/* Left Content */}
               <div>
                 {/* Tab Navigation */}
-                <div className="flex space-x-2 bg-white/5 p-2 rounded-xl border border-white/10 mb-8 inline-flex">
+                <div className="flex space-x-2 bg-white/5 p-2 rounded-xl border border-white/10 mb-8">
                   {Object.keys(tabContent).map((tab) => (
                     <button
                       key={tab}

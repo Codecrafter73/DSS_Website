@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect} from "react";
 import {
   Quote,
   CheckCircle,
@@ -17,6 +17,7 @@ import {
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ShahnawazSir from "../../assets/ShahnawazSir.jpg";
 
 // Register GSAP Plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -65,72 +66,72 @@ const DirectorMessage = () => {
   }, []);
 
   // --- Data: 3 Specific Services ---
-  const services = [
-    {
-      id: 1,
-      title: "Outdoor Signage",
-      subtitle: "Dominating Landscapes",
-      desc: "Weather-resistant, high-brightness LED displays designed to capture attention in any environment. From billboards to unipoles.",
-      icon: Sun,
-      image:
-        "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop", // Replace with your Outdoor Image
-      color: "text-orange-400",
-      border: "group-hover:border-orange-500/50",
-      bg: "group-hover:bg-orange-500/10",
-    },
-    {
-      id: 2,
-      title: "Indoor Signage",
-      subtitle: "Immersive Experiences",
-      desc: "Pixel-perfect fine-pitch displays for retail, corporate lobbies, and control rooms. Stunning clarity at close viewing distances.",
-      icon: Monitor,
-      image:
-        "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop", // Replace with your Indoor Image
-      color: "text-blue-400",
-      border: "group-hover:border-blue-500/50",
-      bg: "group-hover:bg-blue-500/10",
-    },
-    {
-      id: 3,
-      title: "High Rise Signage",
-      subtitle: "Skyline Branding",
-      desc: "Engineered for heights. Wind-load tested, ultra-bright rooftop signage that makes your brand visible across the entire city.",
-      icon: Building2,
-      image:
-        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop", // Replace with your High Rise Image
-      color: "text-purple-400",
-      border: "group-hover:border-purple-500/50",
-      bg: "group-hover:bg-purple-500/10",
-    },
-  ];
+  // const services = [
+  //   {
+  //     id: 1,
+  //     title: "Outdoor Signage",
+  //     subtitle: "Dominating Landscapes",
+  //     desc: "Weather-resistant, high-brightness LED displays designed to capture attention in any environment. From billboards to unipoles.",
+  //     icon: Sun,
+  //     image:
+  //       "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop", // Replace with your Outdoor Image
+  //     color: "text-orange-400",
+  //     border: "group-hover:border-orange-500/50",
+  //     bg: "group-hover:bg-orange-500/10",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Indoor Signage",
+  //     subtitle: "Immersive Experiences",
+  //     desc: "Pixel-perfect fine-pitch displays for retail, corporate lobbies, and control rooms. Stunning clarity at close viewing distances.",
+  //     icon: Monitor,
+  //     image:
+  //       "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop", // Replace with your Indoor Image
+  //     color: "text-blue-400",
+  //     border: "group-hover:border-blue-500/50",
+  //     bg: "group-hover:bg-blue-500/10",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "High Rise Signage",
+  //     subtitle: "Skyline Branding",
+  //     desc: "Engineered for heights. Wind-load tested, ultra-bright rooftop signage that makes your brand visible across the entire city.",
+  //     icon: Building2,
+  //     image:
+  //       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop", // Replace with your High Rise Image
+  //     color: "text-purple-400",
+  //     border: "group-hover:border-purple-500/50",
+  //     bg: "group-hover:bg-purple-500/10",
+  //   },
+  // ];
 
   // --- Data: Values ---
-  const values = [
-    {
-      icon: Heart,
-      title: "Customer First",
-      description: "Decisions centered around delivering exceptional value.",
-      gradient: "from-pink-500 to-rose-500",
-    },
-    {
-      icon: Lightbulb,
-      title: "Innovation",
-      description: "Embracing new tech to stay ahead of industry trends.",
-      gradient: "from-blue-500 to-cyan-500",
-    },
-    {
-      icon: CheckCircle,
-      title: "Quality Excellence",
-      description: "Ensuring every project exceeds strict standards.",
-      gradient: "from-green-500 to-teal-500",
-    },
-    {
-      icon: Star,
-      title: "Trust & Integrity",
-      description: "Building long-term relationships through transparency.",
-      gradient: "from-purple-500 to-violet-500",
-    },
-  ];
+  // const values = [
+  //   {
+  //     icon: Heart,
+  //     title: "Customer First",
+  //     description: "Decisions centered around delivering exceptional value.",
+  //     gradient: "from-pink-500 to-rose-500",
+  //   },
+  //   {
+  //     icon: Lightbulb,
+  //     title: "Innovation",
+  //     description: "Embracing new tech to stay ahead of industry trends.",
+  //     gradient: "from-blue-500 to-cyan-500",
+  //   },
+  //   {
+  //     icon: CheckCircle,
+  //     title: "Quality Excellence",
+  //     description: "Ensuring every project exceeds strict standards.",
+  //     gradient: "from-green-500 to-teal-500",
+  //   },
+  //   {
+  //     icon: Star,
+  //     title: "Trust & Integrity",
+  //     description: "Building long-term relationships through transparency.",
+  //     gradient: "from-purple-500 to-violet-500",
+  //   },
+  // ];
 
   return (
     <div className="relative min-h-screen bg-gray-950 overflow-hidden text-white selection:bg-green-500/30">
@@ -209,7 +210,7 @@ const DirectorMessage = () => {
                     {/* Image Container */}
                     <div className="relative w-full h-full rounded-full border-4 border-white/10 p-2 bg-gray-900 shadow-2xl">
                       <img
-                        src="/Shahnawaz sir.jpg"
+                        src={ShahnawazSir}
                         alt="Director"
                         className="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out transform group-hover:scale-105"
                       />

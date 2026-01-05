@@ -200,20 +200,20 @@ export default function ClientPage() {
                           }
                           alt={client.name}
                           loading="lazy"
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
                         />
 
                         {/* Dark overlay on hover */}
                         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-500" />
 
                         {/* Label - Always visible at top */}
-                        <div className="absolute top-0 left-0 right-0 p-4">
+                        {/* <div className="absolute top-0 left-0 right-0 p-4">
                           <span
                             className={`inline-block px-4 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r ${gradient} text-white shadow-lg`}
                           >
                             {client.name}
                           </span>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>

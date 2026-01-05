@@ -54,9 +54,9 @@ const Footer = () => {
       slug: "azamgarh-narouli",
     },
     {
-      name: "Azamgarh (Mukaiganj)",
-      address: "Mukaiganj, Azamgarh",
-      slug: "azamgarh-mukaiganj",
+      name: "Azamgarh (Mukeriganj)",
+      address: "Mukeriganj, Azamgarh",
+      slug: "azamgarh-mukeriganj",
     },
     {
       name: "Sultanpur (Kadipur)",
@@ -64,6 +64,8 @@ const Footer = () => {
       slug: "sultanpur-kadipur",
     },
   ];
+
+  console.log("Service data :", servicesData);
 
   const quickLinks = [
     { name: "About Us", href: "/about/story", external: false },
@@ -207,7 +209,10 @@ const Footer = () => {
                 .map((service, index) => (
                   <Link
                     key={index}
-                    to={`/services/${service?.slug}`}
+                    to={`/services/${
+                      service?.slug ||
+                      service?.title?.toLowerCase().replace(/\s+/g, "-")
+                    }`}
                     className="flex items-center text-gray-300 hover:text-green-400 transition-colors duration-300 group"
                   >
                     <span className="text-sm group-hover:translate-x-1 transition-transform duration-300">

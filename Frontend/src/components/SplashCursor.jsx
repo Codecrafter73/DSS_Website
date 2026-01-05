@@ -1223,7 +1223,7 @@ function SplashCursor({
     });
 
     updateFrame();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // This line has been removed as it is unnecessary
   }, [
     SIM_RESOLUTION,
     DYE_RESOLUTION,

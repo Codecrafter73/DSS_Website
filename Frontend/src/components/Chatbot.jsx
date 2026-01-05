@@ -28,7 +28,7 @@ export default function Chatbot() {
         },
       ]);
     }
-  }, [isOpen]);
+  }, [isOpen, messages.length]);
 
   // Prevent body scroll when chat is open on mobile
   useEffect(() => {
