@@ -149,10 +149,10 @@ export default function PrivacyPolicy() {
                   collect, use, disclose, and protect your information when you
                   visit{" "}
                   <a
-                    href="https://www.dssup.co.in"
+                    href="https://www.dssup.in"
                     className="text-green-400 hover:text-green-300 transition-colors no-underline border-b border-green-500/30 hover:border-green-400"
                   >
-                    www.dssup.co.in
+                    www.dssup.in
                   </a>{" "}
                   and use our digital signage, LED display, and advertising
                   display solutions.

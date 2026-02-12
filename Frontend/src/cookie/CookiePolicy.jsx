@@ -152,7 +152,7 @@ export default function CookiePolicy() {
                     href="https://www.dssup.co.in"
                     className="text-green-400 hover:text-green-300 transition-colors no-underline border-b border-green-500/30 hover:border-green-400"
                   >
-                    www.dssup.co.in
+                    www.dssup.in
                   </a>
                   . By using our website and accepting cookies, you consent to
                   the collection of certain technical information such as{" "}

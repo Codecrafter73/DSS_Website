@@ -71,7 +71,7 @@ const Footer = () => {
     { name: "About Us", href: "/about/story", external: false },
     { name: "Careers", href: "/career", external: false },
     { name: "Blog", href: "/blog", external: false },
-    { name: "CRM", href: "https://dss-crm.onrender.com", external: true },
+    // { name: "CRM", href: "https://dss-crm.onrender.com", external: true },
     {
       name: "Admin Login",
       href: "https://dssup.in/admin",

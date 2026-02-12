@@ -53,8 +53,9 @@ export default function Header() {
     { name: "Clients", path: "/client" },
     { name: "Testimonial", path: "/testimonial" },
     { name: "Latest Articles", path: "/blog" },
-    { name: "Careers", path: "/career" },
+    // { name: "Careers", path: "/career" },
     { name: "Contact Us", path: "/contact" },
+      { name: "Login CRM", external: true, url: "https://crm.dssup.in/" },
   ];
 
   // Prevent body scroll when mobile menu is open
@@ -244,7 +245,17 @@ export default function Header() {
               {navItems.map((item, index) => (
                 <div key={index} className="relative group">
                   <div className="flex items-center gap-1 cursor-pointer hover:text-green-400 header-transition py-2 whitespace-nowrap nav-item-text text-sm nav-hover focus-visible">
-                    {item.path ? (
+                    {item.external ? (
+                      <a
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block"
+                        tabIndex={0}
+                      >
+                        {item.name}
+                      </a>
+                    ) : item.path ? (
                       <Link
                         to={item.path}
                         className="inline-block"
@@ -373,6 +384,9 @@ export default function Header() {
                       setActiveDropdown(
                         activeDropdown === index ? null : index
                       );
+                    } else if (item.external) {
+                      window.open(item.url, "_blank", "noopener,noreferrer");
+                      closeMobileMenu();
                     } else if (item.path) {
                       navigate(item.path);
                       closeMobileMenu();
@@ -386,6 +400,9 @@ export default function Header() {
                         setActiveDropdown(
                           activeDropdown === index ? null : index
                         );
+                      } else if (item.external) {
+                        window.open(item.url, "_blank", "noopener,noreferrer");
+                        closeMobileMenu();
                       } else if (item.path) {
                         navigate(item.path);
                         closeMobileMenu();
@@ -393,7 +410,18 @@ export default function Header() {
                     }
                   }}
                 >
-                  {item.path && !item.dropdown ? (
+                  {item.external && !item.dropdown ? (
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={closeMobileMenu}
+                      className="text-base sm:text-lg font-medium flex-1"
+                      tabIndex={-1}
+                    >
+                      {item.name}
+                    </a>
+                  ) : item.path && !item.dropdown ? (
                     <Link
                       to={item.path}
                       onClick={closeMobileMenu}
